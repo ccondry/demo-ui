@@ -97,6 +97,22 @@ const actions = {
     } finally {
       dispatch('setLoading', {group: 'session', type: 'config', value: false})
     }
+  },
+  async saveDemoConfig ({getters, commit, dispatch}, {data, showNotification = true}) {
+    dispatch('setWorking', {group: 'session', type: 'config', value: true})
+    try {
+      await dispatch('postData', {
+        name: 'demo config',
+        endpoint: getters.endpoints.configure,
+        data,
+        showNotification
+      })
+    } catch (e) {
+      console.log('error saving demo session config', e)
+      dispatch('errorNotification', {title: 'Failed to save demo session configuration', error: e})
+    } finally {
+      dispatch('setWorking', {group: 'session', type: 'config', value: false})
+    }
   }
 }
 
