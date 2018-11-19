@@ -37,38 +37,24 @@
       </div>
     </div>
 
-    <save-template-modal
-    ref="modal"
-    :visible="showModal"
-    title="Save Vertical As..."
-    @close="showModal = false"
-    @submit="clickSaveVertical"></save-template-modal>
-
-
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import VerticalConfig from '../../components/vertical-config.vue'
-import SaveTemplateModal from '../../components/modals/save-template.vue'
 import moment from 'moment'
 
 export default {
   components: {
-    VerticalConfig,
-    SaveTemplateModal
+    VerticalConfig
   },
   data () {
     return {
       activeTab: 0,
       verticalDataString: '',
-      selectedTemplate: '',
       showModal: false,
-      formModel: {},
-      ownerFilter: '',
-      // selectedOwner: null,
-      verticalFilter: 'all'
+      formModel: {}
     }
   },
   mounted () {
@@ -76,19 +62,18 @@ export default {
   },
   methods: {
     ...mapActions([
-      // 'saveDemoConfig',
       'loadDemoConfig',
       'errorNotification',
-      'saveVertical'
+      'saveDemoConfig'
     ]),
-    confirmSaveDemoConfig ({id, data}) {
-      console.log('confirmSaveDemoConfig', id, data)
+    confirmSaveDemoConfig ({data}) {
+      console.log('confirmSaveDemoConfig', data)
       // pop confirmation dialog
       this.$dialog.confirm({
         message: `Are you sure you want to save your demo configuration?`,
         onConfirm: async () => {
           // this.$toast.open('Save demo configuration confirmed')
-          // await this.saveDemoConfig({id, data})
+          await this.saveDemoConfig({data})
           await this.loadDemoConfig(false)
         }
       })
@@ -107,19 +92,23 @@ export default {
       this.loadDemoConfig(false)
     },
     async clickSave () {
-      const id = this.selectedTemplate
-      console.log('click save vertical', id)
       try {
         let data
         if (this.activeTab === 0) {
-          // use Form model
-          data = JSON.parse(JSON.stringify(this.formModel))
+          // use Form model data
+          data = JSON.parse(JSON.stringify(this.formModel)).configuration
         } else if (this.activeTab === 1) {
-          // use Raw JSON string
-          data = JSON.parse(this.verticalDataString)
+          // use Raw JSON string data
+          data = JSON.parse(this.verticalDataString).configuration
+        }
+        // remove empty strings from the data, so that those values are not unset on server side
+        for (const key of Object.keys(data)) {
+          if (data[key] === '') {
+            delete data[key]
+          }
         }
         // confirm with user and save the data to the server
-        this.confirmSaveDemoConfig({id, data})
+        this.confirmSaveDemoConfig({data})
       } catch (e) {
         // failed to save data
         console.log('failed to save vertical', e.message)
