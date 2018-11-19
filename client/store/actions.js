@@ -24,7 +24,7 @@ export const switchEffect = ({ commit }, data) => {
 
 export const loadToState = async function ({getters, commit, dispatch}, options) {
   try {
-    const response = await load(getters.jwt, options.endpoint, options.query)
+    const response = await load(options.endpoint, options.query)
     console.log(`GET ${options.name}`, response)
     let data
     if (typeof options.transform === 'function') {
@@ -67,7 +67,7 @@ export const setLoading = function ({getters, commit, dispatch}, {group, type, v
 export const putData = async function ({getters, commit, dispatch}, options) {
   try {
     console.log(`putData ${options.endpoint}`, options.data)
-    const response = await put(getters.jwt, options.endpoint, options.query, options.data)
+    const response = await put(options.endpoint, options.query, options.data)
     console.log(`put ${options.name}`, response)
     if (options.showNotification) {
       dispatch('successNotification', `Successfully set ${options.name}`)
@@ -82,7 +82,7 @@ export const putData = async function ({getters, commit, dispatch}, options) {
 export const postData = async function ({getters, commit, dispatch}, options) {
   try {
     console.log(`postData ${options.endpoint}`, options.data)
-    const response = await post(getters.jwt, options.endpoint, options.query, options.data)
+    const response = await post(options.endpoint, options.query, options.data)
     console.log(`post ${options.name}`, response)
     if (options.showNotification) {
       dispatch('successNotification', `Successfully updated ${options.name}`)
@@ -97,7 +97,7 @@ export const postData = async function ({getters, commit, dispatch}, options) {
 export const deleteData = async function ({getters, commit, dispatch}, options) {
   try {
     console.log(`deleteData ${options.endpoint}`, options.data)
-    const response = await httpDelete(getters.jwt, options.endpoint, options.query)
+    const response = await httpDelete(options.endpoint, options.query)
     console.log(`delete ${options.name}`, response)
     if (options.showNotification) {
       dispatch('successNotification', `Successfully deleted ${options.name}`)

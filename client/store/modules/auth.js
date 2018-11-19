@@ -117,64 +117,6 @@ const actions = {
     } finally {
       dispatch('setWorking', {group: 'app', type: 'login', value: false})
     }
-  },
-  async sendPasswordResetEmail ({getters, dispatch, commit, rootState}, data) {
-    // try reset password request
-    try {
-      // send data as email or username depending on contents
-      let body
-      if (data.indexOf('@') > 0) {
-        body = {email: data}
-      } else {
-        body = {username: data}
-      }
-      const response = await axios.post(`/auth/password/reset/request`, body)
-      // if successful
-      if (response.status >= 200 && response.status < 300) {
-        dispatch('successNotification', {
-          title: `Password Reset Email Sent`,
-          message: 'You should be receiving an email shortly with the link to reset your password.',
-          duration: 12000
-        })
-      } else {
-        dispatch('errorNotification', {
-          title: `Failed to Send Password Reset Email`,
-          message: `${response.status} ${response.statusText}`
-        })
-      }
-    } catch (error) {
-      console.log(error)
-      dispatch('errorNotification', {
-        title: `Failed to Send Password Reset Email`,
-        message: `${error.response.status} ${error.response.statusText}`
-      })
-      throw error
-    }
-  },
-  async resetPassword ({getters, dispatch}, data) {
-    // try password reset request
-    try {
-      const response = await axios.post(`/auth/password/reset`, data)
-      // if successful
-      if (response.status >= 200 && response.status < 300) {
-        dispatch('successNotification', {
-          title: `Password Reset Successful`,
-          message: 'You can now log in with your new password.'
-        })
-      } else {
-        dispatch('errorNotification', {
-          title: `Failed to Reset Password`,
-          message: `${response.status} ${response.statusText}`
-        })
-      }
-    } catch (error) {
-      console.log(error)
-      dispatch('errorNotification', {
-        title: `Failed to Reset Password`,
-        message: `${error.response.status} ${error.response.statusText}`
-      })
-      throw error
-    }
   }
 }
 

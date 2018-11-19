@@ -27,3 +27,6 @@ export const SET_USERS = 'SET_USERS'
 
 // defaults
 export const SET_DEFAULTS = 'SET_DEFAULTS'
+
+// SET_DEMO_CONFIG
+export const SET_DEMO_CONFIG = 'SET_DEMO_CONFIG'
