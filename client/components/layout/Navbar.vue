@@ -29,7 +29,7 @@
                 </div>
                 <div class="level-item">
                   <b-select v-model="pageSelection" @change="changePage">
-                    <option value="Verticals">Verticals</option>
+                    <option value="Demo Session Configuration">Demo Session Configuration</option>
                   </b-select>
                 </div>
               </nav>
@@ -55,7 +55,7 @@ export default {
   data () {
     return {
       filter: '',
-      pageSelection: 'Verticals'
+      pageSelection: 'Demo Session Configuration'
     }
   },
 

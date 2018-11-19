@@ -32,7 +32,7 @@ module.exports = merge(baseWebpackConfig, {
     }),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      title: 'dCloud Toolbox - Verticals',
+      title: 'dCloud Toolbox - Demo Session Configuration',
       template: 'index.html',
       inject: true,
       favicon: 'client/assets/logo.png'
