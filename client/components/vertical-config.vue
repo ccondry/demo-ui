@@ -40,7 +40,11 @@
         </b-field>
 
         <b-field label="Chat Bot Token">
-          <b-input v-model="model.configuration.chatBotToken" :placeholder="defaults.chatBotToken" />
+          <b-autocomplete
+            v-model="model.configuration.chatBotToken"
+            :data="[defaults.chatBotToken]"
+            :placeholder="defaults.chatBotToken">
+          </b-autocomplete>
         </b-field>
 
         <b-field label="Chat Bot Language">
