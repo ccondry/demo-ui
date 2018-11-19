@@ -23,7 +23,7 @@ else
         #echo "removing old web files"
         #rm -rf /var/www/html/
         echo "copying new web files"
-        cp -rf dist/* /var/www/demo-ui/
+        cp -rf dist/* /var/www/html/
       else
         echo "npm failed to run build script"
       fi
