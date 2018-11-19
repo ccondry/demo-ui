@@ -4,7 +4,15 @@ import defaultVertical from './default-vertical.json'
 
 const state = {
   defaults: {
-    verticals: defaultVertical
+    verticals: defaultVertical,
+    configuration: {
+      chatBotToken: '5dc044d7822d43a5839627427ed28935',
+      chatBotEnabled: true,
+      chatBotSurveyEnabled: true,
+      language: 'en',
+      region: 'US',
+      multichannel: 'ece'
+    }
   }
 }
 

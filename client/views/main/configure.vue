@@ -21,10 +21,9 @@
               <vertical-config
               :model.sync="formModel"
               @save="clickSave"
-              @upload="upload"
               :working="working"
               :loading="loading"
-              :defaults="defaults.verticals"
+              :defaults="defaults.configuration"
               :user="user"
               ></vertical-config>
             </b-tab-item>
@@ -77,32 +76,22 @@ export default {
   },
   methods: {
     ...mapActions([
+      // 'saveDemoConfig',
       'loadDemoConfig',
       'errorNotification',
-      'saveVertical',
-      'uploadImage'
+      'saveVertical'
     ]),
-    confirmSaveVertical ({id, data}) {
-      console.log('confirmSaveVertical', id, data)
+    confirmSaveDemoConfig ({id, data}) {
+      console.log('confirmSaveDemoConfig', id, data)
       // pop confirmation dialog
       this.$dialog.confirm({
-        message: `Are you sure you want to save vertical ${data.name} (${id})?`,
+        message: `Are you sure you want to save your demo configuration?`,
         onConfirm: async () => {
-          this.$toast.open('Save vertical confirmed')
-          await this.saveVertical({id, data})
-          // update verticals data in state with current server data
+          // this.$toast.open('Save demo configuration confirmed')
+          // await this.saveDemoConfig({id, data})
           await this.loadDemoConfig(false)
-          // make sure the the new vertical is the selected one
-          this.selectedTemplate = id
-          // load the selected vertical - so that after Save As, the vertical ID
-          // will be correctly displayed
-          this.clickLoadTemplate()
         }
       })
-    },
-    upload (data) {
-      console.log('Home.vue - upload vertical image', data)
-      this.uploadImage({data})
     },
     isRecent (date) {
       try {
@@ -130,30 +119,16 @@ export default {
           data = JSON.parse(this.verticalDataString)
         }
         // confirm with user and save the data to the server
-        this.confirmSaveVertical({id, data})
+        this.confirmSaveDemoConfig({id, data})
       } catch (e) {
         // failed to save data
         console.log('failed to save vertical', e.message)
         this.errorNotification(`Failed to save vertical. Check JSON syntax.`)
       }
     },
-    clickSaveAs () {
-      console.log('saving vertical as...')
-      this.showModal = true
-    },
     updateCache (data) {
       // copy state data to local data
       this.verticalDataString = JSON.stringify(data, null, 2)
-    },
-    clickLoadTemplate () {
-      // user clicked button to load a template into their user branding config
-      console.log('loading vertical', this.selectedTemplate)
-      // update the raw JSON string
-      this.updateCache(this.selectedTemplateObject)
-      // update the form with a copy of the template object
-      this.formModel = JSON.parse(JSON.stringify(this.selectedTemplateObject))
-      // remove database _id
-      delete this.formModel._id
     },
     async clickSaveVertical ({id, name}) {
       console.log('saving vertical as', id, '-', name)
@@ -171,7 +146,7 @@ export default {
         data.id = id
         data.name = name
         // confirm with user and save the data to the server
-        await this.confirmSaveVertical({id, data})
+        await this.confirmSaveDemoConfig({id, data})
       } catch (e) {
         console.log('failed to save vertical', id, e)
         this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
@@ -188,42 +163,17 @@ export default {
       'demoConfig'
     ]),
     disableSave () {
-      if (this.selectedTemplate && this.selectedTemplate.length && this.selectedTemplateObject) {
-        // any template has been selected
-        if (this.selectedTemplateObject.owner === this.user.username || this.user.admin) {
-          // this user owns this template or is an admin
-          return false
-        } else {
-          // this user doesn't have access to save over this template,
-          // so disable the button
-          return true
-        }
-      } else {
-        // template selection still on placeholder option
-        return true
-      }
-    },
-    disableSaveAs () {
-      return !Object.keys(this.formModel).length
-    },
-    selectedTemplateObject () {
-      if (this.verticals && this.verticals.length && this.selectedTemplate.length) {
-        return this.verticals.find(v => v.id === this.selectedTemplate)
-      } else {
-        return {}
-      }
+      return false
     }
   },
 
   watch: {
-    configuration (val, oldVal) {
+    demoConfig (val, oldVal) {
       // demo configuration state changed
       // update the raw JSON string
       this.updateCache(val)
       // update the form with a copy of the template object
       this.formModel = JSON.parse(JSON.stringify(val))
-      // remove database _id
-      delete this.formModel._id
     },
     activeTab (val, oldVal) {
       console.log('activeTab changed')
