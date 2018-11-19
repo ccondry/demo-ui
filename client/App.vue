@@ -3,12 +3,9 @@
     <nprogress-container></nprogress-container>
     <!-- <b-loading :is-full-page="true" :active="loading.app.user" :can-cancel="false"></b-loading> -->
     <navbar :show="true" :menu-filter.sync="menuFilter"></navbar>
-    <div v-if="authenticated && endpoints">
+    <div v-if="endpoints">
       <sidebar :show="sidebar.opened && !sidebar.hidden" :menu-filter="menuFilter"></sidebar>
       <app-main></app-main>
-    </div>
-    <div v-else>
-      <login />
     </div>
     <!-- <footer-bar></footer-bar> -->
   </div>
@@ -19,7 +16,6 @@ import NprogressContainer from 'vue-nprogress/src/NprogressContainer'
 import { Navbar, Sidebar, AppMain } from 'components/layout/'
 import { mapGetters, mapActions } from 'vuex'
 // import router from './router'
-import Login from './views/auth/Login'
 
 export default {
   data () {
@@ -32,8 +28,7 @@ export default {
     Navbar,
     Sidebar,
     AppMain,
-    NprogressContainer,
-    Login
+    NprogressContainer
   },
 
   async beforeMount () {
@@ -57,34 +52,9 @@ export default {
     window.addEventListener('DOMContentLoaded', handler)
     window.addEventListener('resize', handler)
 
-    // check the JWT in localstorage to see if the user is already logged in
-    // try {
-    console.log('checking login...')
-    await this.checkLogin()
-    console.log('checking login done.')
     console.log('getting endpoints...')
     await this.getEndpoints()
     console.log('getting endpoints done.')
-      // logged in
-    // } catch (e) {
-      // not logged in, so go to login page
-      // return router.push('Login')
-    // }
-
-    // if (this.authEnabled === true) {
-    //   try {
-    //     await this.checkLogin()
-    //   } catch (e) {
-    //     console.log(e)
-    //     console.log('this.$route', this.$route)
-    //     if (this.$route.name === 'Password Reset') {
-    //       // leave it
-    //     } else {
-    //       // go to login screen
-    //       this.$router.push('Login')
-    //     }
-    //   }
-    // }
   },
 
   async mounted () {
@@ -93,8 +63,6 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
-      'authEnabled',
-      'authenticated',
       'loading',
       'endpoints'
     ])
@@ -104,17 +72,8 @@ export default {
     ...mapActions([
       'toggleDevice',
       'toggleSidebar',
-      'checkLogin',
       'getEndpoints'
     ])
-  },
-  watch: {
-    authenticated (val, oldVal) {
-      // if user goes from logged in to logged out, forward them to the login page
-      if (oldVal === true && val === false) {
-        // this.$router.push('Login')
-      }
-    }
   }
 }
 </script>

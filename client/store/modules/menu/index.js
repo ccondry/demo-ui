@@ -1,11 +1,9 @@
 import * as types from '../../mutation-types'
 import main from './main.js'
-import admin from './admin.js'
 
 const state = {
   items: [
-    main,
-    admin
+    main
   ]
 }
 

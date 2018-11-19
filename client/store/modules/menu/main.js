@@ -12,15 +12,15 @@ export default {
   },
   children: [
     {
-      name: 'Verticals',
-      path: '/verticals',
+      name: 'Configure',
+      path: '/configure',
       meta: {
         icon: 'copyright',
-        description: 'cumulus vertical configuration',
-        created: '2018-11-07',
-        modified: '2018-11-07'
+        description: 'dCloud demo configuration',
+        created: '2018-11-19',
+        modified: '2018-11-19'
       },
-      component: lazyLoading('main/verticals')
+      component: lazyLoading('main/configure')
     }
     // {
     //   name: 'Verticals',
