@@ -91,14 +91,19 @@ const actions = {
     dispatch('setLoading', {group: 'session', type: 'info', value: true})
     try {
       await dispatch('loadToState', {
-        name: 'session info',
+        name: 'load demo session info',
         endpoint: getters.endpoints.session,
         mutation: types.SET_SESSION_INFO,
         showNotification
       })
     } catch (e) {
-      console.log('error loading demo session config', e)
-      dispatch('errorNotification', {title: 'Failed to load demo session configuration', error: e})
+      console.log('error loading demo session info', e)
+      Toast.open({
+        duration: 5000,
+        message: `load demo session info failed`,
+        // position: 'is-bottom',
+        type: 'is-danger'
+      })
     } finally {
       dispatch('setLoading', {group: 'session', type: 'info', value: false})
     }
@@ -107,14 +112,20 @@ const actions = {
     dispatch('setLoading', {group: 'session', type: 'config', value: true})
     try {
       await dispatch('loadToState', {
-        name: 'demo config',
+        name: 'load demo session configuration',
         endpoint: getters.endpoints.configure,
         mutation: types.SET_DEMO_CONFIG,
         showNotification
       })
     } catch (e) {
-      console.log('error loading demo session config', e)
+      console.log('error loading demo session configuration', e)
       dispatch('errorNotification', {title: 'Failed to load demo session configuration', error: e})
+      Toast.open({
+        duration: 5000,
+        message: `load demo session configuration failed`,
+        // position: 'is-bottom',
+        type: 'is-danger'
+      })
     } finally {
       dispatch('setLoading', {group: 'session', type: 'config', value: false})
     }
@@ -130,7 +141,13 @@ const actions = {
       })
     } catch (e) {
       console.log('error saving demo session config', e)
-      dispatch('errorNotification', {title: 'Failed to save demo session configuration', error: e})
+      // dispatch('errorNotification', {title: 'Failed to save demo session configuration', error: e})
+      Toast.open({
+        duration: 5000,
+        message: `save demo session configuration failed`,
+        // position: 'is-bottom',
+        type: 'is-danger'
+      })
     } finally {
       dispatch('setWorking', {group: 'session', type: 'config', value: false})
     }
