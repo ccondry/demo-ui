@@ -68,33 +68,35 @@
           </div>
           <div class="card-content" v-else>
 
-            <b-field label="Chat Bot Enabled">
+            <b-field label="Bot Enabled">
               <b-select v-model="model.configuration.chatBotEnabled">
                 <option :value="true">Enabled</option>
                 <option :value="false">Disabled</option>
               </b-select>
             </b-field>
 
-            <b-field label="Chat Bot Token">
+            <b-field label="DialogFlow Client API Token">
               <b-autocomplete
               v-model="model.configuration.chatBotToken"
               :data="[defaults.chatBotToken]"
               :placeholder="defaults.chatBotToken" />
             </b-field>
 
-            <b-field label="Chat Bot Language">
-              <b-select v-model="model.configuration.language">
-                <option value="en">English</option>
-              </b-select>
+            <b-field grouped>
+              <b-field label="Language">
+                <b-select v-model="model.configuration.language">
+                  <option value="en">English</option>
+                </b-select>
+              </b-field>
+
+              <b-field label="Region">
+                <b-select v-model="model.configuration.region">
+                  <option value="US">US</option>
+                </b-select>
+              </b-field>
             </b-field>
 
-            <b-field label="Chat Bot Region">
-              <b-select v-model="model.configuration.region">
-                <option value="US">US</option>
-              </b-select>
-            </b-field>
-
-            <b-field label="Chat Bot Survey">
+            <b-field label="Post-Chat Survey">
               <b-select v-model="model.configuration.chatBotSurveyEnabled">
                 <option :value="true">Enabled</option>
                 <option :value="false">Disabled</option>
@@ -155,9 +157,6 @@ export default {
       this.model.configuration.language === undefined &&
       this.model.configuration.region === undefined &&
       this.model.configuration.chatBotSurveyEnabled === undefined
-    },
-    chatBotTokenFieldType () {
-      return 'is-warning'
     }
   },
 
