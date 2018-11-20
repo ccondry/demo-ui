@@ -1,5 +1,6 @@
 import * as types from './mutation-types'
 import { load, put, post, httpDelete } from '../utils'
+import { Toast } from 'buefy'
 
 export const toggleSidebar = ({ commit }, data) => {
   if (data instanceof Object) {
@@ -34,25 +35,20 @@ export const loadToState = async function ({getters, commit, dispatch}, options)
     }
     commit(options.mutation, data)
     if (options.showNotification) {
-      dispatch('successNotification', `Successfully loaded ${options.name}`)
+      Toast.open({
+        duration: 5000,
+        message: `${options.name} successful`,
+        type: 'is-success'
+      })
     }
     return response
   } catch (e) {
     console.error(`error during GET ${options.name}`, e)
-    // check for 401 (expired JWT)
-    // console.error('e.response', e.response)
-    // console.error('e.response.status', e.response.status)
-    // console.error('e.response.data', e.response.data)
-    try {
-      if (e.response.status === 401 && e.response.data.toLowerCase() === 'jwt expired') {
-        // JWT expired
-        console.log('JWT expired. logging out user locally.')
-        dispatch('unsetJwt')
-      }
-    } catch (e2) {
-      // continue
-    }
-    dispatch('errorNotification', {title: `Failed to GET ${options.name}`, error: e})
+    Toast.open({
+      duration: 5000,
+      message: `${options.name} failed`,
+      type: 'is-danger'
+    })
   }
 }
 
@@ -70,12 +66,20 @@ export const putData = async function ({getters, commit, dispatch}, options) {
     const response = await put(options.endpoint, options.query, options.data)
     console.log(`put ${options.name}`, response)
     if (options.showNotification) {
-      dispatch('successNotification', `Successfully set ${options.name}`)
+      Toast.open({
+        duration: 5000,
+        message: `${options.name} successful`,
+        type: 'is-success'
+      })
     }
     return response
   } catch (e) {
     console.log(`error during PUT ${options.name}`, e)
-    dispatch('errorNotification', {title: `Failed to PUT ${options.name}`, error: e})
+    Toast.open({
+      duration: 5000,
+      message: `${options.name} failed`,
+      type: 'is-danger'
+    })
   }
 }
 
@@ -85,12 +89,21 @@ export const postData = async function ({getters, commit, dispatch}, options) {
     const response = await post(options.endpoint, options.query, options.data)
     console.log(`post ${options.name}`, response)
     if (options.showNotification) {
-      dispatch('successNotification', `Successfully updated ${options.name}`)
+      Toast.open({
+        duration: 5000,
+        message: `${options.name} successful`,
+        type: 'is-success'
+      })
     }
     return response
   } catch (e) {
     console.log(`error during POST ${options.name}`, e)
-    dispatch('errorNotification', {title: `Failed to POST ${options.name}`, error: e})
+    // dispatch('errorNotification', {title: `Failed to POST ${options.name}`, error: e})
+    Toast.open({
+      duration: 5000,
+      message: `${options.name} failed`,
+      type: 'is-danger'
+    })
   }
 }
 
@@ -100,11 +113,19 @@ export const deleteData = async function ({getters, commit, dispatch}, options) 
     const response = await httpDelete(options.endpoint, options.query)
     console.log(`delete ${options.name}`, response)
     if (options.showNotification) {
-      dispatch('successNotification', `Successfully deleted ${options.name}`)
+      Toast.open({
+        duration: 5000,
+        message: `${options.name} successful`,
+        type: 'is-success'
+      })
     }
     return response
   } catch (e) {
     console.log(`error during DELETE ${options.name}`, e)
-    dispatch('errorNotification', {title: `Failed to DELETE ${options.name}`, error: e})
+    Toast.open({
+      duration: 5000,
+      message: `${options.name} failed`,
+      type: 'is-danger'
+    })
   }
 }

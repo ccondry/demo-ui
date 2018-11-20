@@ -21,6 +21,17 @@ export default {
         modified: '2018-11-19'
       },
       component: lazyLoading('main/configure')
+    },
+    {
+      name: 'Upstream',
+      path: '/upstream',
+      meta: {
+        icon: 'cloud',
+        description: 'Upstream demo configuration',
+        created: '2018-11-20',
+        modified: '2018-11-20'
+      },
+      component: lazyLoading('main/upstream')
     }
     // {
     //   name: 'Verticals',

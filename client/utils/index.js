@@ -2,7 +2,6 @@ import axios from 'axios'
 
 export const load = async function (endpoint, query) {
   try {
-    console.log('GET', endpoint)
     const options = {
       params: query
     }

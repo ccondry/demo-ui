@@ -6,6 +6,7 @@ import verticals from './verticals'
 import defaults from './defaults'
 import user from './user'
 import usage from './usage'
+import upstream from './upstream'
 
 export default {
   app,
@@ -15,5 +16,6 @@ export default {
   verticals,
   user,
   usage,
+  upstream,
   defaults
 }

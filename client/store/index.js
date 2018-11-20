@@ -25,7 +25,8 @@ const store = new Vuex.Store({
       facebook: {},
       finesse: {},
       templates: {},
-      session: {}
+      session: {},
+      upstream: {}
     },
     loading: {
       app: {},
@@ -35,7 +36,8 @@ const store = new Vuex.Store({
       facebook: {},
       finesse: {},
       templates: {},
-      session: {}
+      session: {},
+      upstream: {}
     },
     defaultChatEntryPointId: config.ece.defaultChatEntryPointId
   },
