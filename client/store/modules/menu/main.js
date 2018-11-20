@@ -15,7 +15,7 @@ export default {
       name: 'Configure',
       path: '/configure',
       meta: {
-        icon: 'copyright',
+        icon: 'tune',
         description: 'dCloud demo configuration',
         created: '2018-11-19',
         modified: '2018-11-19'
