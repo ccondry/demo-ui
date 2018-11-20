@@ -1,4 +1,5 @@
 import * as types from '../mutation-types'
+import {Toast} from 'buefy'
 
 const state = {
   verticals: [],
