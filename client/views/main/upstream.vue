@@ -119,8 +119,8 @@ export default {
       console.log('clicked save')
       // confirm with user and save the data to the server
       this.confirmSave({
-        contactId: this.form.contactId,
-        vertical: this.form.vertical
+        contactId: this.form2.contactId,
+        vertical: this.form2.vertical
       })
     },
     confirmCreate (data) {
