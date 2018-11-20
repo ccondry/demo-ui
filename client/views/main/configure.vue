@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Loading Indicator -->
-    <b-loading :is-full-page="false" :active="loading.session.config || working.session.config" :can-cancel="false"></b-loading>
+    <b-loading :is-full-page="false" :active="loading.session.config || loading.session.info || working.session.config" :can-cancel="false"></b-loading>
 
     <div class="tile is-ancestor">
       <div class="tile is-parent is-vertical">
