@@ -71,24 +71,16 @@
             <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
           </div>
 
-          <b-tabs v-model="activeTab">
-            <b-tab-item label="Form">
-              <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
-              <vertical-config
-              :model.sync="formModel"
-              :session-info="sessionInfo"
-              @save="clickSave"
-              :working="working"
-              :loading="loading"
-              :defaults="defaults.configuration"
-              :user="user"
-              ></vertical-config>
-            </b-tab-item>
-
-            <b-tab-item label="Raw JSON">
-              <textarea class="input is-12" v-model="verticalDataString" style="min-height: 25em;"></textarea>
-            </b-tab-item>
-          </b-tabs>
+          <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
+          <vertical-config
+          :model.sync="formModel"
+          :session-info="sessionInfo"
+          @save="clickSave"
+          :working="working"
+          :loading="loading"
+          :defaults="defaults.configuration"
+          :user="user"
+          ></vertical-config>
 
         </article>
       </div>
