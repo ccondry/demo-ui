@@ -32,47 +32,78 @@
       </div>
       <div class="card-content" v-else>
 
-        <b-field label="Chat Bot Enabled">
-          <b-select v-model="model.configuration.chatBotEnabled">
-            <option :value="true">Enabled</option>
-            <option :value="false">Disabled</option>
-          </b-select>
-        </b-field>
+        <!-- Multichannel Configuration -->
+        <b-collapse class="content card" v-if="model.demo === 'pcce'">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Multichannel Configuration</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content" v-if="!model.configuration.multichannel">
+            <button class="button is-primary" @click="$set(model.configuration, 'multichannel', defaults.multichannel)">Configure</button>
+          </div>
+          <div class="card-content" v-else>
+            <b-field label="Multichannel System">
+              <b-select v-model="model.configuration.multichannel">
+                <option value="ece">ECE</option>
+                <option value="sfdc">SFDC</option>
+                <option value="upstream">Upstream</option>
+              </b-select>
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /Multichannel Configuration -->
 
-        <b-field label="Chat Bot Token">
-          <b-autocomplete
-            v-model="model.configuration.chatBotToken"
-            :data="[defaults.chatBotToken]"
-            :placeholder="defaults.chatBotToken">
-          </b-autocomplete>
-        </b-field>
+        <!-- Chat Bot Configuration -->
+        <b-collapse class="content card" v-if="model.demo === 'pcce'">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Chat Bot Configuration</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content" v-if="chatBotConfigured">
+            <button class="button is-primary" @click="configureChatBot">Configure</button>
+          </div>
+          <div class="card-content" v-else>
 
-        <b-field label="Chat Bot Language">
-          <b-select v-model="model.configuration.language">
-            <option value="en">English</option>
-          </b-select>
-        </b-field>
+            <b-field label="Chat Bot Enabled">
+              <b-select v-model="model.configuration.chatBotEnabled">
+                <option :value="true">Enabled</option>
+                <option :value="false">Disabled</option>
+              </b-select>
+            </b-field>
 
-        <b-field label="Chat Bot Region">
-          <b-select v-model="model.configuration.region">
-            <option value="US">US</option>
-          </b-select>
-        </b-field>
+            <b-field label="Chat Bot Token">
+              <b-autocomplete
+              v-model="model.configuration.chatBotToken"
+              :data="[defaults.chatBotToken]"
+              :placeholder="defaults.chatBotToken" />
+            </b-field>
 
-        <b-field label="Chat Bot Survey">
-          <b-select v-model="model.configuration.chatBotSurveyEnabled">
-            <option :value="true">Enabled</option>
-            <option :value="false">Disabled</option>
-          </b-select>
-        </b-field>
+            <b-field label="Chat Bot Language">
+              <b-select v-model="model.configuration.language">
+                <option value="en">English</option>
+              </b-select>
+            </b-field>
 
-        <b-field label="Multichannel">
-          <b-select v-model="model.configuration.multichannel">
-            <option value="ece">ECE</option>
-            <option value="sfdc">SFDC</option>
-            <option value="upstream">Upstream</option>
-          </b-select>
-        </b-field>
+            <b-field label="Chat Bot Region">
+              <b-select v-model="model.configuration.region">
+                <option value="US">US</option>
+              </b-select>
+            </b-field>
+
+            <b-field label="Chat Bot Survey">
+              <b-select v-model="model.configuration.chatBotSurveyEnabled">
+                <option :value="true">Enabled</option>
+                <option :value="false">Disabled</option>
+              </b-select>
+            </b-field>
+
+          </div>
+        </b-collapse>
+        <!-- /Chat Bot Configuration -->
 
       </div>
     </b-collapse>
@@ -107,6 +138,26 @@ export default {
     submit () {
       console.log('vertical config form submitted')
       this.$emit('save', this.model)
+    },
+    configureChatBot () {
+      this.$set(this.model.configuration, 'chatBotEnabled', this.defaults.chatBotEnabled)
+      this.$set(this.model.configuration, 'chatBotToken', this.defaults.chatBotEnabled)
+      this.$set(this.model.configuration, 'language', this.defaults.chatBotEnabled)
+      this.$set(this.model.configuration, 'region', this.defaults.chatBotEnabled)
+      this.$set(this.model.configuration, 'chatBotSurveyEnabled', this.defaults.chatBotEnabled)
+    }
+  },
+
+  computed: {
+    chatBotConfigured () {
+      return this.model.configuration.chatBotEnabled === undefined &&
+      this.model.configuration.chatBotToken === undefined &&
+      this.model.configuration.language === undefined &&
+      this.model.configuration.region === undefined &&
+      this.model.configuration.chatBotSurveyEnabled === undefined
+    },
+    chatBotTokenFieldType () {
+      return 'is-warning'
     }
   },
 
