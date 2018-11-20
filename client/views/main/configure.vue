@@ -7,6 +7,62 @@
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
           <h1 class="title">
+            Demo Session Information
+            <!-- 'updated' tag -->
+            <!-- <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag> -->
+          </h1>
+          <div class="block">
+            <!-- Basic Information -->
+            <b-collapse class="content card">
+              <div slot="trigger" slot-scope="props" class="card-header">
+                <p class="card-header-title">Basic Information</p>
+                <a class="card-header-icon">
+                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+                </a>
+              </div>
+              <div class="card-content">
+
+                <b-field grouped>
+                  <b-field label="Session ID">
+                    <b-input v-model="sessionInfo.id" disabled />
+                  </b-field>
+                  <b-field label="Datacenter">
+                    <b-input v-model="sessionInfo.datacenter" disabled />
+                  </b-field>
+                  <b-field label="Owner">
+                    <b-input v-model="sessionInfo.owner" disabled />
+                  </b-field>
+                </b-field>
+
+                <b-field grouped>
+                  <b-field label="Demo">
+                    <b-input v-model="demoConfig.demo" disabled />
+                  </b-field>
+                  <b-field label="Version">
+                    <b-input v-model="demoConfig.version" disabled />
+                  </b-field>
+                </b-field>
+
+                <b-field grouped>
+                  <b-field label="AnyConnect Username">
+                    <b-input :value="`v${sessionInfo.vpod}user1`" disabled />
+                  </b-field>
+                  <b-field label="Password">
+                    <b-input :value="sessionInfo.anycpwd" disabled />
+                  </b-field>
+                </b-field>
+
+              </div>
+            </b-collapse>
+            <!-- /Basic Information -->
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="tile is-ancestor">
+      <div class="tile is-parent is-vertical">
+        <article class="tile is-child box">
+          <h1 class="title">
             Demo Session Configuration
             <!-- 'updated' tag -->
             <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
