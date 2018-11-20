@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Loading Indicator -->
-    <b-loading :is-full-page="false" :active="working.upstream.create" :can-cancel="false"></b-loading>
+    <b-loading :is-full-page="false" :active="working.upstream.customer" :can-cancel="false"></b-loading>
 
     <div class="tile is-ancestor">
       <div class="tile is-parent is-4">
