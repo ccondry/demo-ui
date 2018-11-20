@@ -135,7 +135,7 @@ const actions = {
     dispatch('setWorking', {group: 'session', type: 'config', value: true})
     try {
       await dispatch('postData', {
-        name: 'demo config',
+        name: 'save demo session configuration',
         endpoint: getters.endpoints.configure,
         data,
         showNotification

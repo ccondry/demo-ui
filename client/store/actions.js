@@ -37,7 +37,7 @@ export const loadToState = async function ({getters, commit, dispatch}, options)
     if (options.showNotification) {
       Toast.open({
         duration: 5000,
-        message: `${options.name} successful`,
+        message: `${options.name} was successful`,
         type: 'is-success'
       })
     }
@@ -68,7 +68,7 @@ export const putData = async function ({getters, commit, dispatch}, options) {
     if (options.showNotification) {
       Toast.open({
         duration: 5000,
-        message: `${options.name} successful`,
+        message: `${options.name} was successful`,
         type: 'is-success'
       })
     }
@@ -91,7 +91,7 @@ export const postData = async function ({getters, commit, dispatch}, options) {
     if (options.showNotification) {
       Toast.open({
         duration: 5000,
-        message: `${options.name} successful`,
+        message: `${options.name} was successful`,
         type: 'is-success'
       })
     }
@@ -115,7 +115,7 @@ export const deleteData = async function ({getters, commit, dispatch}, options) 
     if (options.showNotification) {
       Toast.open({
         duration: 5000,
-        message: `${options.name} successful`,
+        message: `${options.name} was successful`,
         type: 'is-success'
       })
     }
