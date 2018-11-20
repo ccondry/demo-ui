@@ -20,6 +20,7 @@
               <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
               <vertical-config
               :model.sync="formModel"
+              :session-info="sessionInfo"
               @save="clickSave"
               :working="working"
               :loading="loading"
@@ -63,6 +64,7 @@ export default {
   methods: {
     ...mapActions([
       'loadDemoConfig',
+      'loadSessionInfo',
       'errorNotification',
       'saveDemoConfig'
     ]),
@@ -90,6 +92,8 @@ export default {
     refresh () {
       // load demo session configuration
       this.loadDemoConfig(false)
+      // load dcloud session info
+      this.loadSessionInfo(false)
     },
     async clickSave () {
       try {
@@ -149,7 +153,8 @@ export default {
       'loading',
       'working',
       'defaults',
-      'demoConfig'
+      'demoConfig',
+      'sessionInfo'
     ]),
     disableSave () {
       return false

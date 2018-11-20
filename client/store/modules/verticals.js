@@ -2,12 +2,14 @@ import * as types from '../mutation-types'
 
 const state = {
   verticals: [],
-  demoConfig: {}
+  demoConfig: {},
+  sessionInfo: {}
 }
 
 const getters = {
   verticals: state => state.verticals,
-  demoConfig: state => state.demoConfig
+  demoConfig: state => state.demoConfig,
+  sessionInfo: state => state.sessionInfo
 }
 
 const mutations = {
@@ -16,6 +18,9 @@ const mutations = {
   },
   [types.SET_DEMO_CONFIG] (state, data) {
     state.demoConfig = data
+  },
+  [types.SET_SESSION_INFO] (state, data) {
+    state.sessionInfo = data
   }
 }
 
@@ -81,6 +86,22 @@ const actions = {
     // } finally {
     //   dispatch('setLoading', {group: 'session', type: 'config', value: false})
     // }
+  },
+  async loadSessionInfo ({getters, commit, dispatch}, showNotification = true) {
+    dispatch('setLoading', {group: 'session', type: 'info', value: true})
+    try {
+      await dispatch('loadToState', {
+        name: 'session info',
+        endpoint: getters.endpoints.session,
+        mutation: types.SET_SESSION_INFO,
+        showNotification
+      })
+    } catch (e) {
+      console.log('error loading demo session config', e)
+      dispatch('errorNotification', {title: 'Failed to load demo session configuration', error: e})
+    } finally {
+      dispatch('setLoading', {group: 'session', type: 'info', value: false})
+    }
   },
   async loadDemoConfig ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'session', type: 'config', value: true})

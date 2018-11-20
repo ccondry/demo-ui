@@ -9,12 +9,37 @@
         </a>
       </div>
       <div class="card-content">
-        <b-field label="Demo">
-          <b-input v-model="model.demo" disabled />
+
+        <b-field grouped>
+          <b-field label="Session ID">
+            <b-input v-model="sessionInfo.id" disabled />
+          </b-field>
+          <b-field label="Datacenter">
+            <b-input v-model="sessionInfo.datacenter" disabled />
+          </b-field>
+          <b-field label="Owner">
+            <b-input v-model="sessionInfo.owner" disabled />
+          </b-field>
         </b-field>
-        <b-field label="Version">
-          <b-input v-model="model.version" disabled />
+
+        <b-field grouped>
+          <b-field label="Demo">
+            <b-input v-model="model.demo" disabled />
+          </b-field>
+          <b-field label="Version">
+            <b-input v-model="model.version" disabled />
+          </b-field>
         </b-field>
+
+        <b-field grouped>
+          <b-field label="AnyConnect Username">
+            <b-input :value="`v${sessionInfo.vpod}user1`" disabled />
+          </b-field>
+          <b-field label="Password">
+            <b-input :value="sessionInfo.anycpwd" disabled />
+          </b-field>
+        </b-field>
+
       </div>
     </b-collapse>
     <!-- /Basic Information -->
@@ -118,6 +143,10 @@
 export default {
   props: {
     'model': {
+      type: Object,
+      default () { return {} }
+    },
+    'sessionInfo': {
       type: Object,
       default () { return {} }
     },
