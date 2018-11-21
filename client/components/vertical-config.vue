@@ -37,7 +37,7 @@
         <!-- /Multichannel Configuration -->
 
         <!-- Chat Bot Configuration -->
-        <b-collapse class="content card" v-if="model.demo === 'pcce'">
+        <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Chat Bot Configuration</p>
             <a class="card-header-icon">
