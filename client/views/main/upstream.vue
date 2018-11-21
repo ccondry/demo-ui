@@ -1,7 +1,21 @@
 <template>
   <div>
     <!-- Loading Indicator -->
-    <b-loading :is-full-page="false" :active="working.upstream.customer" :can-cancel="false"></b-loading>
+    <b-loading :is-full-page="false" :active="loading.upstream.customer || working.upstream.customer" :can-cancel="false"></b-loading>
+
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <h1 class="title">
+            Upstream Customers
+          </h1>
+          <div class="block">
+            <customers-table
+            :model="upstreamCustomers" />
+          </div>
+        </article>
+      </div>
+    </div>
 
     <div class="tile is-ancestor">
       <div class="tile is-parent is-4">
@@ -69,10 +83,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import CustomersTable from '../../components/customers-table.vue'
 
 export default {
   components: {
+    CustomersTable
   },
+
   data () {
     return {
       form: {
@@ -89,19 +106,25 @@ export default {
       },
       autocomplete: {
         verticals: [
-          'travel',
-          'city',
-          'finance',
-          'utility',
-          'healthcare'
+          'Travel',
+          'City',
+          'Finance',
+          'Utility',
+          'Healthcare'
         ]
       }
     }
   },
+
+  mounted () {
+    this.getUpstreamCustomers()
+  },
+
   methods: {
     ...mapActions([
       'createUpstreamCustomer',
-      'setUpstreamVertical'
+      'setUpstreamVertical',
+      'getUpstreamCustomers'
     ]),
     clickCreate () {
       console.log('clicked create')
@@ -144,10 +167,12 @@ export default {
       })
     }
   },
+
   computed: {
     ...mapGetters([
       'loading',
-      'working'
+      'working',
+      'upstreamCustomers'
     ]),
     disableSave () {
       return false
