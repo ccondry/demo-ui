@@ -36,7 +36,7 @@
 
     <span v-if="item.children && item.children.length">
       <ul v-show="isExpanded(item)">
-        <li v-for="subItem in item.children" v-if="subItem.path">
+        <li v-for="subItem in item.children" v-if="subItem.path && (subItem.meta.filter ? subItem.meta.filter.includes(demoConfig.demo) : true)">
           <router-link :to="generatePath(item, subItem)">
             <!-- <span v-if="subItem.meta && subItem.meta.icon" class="icon is-small"><i :class="['fa', subItem.meta.icon]"></i></span> -->
             <b-icon v-if="subItem.meta && subItem.meta.icon" :icon="subItem.meta.icon" ></b-icon>
@@ -97,7 +97,8 @@ export default {
   computed: {
     ...mapGetters({
       menu: 'menuitems',
-      user: 'user'
+      user: 'user',
+      demoConfig: 'demoConfig'
     }),
     filteredMenu () {
       // copy menu
