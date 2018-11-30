@@ -4,24 +4,10 @@
     <b-loading :is-full-page="false" :active="loading.upstream.customer || working.upstream.customer" :can-cancel="false"></b-loading>
 
     <div class="tile is-ancestor">
-      <div class="tile is-parent">
-        <article class="tile is-child box">
-          <h1 class="title">
-            Upstream Customers
-          </h1>
-          <div class="block">
-            <customers-table
-            :model="upstreamCustomers" />
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <div class="tile is-ancestor">
       <div class="tile is-parent is-4">
         <article class="tile is-child box">
           <h1 class="title">
-            Create Customer
+            Set Customer Interaction History
           </h1>
           <div class="block">
             <b-field label="First Name">
@@ -30,9 +16,9 @@
             <b-field label="Last Name">
               <b-input v-model="form.lastName" placeholder="Littlefoot" />
             </b-field>
-            <b-field label="Contact ID">
+            <!-- <b-field label="Contact ID">
               <b-input v-model="form.contactId" placeholder="5551112222" />
-            </b-field>
+            </b-field> -->
             <b-field label="Phone">
               <b-input v-model="form.phone" placeholder="5551112222" />
             </b-field>
@@ -47,30 +33,7 @@
             </b-field>
 
             <b-field>
-              <button type="button" class="button is-success" @click.prevent="clickCreate" :disabled="disableCreate">Create</button>
-            </b-field>
-
-          </div>
-        </article>
-      </div>
-      <div class="tile is-parent is-4">
-        <article class="tile is-child box">
-          <h1 class="title">
-            Edit Customer's Vertical
-          </h1>
-          <div class="block">
-            <b-field label="Contact ID">
-              <b-input v-model="form2.contactId" placeholder="5551112222" />
-            </b-field>
-            <b-field label="Vertical">
-              <b-autocomplete
-              v-model="form2.vertical"
-              :data="autocomplete.verticals"
-              :placeholder="autocomplete.verticals[0]" />
-            </b-field>
-
-            <b-field>
-              <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
+              <button type="button" class="button is-success" @click.prevent="clickCreate" :disabled="disableCreate">Submit</button>
             </b-field>
 
           </div>
@@ -83,12 +46,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import CustomersTable from '../../components/customers-table.vue'
 
 export default {
-  components: {
-    CustomersTable
-  },
 
   data () {
     return {
@@ -97,11 +56,7 @@ export default {
         lastName: '',
         phone: '',
         email: '',
-        contactId: '',
-        vertical: ''
-      },
-      form2: {
-        contactId: '',
+        // contactId: '',
         vertical: ''
       },
       autocomplete: {
@@ -116,15 +71,9 @@ export default {
     }
   },
 
-  mounted () {
-    this.getUpstreamCustomers()
-  },
-
   methods: {
     ...mapActions([
-      'createUpstreamCustomer',
-      'setUpstreamVertical',
-      'getUpstreamCustomers'
+      'createUpstreamCustomer'
     ]),
     clickCreate () {
       console.log('clicked create')
@@ -132,18 +81,9 @@ export default {
       this.confirmCreate({
         firstName: this.form.firstName,
         lastName: this.form.lastName,
-        contactId: this.form.contactId,
         phone: this.form.phone,
         email: this.form.email,
         vertical: this.form.vertical
-      })
-    },
-    clickSave () {
-      console.log('clicked save')
-      // confirm with user and save the data to the server
-      this.confirmSave({
-        contactId: this.form2.contactId,
-        vertical: this.form2.vertical
       })
     },
     confirmCreate (data) {
@@ -155,34 +95,20 @@ export default {
           await this.createUpstreamCustomer({data})
         }
       })
-    },
-    confirmSave (data) {
-      console.log('confirmSave', data)
-      // pop confirmation dialog
-      this.$dialog.confirm({
-        message: `Are you sure you want to change this Upstream customer's vertical?`,
-        onConfirm: async () => {
-          await this.setUpstreamVertical({data})
-        }
-      })
     }
   },
 
   computed: {
     ...mapGetters([
       'loading',
-      'working',
-      'upstreamCustomers'
+      'working'
     ]),
-    disableSave () {
-      return false
-    },
     disableCreate () {
       return !this.form.firstName.length ||
       !this.form.lastName.length ||
       !this.form.phone.length ||
       !this.form.email.length ||
-      !this.form.contactId.length ||
+      // !this.form.contactId.length ||
       !this.form.vertical.length
     }
   }
