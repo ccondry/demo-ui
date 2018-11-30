@@ -95,9 +95,11 @@ import VerticalConfig from '../../components/vertical-config.vue'
 import moment from 'moment'
 
 export default {
+
   components: {
     VerticalConfig
   },
+
   data () {
     return {
       activeTab: 0,
@@ -106,13 +108,10 @@ export default {
       formModel: {}
     }
   },
-  mounted () {
-    this.refresh()
-  },
+
   methods: {
     ...mapActions([
       'loadDemoConfig',
-      'loadSessionInfo',
       'errorNotification',
       'saveDemoConfig'
     ]),
@@ -136,12 +135,6 @@ export default {
         // if anything fails, use false
         return false
       }
-    },
-    refresh () {
-      // load demo session configuration
-      this.loadDemoConfig(false)
-      // load dcloud session info
-      this.loadSessionInfo(false)
     },
     async clickSave () {
       try {
@@ -194,6 +187,7 @@ export default {
       }
     }
   },
+
   computed: {
     ...mapGetters([
       'user',
