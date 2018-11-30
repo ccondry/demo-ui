@@ -58,6 +58,10 @@ export default {
   },
 
   async mounted () {
+    // load demo session configuration
+    this.loadDemoConfig(false)
+    // load dcloud session info
+    this.loadSessionInfo(false)
   },
 
   computed: {
@@ -72,7 +76,9 @@ export default {
     ...mapActions([
       'toggleDevice',
       'toggleSidebar',
-      'getEndpoints'
+      'getEndpoints',
+      'loadDemoConfig',
+      'loadSessionInfo'
     ])
   }
 }
