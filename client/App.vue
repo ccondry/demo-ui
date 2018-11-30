@@ -55,13 +55,18 @@ export default {
     console.log('getting endpoints...')
     await this.getEndpoints()
     console.log('getting endpoints done.')
+    // load demo session configuration
+    console.log('getting demo config...')
+    await this.loadDemoConfig(false)
+    console.log('getting demo config done.')
+    // load dcloud session info
+    console.log('getting session info...')
+    await this.loadSessionInfo(false)
+    console.log('getting session info done.')
   },
 
   async mounted () {
-    // load demo session configuration
-    this.loadDemoConfig(false)
-    // load dcloud session info
-    this.loadSessionInfo(false)
+
   },
 
   computed: {
