@@ -31,6 +31,11 @@
               :data="autocomplete.verticals"
               :placeholder="autocomplete.verticals[0]" />
             </b-field>
+            <b-field label="Create Interaction History">
+              <b-input
+              v-model="form.interactionHistory"
+              type="checkbox" />
+            </b-field>
 
             <b-field>
               <button type="button" class="button is-success" @click.prevent="clickCreate" :disabled="disableCreate">Submit</button>
@@ -57,7 +62,8 @@ export default {
         phone: '',
         email: '',
         // contactId: '',
-        vertical: ''
+        vertical: '',
+        interactionHistory: true
       },
       autocomplete: {
         verticals: [
@@ -83,7 +89,8 @@ export default {
         lastName: this.form.lastName,
         phone: this.form.phone,
         email: this.form.email,
-        vertical: this.form.vertical
+        vertical: this.form.vertical,
+        interactionHistory: this.form.interactionHistory
       })
     },
     confirmCreate (data) {
