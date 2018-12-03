@@ -32,9 +32,7 @@
               :placeholder="autocomplete.verticals[0]" />
             </b-field>
             <b-field label="Create Interaction History">
-              <b-input
-              v-model="form.interactionHistory"
-              type="checkbox" />
+              <b-checkbox v-model="form.interactionHistory" />
             </b-field>
 
             <b-field>
