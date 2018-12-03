@@ -26,10 +26,11 @@
               <b-input v-model="form.email" placeholder="michael.littlefoot@gmail.com" />
             </b-field>
             <b-field label="Vertical">
-              <b-autocomplete
-              v-model="form.vertical"
-              :data="autocomplete.verticals"
-              :placeholder="autocomplete.verticals[0]" />
+              <b-select v-model="form.vertical">
+                <option v-for="vertical of autocomplete.verticals" :value="vertical">
+                  {{ vertical }}
+                </option>
+              </b-select>
             </b-field>
             <b-field label="Create Interaction History">
               <b-checkbox v-model="form.interactionHistory" />
