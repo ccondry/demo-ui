@@ -61,7 +61,7 @@ export default {
         phone: '',
         email: '',
         // contactId: '',
-        vertical: '',
+        vertical: 'Finance',
         interactionHistory: true
       },
       autocomplete: {
