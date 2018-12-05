@@ -73,20 +73,26 @@ const actions = {
     // }
   },
   async loadVerticals ({getters, commit, dispatch}, showNotification = true) {
-    // dispatch('setLoading', {group: 'session', type: 'config', value: true})
-    // try {
-    //   await dispatch('loadToState', {
-    //     name: 'verticals',
-    //     endpoint: getters.endpoints.configure,
-    //     mutation: types.SET_VERTICALS,
-    //     showNotification
-    //   })
-    // } catch (e) {
-    //   console.log('error loading verticals', e)
-    //   dispatch('errorNotification', {title: 'Failed to load session configuration', error: e})
-    // } finally {
-    //   dispatch('setLoading', {group: 'session', type: 'config', value: false})
-    // }
+    dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
+    try {
+      await dispatch('loadToState', {
+        name: 'verticals',
+        endpoint: getters.endpoints.verticals,
+        mutation: types.SET_VERTICALS,
+        showNotification
+      })
+    } catch (e) {
+      console.error('error loading verticals', e)
+      // notify user
+      Toast.open({
+        duration: 5000,
+        message: `load verticals failed`,
+        // position: 'is-bottom',
+        type: 'is-danger'
+      })
+    } finally {
+      dispatch('setLoading', {group: 'app', type: 'verticals', value: false})
+    }
   },
   async loadSessionInfo ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'session', type: 'info', value: true})

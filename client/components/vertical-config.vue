@@ -13,6 +13,27 @@
       </div>
       <div class="card-content" v-else>
 
+        <!-- Vertical Configuration -->
+        <b-collapse class="content card" v-if="model.demo === 'pcce'">
+          <div slot="trigger" slot-scope="props" class="card-header">
+            <p class="card-header-title">Vertical Configuration</p>
+            <a class="card-header-icon">
+              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+            </a>
+          </div>
+          <div class="card-content" v-if="!model.configuration.vertical">
+            <button class="button is-primary" @click="$set(model.configuration, 'vertical', defaults.vertical)">Configure</button>
+          </div>
+          <div class="card-content" v-else>
+            <b-field label="Vertical">
+              <b-select v-model="model.configuration.vertical">
+                <option v-for="vertical of verticals" :value="vertical.id">{{ vertical.name }}</option>
+              </b-select>
+            </b-field>
+          </div>
+        </b-collapse>
+        <!-- /Vertical Configuration -->
+
         <!-- Multichannel Configuration -->
         <b-collapse class="content card" v-if="model.demo === 'pcce'">
           <div slot="trigger" slot-scope="props" class="card-header">
@@ -115,6 +136,18 @@ export default {
     'defaults': {
       type: Object,
       default () { return {} }
+    },
+    'verticals': {
+      type: Array,
+      default () {
+        return [
+          {id: 'travel', name: 'Travel'},
+          {id: 'city', name: 'City'},
+          {id: 'finance', name: 'Finance'},
+          {id: 'health', name: 'Health'},
+          {id: 'utility', name: 'Utility'}
+        ]
+      }
     }
   },
 

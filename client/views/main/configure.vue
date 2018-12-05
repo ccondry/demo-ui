@@ -80,6 +80,7 @@
           :loading="loading"
           :defaults="defaults.configuration"
           :user="user"
+          :verticals="verticals"
           ></vertical-config>
 
         </article>
@@ -113,7 +114,8 @@ export default {
     ...mapActions([
       'loadDemoConfig',
       'errorNotification',
-      'saveDemoConfig'
+      'saveDemoConfig',
+      'loadVerticals'
     ]),
     confirmSaveDemoConfig ({data}) {
       console.log('confirmSaveDemoConfig', data)

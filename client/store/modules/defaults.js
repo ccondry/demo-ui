@@ -11,7 +11,8 @@ const state = {
       chatBotSurveyEnabled: true,
       language: 'en',
       region: 'US',
-      multichannel: 'ece'
+      multichannel: 'ece',
+      vertical: 'finance'
     }
   }
 }
