@@ -48,7 +48,7 @@ const mutations = {
 }
 
 const endpoint = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'http://localhost:3022/api/v1/endpoints'
-// const endpoint = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'http://branding.dcloud.cisco.com/api/v1/endpoints'
+// const endpoint = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'https://branding.dcloud.cisco.com/api/v1/endpoints'
 
 const actions = {
   async getEndpoints ({getters, commit, dispatch}, showNotification = true) {

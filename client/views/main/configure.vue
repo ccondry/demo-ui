@@ -72,7 +72,7 @@
           </div>
 
           <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
-          <vertical-config
+          <session-config
           :model.sync="formModel"
           :session-info="sessionInfo"
           @save="clickSave"
@@ -81,7 +81,7 @@
           :defaults="defaults.configuration"
           :user="user"
           :verticals="verticals"
-          ></vertical-config>
+          ></session-config>
 
         </article>
       </div>
@@ -92,13 +92,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import VerticalConfig from '../../components/vertical-config.vue'
+import SessionConfig from '../../components/session-config.vue'
 import moment from 'moment'
 
 export default {
 
   components: {
-    VerticalConfig
+    SessionConfig
   },
 
   data () {
