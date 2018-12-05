@@ -114,8 +114,7 @@ export default {
     ...mapActions([
       'loadDemoConfig',
       'errorNotification',
-      'saveDemoConfig',
-      'loadVerticals'
+      'saveDemoConfig'
     ]),
     confirmSaveDemoConfig ({data}) {
       console.log('confirmSaveDemoConfig', data)

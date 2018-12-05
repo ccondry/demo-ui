@@ -63,6 +63,10 @@ export default {
     console.log('getting session info...')
     await this.loadSessionInfo(false)
     console.log('getting session info done.')
+    // load dcloud verticals list
+    console.log('getting verticals...')
+    await this.loadVerticals(false)
+    console.log('getting verticals done.')
   },
 
   async mounted () {
@@ -83,7 +87,8 @@ export default {
       'toggleSidebar',
       'getEndpoints',
       'loadDemoConfig',
-      'loadSessionInfo'
+      'loadSessionInfo',
+      'loadVerticals'
     ])
   }
 }
