@@ -119,9 +119,9 @@ export default {
       return !this.form.firstName.length ||
       !this.form.lastName.length ||
       !this.form.phone.length ||
-      !this.form.email.length ||
+      !this.form.email.length
       // !this.form.contactId.length ||
-      !this.form.vertical.length
+      // !this.form.vertical.length
     }
   }
 }
