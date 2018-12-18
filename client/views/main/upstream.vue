@@ -25,13 +25,13 @@
             <b-field label="Email">
               <b-input v-model="form.email" placeholder="michael.littlefoot@gmail.com" />
             </b-field>
-            <b-field label="Vertical">
+            <!-- <b-field label="Vertical">
               <b-select v-model="form.vertical">
                 <option v-for="vertical of autocomplete.verticals" :value="vertical">
                   {{ vertical }}
                 </option>
               </b-select>
-            </b-field>
+            </b-field> -->
             <b-field label="Create Interaction History">
               <b-checkbox v-model="form.interactionHistory" />
             </b-field>
@@ -61,18 +61,18 @@ export default {
         phone: '',
         email: '',
         // contactId: '',
-        vertical: 'Finance',
+        // vertical: 'Finance',
         interactionHistory: true
-      },
-      autocomplete: {
-        verticals: [
-          'Travel',
-          'City',
-          'Finance',
-          'Utility',
-          'Healthcare'
-        ]
       }
+      // autocomplete: {
+      //   verticals: [
+      //     'Travel',
+      //     'City',
+      //     'Finance',
+      //     'Utility',
+      //     'Healthcare'
+      //   ]
+      // }
     }
   },
 
@@ -82,13 +82,17 @@ export default {
     ]),
     clickCreate () {
       console.log('clicked create')
+      // get vertical name from session config
+      const verticalId = demoConfig.configuration.vertical
+      const vertical = verticals.find(v => v.id === verticalId)
+      const verticalName = vertical.name
       // confirm with user and save the data to the server
       this.confirmCreate({
         firstName: this.form.firstName,
         lastName: this.form.lastName,
         phone: this.form.phone,
         email: this.form.email,
-        vertical: this.form.vertical,
+        vertical: verticalName,
         interactionHistory: this.form.interactionHistory
       })
     },
@@ -107,7 +111,9 @@ export default {
   computed: {
     ...mapGetters([
       'loading',
-      'working'
+      'working',
+      'demoConfig',
+      'verticals'
     ]),
     disableCreate () {
       return !this.form.firstName.length ||
