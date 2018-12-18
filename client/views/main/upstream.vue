@@ -83,8 +83,8 @@ export default {
     clickCreate () {
       console.log('clicked create')
       // get vertical name from session config
-      const verticalId = demoConfig.configuration.vertical
-      const vertical = verticals.find(v => v.id === verticalId)
+      const verticalId = this.demoConfig.configuration.vertical
+      const vertical = this.verticals.find(v => v.id === verticalId)
       const verticalName = vertical.name
       // confirm with user and save the data to the server
       this.confirmCreate({
