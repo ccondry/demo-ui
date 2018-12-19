@@ -204,6 +204,13 @@ export default {
     }
   },
 
+  mounted () {
+    // if demo config is loaded, make sure to update the cache when we mount
+    if(Object.keys(this.demoConfig).length) {
+      this.updateCache(this.demoConfig)
+    }
+  }
+
   watch: {
     demoConfig (val, oldVal) {
       // demo configuration state changed
