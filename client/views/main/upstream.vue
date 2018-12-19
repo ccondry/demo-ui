@@ -81,11 +81,21 @@ export default {
       'createUpstreamCustomer'
     ]),
     clickCreate () {
+      function capitalizeFirstLetter (string) {
+        return string.charAt(0).toUpperCase() + string.slice(1)
+      }
+
       console.log('clicked create')
       // get vertical name from session config
-      const verticalId = this.demoConfig.configuration.vertical
-      const vertical = this.verticals.find(v => v.id === verticalId)
-      const verticalName = vertical.name
+      let verticalName = 'Finance'
+      try {
+        const verticalId = this.demoConfig.configuration.vertical
+        // const vertical = this.verticals.find(v => v.id === verticalId)
+        verticalName = capitalizeFirstLetter(verticalId)
+        console.log('Upstream vertical is', verticalName)
+      } catch (e) {
+        console.log('I think the vertical was not configured on this demo session. Using default of "Finance" for Upstream vertical.', e.message)
+      }
       // confirm with user and save the data to the server
       this.confirmCreate({
         firstName: this.form.firstName,
@@ -112,8 +122,8 @@ export default {
     ...mapGetters([
       'loading',
       'working',
-      'demoConfig',
-      'verticals'
+      'demoConfig'
+      // 'verticals'
     ]),
     disableCreate () {
       return !this.form.firstName.length ||
