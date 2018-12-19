@@ -209,7 +209,7 @@ export default {
     if(Object.keys(this.demoConfig).length) {
       this.updateCache(this.demoConfig)
     }
-  }
+  },
 
   watch: {
     demoConfig (val, oldVal) {
