@@ -81,7 +81,7 @@
             <b-field label="Multichannel System">
               <b-select v-model="model.configuration.multichannel">
                 <option value="ece">ECE</option>
-                <option value="sfdc">SFDC</option>
+                <!-- <option value="sfdc">SFDC</option> -->
                 <option value="upstream">Upstream</option>
               </b-select>
             </b-field>
