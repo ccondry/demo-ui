@@ -27,7 +27,8 @@ export default {
       path: '/upstream',
       meta: {
         icon: 'cloud',
-        description: 'Upstream demo configuration',
+        label: 'Upstream Works',
+        description: 'Upstream Works demo configuration',
         created: '2018-11-20',
         modified: '2018-11-20',
         filter: ['pcce']
