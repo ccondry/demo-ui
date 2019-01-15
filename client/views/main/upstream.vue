@@ -100,7 +100,7 @@ export default {
       console.log('confirmCreate', data)
       // pop confirmation dialog
       this.$dialog.confirm({
-        message: `Are you sure you want to create this customer in Upstream?`,
+        message: `Are you sure you want to create this customer in Upstream Works?`,
         onConfirm: async () => {
           await this.createUpstreamCustomer({data})
         }
