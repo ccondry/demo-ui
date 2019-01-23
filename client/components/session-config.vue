@@ -109,7 +109,17 @@
               </b-select>
             </b-field>
 
-            <b-field label="DialogFlow Client API Token">
+            <p>
+              Please download
+              <a :href="intentsZipFile">
+                this zip file
+              </a>
+              containing the dCloud DialogFlow intents and import it into your
+              DialogFlow. Then you can customize it with your own text and
+              intents, and use your Client Access API Token here.
+            </p>
+
+            <b-field label="DialogFlow Client Access API Token">
               <b-autocomplete
               v-model="model.configuration.chatBotToken"
               :data="[defaults.chatBotToken]"
@@ -153,7 +163,8 @@ export default {
   data () {
     return {
       ownerFilter: '',
-      verticalFilter: 'all'
+      verticalFilter: 'all',
+      intentsZipFile: '//cs-manager.dcloud.cisco.com/files/intents.zip'
     }
   },
 
