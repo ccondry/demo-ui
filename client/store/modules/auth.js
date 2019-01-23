@@ -72,7 +72,7 @@ const actions = {
         dispatch('errorNotification', `Failed to log out of ${getters.user.username}`)
       }
     } catch (e) {
-      console.log(e)
+      console.log(e.message)
     }
   },
   async login ({getters, dispatch}, data) {
