@@ -206,7 +206,7 @@ export default {
 
   mounted () {
     // if demo config is loaded, make sure to update the cache when we mount
-    if(Object.keys(this.demoConfig).length) {
+    if (Object.keys(this.demoConfig).length) {
       this.updateCache(this.demoConfig)
     }
   },
