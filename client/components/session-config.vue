@@ -27,14 +27,14 @@
           <div class="card-content" v-else>
             <div class="block">
               <div class="field">
-                <div class="field">
+                <!-- <div class="field">
                   <b-radio v-model="verticalFilter"
                   native-value="all">Show all verticals</b-radio>
-                </div>
+                </div> -->
                 <div class="field">
                   <b-radio v-model="verticalFilter"
                   native-value="other">
-                  Show only this user's verticals:
+                  Show this user's verticals:
                   <b-autocomplete
                     v-model="ownerFilter"
                     :data="autocompleteOwners">
@@ -165,7 +165,7 @@ export default {
   data () {
     return {
       ownerFilter: '',
-      verticalFilter: 'all',
+      verticalFilter: 'other',
       intentsZipFile: '//cs-manager.dcloud.cisco.com/files/intents.zip'
     }
   },
