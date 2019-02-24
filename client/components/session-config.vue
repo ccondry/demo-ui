@@ -130,12 +130,14 @@
               <b-field label="Language">
                 <b-select v-model="model.configuration.language">
                   <option value="en">English</option>
+                  <option value="nl">Dutch</option>
                 </b-select>
               </b-field>
 
               <b-field label="Region">
                 <b-select v-model="model.configuration.region">
                   <option value="US">US</option>
+                  <option value="NL">Netherlands</option>
                 </b-select>
               </b-field>
             </b-field>
