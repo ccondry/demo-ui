@@ -14,7 +14,7 @@
       <div class="card-content" v-else>
 
         <!-- Vertical Configuration -->
-        <b-collapse class="content card" v-if="model.demo === 'pcce'">
+        <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Vertical Configuration</p>
             <a class="card-header-icon">
