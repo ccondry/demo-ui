@@ -64,8 +64,6 @@
         <article class="tile is-child box">
           <h1 class="title">
             Demo Session Configuration
-            <!-- 'updated' tag -->
-            <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag>
           </h1>
           <div class="block">
             <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
