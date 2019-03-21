@@ -166,7 +166,7 @@ export default {
     return {
       ownerFilter: '',
       verticalFilter: 'other',
-      intentsZipFile: '//cs-manager.dcloud.cisco.com/files/intents.zip'
+      intentsZipFile: 'https://mm.cxdemo.net/static/intents.zip'
     }
   },
 
