@@ -166,7 +166,7 @@ export default {
     return {
       ownerFilter: '',
       verticalFilter: 'other',
-      intentsZipFile: 'https://mm.cxdemo.net/static/intents.zip'
+      intentsZipFile: 'https://mm-static.cxdemo.net/intents.zip'
     }
   },
 
