@@ -89,73 +89,9 @@
         </b-collapse>
         <!-- /Multichannel Configuration -->
 
-        <!-- Chat Bot Configuration -->
-        <b-collapse class="content card">
-          <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Chat Bot Configuration</p>
-            <a class="card-header-icon">
-              <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-            </a>
-          </div>
-          <div class="card-content" v-if="chatBotConfigured">
-            <button class="button is-primary" @click="configureChatBot">Configure</button>
-          </div>
-          <div class="card-content" v-else>
-
-            <b-field label="Bot Enabled">
-              <b-select v-model="model.configuration.chatBotEnabled">
-                <option :value="true">Enabled</option>
-                <option :value="false">Disabled</option>
-              </b-select>
-            </b-field>
-
-            <p>
-              Please download
-              <a :href="intentsZipFile">
-                this zip file
-              </a>
-              containing the dCloud DialogFlow intents and import it into your
-              DialogFlow. Then you can customize it with your own text and
-              intents, and use your Client Access API Token here.
-            </p>
-
-            <b-field label="DialogFlow Client Access API Token">
-              <b-autocomplete
-              v-model="model.configuration.chatBotToken"
-              :data="[defaults.chatBotToken]"
-              :placeholder="defaults.chatBotToken" />
-            </b-field>
-
-            <b-field grouped>
-              <b-field label="Language">
-                <b-select v-model="model.configuration.language">
-                  <option value="en">English</option>
-                  <option value="nl">Dutch</option>
-                </b-select>
-              </b-field>
-
-              <b-field label="Region">
-                <b-select v-model="model.configuration.region">
-                  <option value="US">US</option>
-                  <option value="NL">Netherlands</option>
-                </b-select>
-              </b-field>
-            </b-field>
-
-            <b-field label="Post-Chat Survey">
-              <b-select v-model="model.configuration.chatBotSurveyEnabled">
-                <option :value="true">Enabled</option>
-                <option :value="false">Disabled</option>
-              </b-select>
-            </b-field>
-
-          </div>
-        </b-collapse>
-        <!-- /Chat Bot Configuration -->
-
       </div>
     </b-collapse>
-    <!-- /IVR Menu -->
+    <!-- /Demo Configuration -->
 
   </div>
 </template>
