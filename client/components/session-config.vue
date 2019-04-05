@@ -16,7 +16,7 @@
         <!-- Vertical Configuration -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
-            <p class="card-header-title">Vertical Configuration</p>
+            <p class="card-header-title">Vertical Selection</p>
             <a class="card-header-icon">
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
