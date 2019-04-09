@@ -65,21 +65,40 @@
           <h1 class="title">
             Demo Session Configuration
           </h1>
-          <div class="block">
-            <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
-          </div>
+          <div class="content">
+            <p>
+              Use this form to choose the Vertical to use when you open the
+              <a :href="brandDemoLink" target="brand">
+                <strong>Brand demo website</strong>
+              </a>
+              or
+              <a :href="cumulusDemoLink" target="cumulus">
+                <strong>Cumulus demo website</strong>
+              </a>. Be sure to click Save after changing these settings.
+            </p>
+            <!-- <p>
+              You can create and configure your own vertical on the
+              <a :href="brandEditorLink" target="brand-toolbox">
+                <strong>Demo Branding Toolbox</strong>
+              </a>.
+            </p> -->
+            <!-- <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button> -->
+            <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
+            <session-config
+            :model.sync="formModel"
+            :session-info="sessionInfo"
+            @save="clickSave"
+            :working="working"
+            :loading="loading"
+            :defaults="defaults.configuration"
+            :user="user"
+            :verticals="verticals"
+            ></session-config>
 
-          <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
-          <session-config
-          :model.sync="formModel"
-          :session-info="sessionInfo"
-          @save="clickSave"
-          :working="working"
-          :loading="loading"
-          :defaults="defaults.configuration"
-          :user="user"
-          :verticals="verticals"
-          ></session-config>
+            <div class="block">
+              <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
+            </div>
+          </div>
 
         </article>
       </div>
@@ -199,6 +218,15 @@ export default {
     ]),
     disableSave () {
       return false
+    },
+    brandEditorLink () {
+      return `https://dcloud-collab-toolbox-${this.sessionInfo.datacenter}.cisco.com/`
+    },
+    brandDemoLink () {
+      return `https://mm-brand.cxdemo.net?session=${this.sessionInfo.id}&datacenter=${this.sessionInfo.datacenter}`
+    },
+    cumulusDemoLink () {
+      return `https://mm.cxdemo.net?session=${this.sessionInfo.id}&datacenter=${this.sessionInfo.datacenter}`
     }
   },
 
