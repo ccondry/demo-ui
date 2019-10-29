@@ -67,13 +67,9 @@
           </h1>
           <div class="content">
             <p>
-              Use this form to choose the Vertical to use when you open the
+              Use this form to choose the Vertical to use when you open
               <a :href="brandDemoLink" target="brand">
-                <strong>Brand demo website</strong>
-              </a>
-              or
-              <a :href="cumulusDemoLink" target="cumulus">
-                <strong>Cumulus demo website</strong>
+                <strong>your demo website</strong>
               </a>. Be sure to click Save after changing these settings.
             </p>
             <!-- <p>
@@ -224,9 +220,6 @@ export default {
     },
     brandDemoLink () {
       return `https://mm-brand.cxdemo.net?session=${this.sessionInfo.id}&datacenter=${this.sessionInfo.datacenter}`
-    },
-    cumulusDemoLink () {
-      return `https://mm.cxdemo.net?session=${this.sessionInfo.id}&datacenter=${this.sessionInfo.datacenter}`
     }
   },
 
