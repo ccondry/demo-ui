@@ -142,9 +142,13 @@ export default {
   methods: {
     setDefaults () {
       // if this is a PCCE demo and multichannel is not set yet
-      if (this.model.demo === 'pcce' && !this.model.configuration.multichannel) {
-        // set a default multichannel option so the user doesn't have to click 'Configure' button
-        this.$set(this.model.configuration, 'multichannel', this.defaults.multichannel)
+      try {
+        if (this.model.demo === 'pcce' && !this.model.configuration.multichannel) {
+          // set a default multichannel option so the user doesn't have to click 'Configure' button
+          this.$set(this.model.configuration, 'multichannel', this.defaults.multichannel)
+        }
+      } catch (e) {
+        // do nothing if fail
       }
     },
     pushChanges (data) {
