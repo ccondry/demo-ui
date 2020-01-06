@@ -213,7 +213,14 @@ export default {
       // model changed - format and push those changes back to the parent
       this.pushChanges(val)
     }
+  },
+
+  mounted () {
+    // when this component is mounted, set defaults
+    // set a default multichannel option so the user doesn't have to click 'Configure' button
+    this.$set(this.model.configuration, 'multichannel', this.defaults.multichannel)
   }
+
 }
 </script>
 
