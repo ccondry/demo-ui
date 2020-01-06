@@ -217,6 +217,10 @@ export default {
 
   watch: {
     model (val, oldVal) {
+      // is this the first time mounting the config?
+      if (val.configuration && !oldVal.configuration) {
+        this.setDefaults()
+      }
       // model changed - format and push those changes back to the parent
       this.pushChanges(val)
     }
@@ -224,7 +228,7 @@ export default {
 
   mounted () {
     // when this component is mounted, set defaults
-    this.setDefaults()
+    // this.setDefaults()
   }
 
 }
