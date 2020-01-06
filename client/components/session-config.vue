@@ -140,6 +140,13 @@ export default {
   },
 
   methods: {
+    setDefaults () {
+      // if this is a PCCE demo
+      if (this.model.demo === 'pcce') {
+        // set a default multichannel option so the user doesn't have to click 'Configure' button
+        this.$set(this.model.configuration, 'multichannel', this.defaults.multichannel)
+      }
+    },
     pushChanges (data) {
       this.$emit('update:data', JSON.stringify(data, null, 2))
     },
@@ -217,8 +224,7 @@ export default {
 
   mounted () {
     // when this component is mounted, set defaults
-    // set a default multichannel option so the user doesn't have to click 'Configure' button
-    this.$set(this.model.configuration, 'multichannel', this.defaults.multichannel)
+    this.setDefaults()
   }
 
 }
