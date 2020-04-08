@@ -105,7 +105,9 @@ export default {
       const m = JSON.parse(JSON.stringify(this.menu))
       // remove Upstream menu item if this demo does not feature Upstream
       if (!this.hasUpstream) {
-        m.children = m.children.filter(v => v.name !== 'Upstream')
+        for (const item of m) {
+          item.children = item.children.filter(v => v.name !== 'Upstream')
+        }
       }
       // return filtered menu
       return m
