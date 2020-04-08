@@ -10,7 +10,7 @@ const getters = {
   hasUpstream: (state, getters) => {
     // returns true if this demo has Upstream capabilities
     const has = getters.demoConfig.demo === 'pcce' &&
-    ['11.6v3', '12.0v1', '12.0v2', '12.5EFT'].includes(getters.sessionInfo.version)
+    ['11.6v3', '12.0v1', '12.0v2', '12.5EFT'].includes(getters.demoConfig.version)
     console.log('this demo', has ? 'has' : 'does not have', 'Upstream')
     return has
   }
