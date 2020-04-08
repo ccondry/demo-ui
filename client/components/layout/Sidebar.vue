@@ -56,18 +56,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import fuzzy from 'fuzzy'
 import moment from 'moment'
-
-// extract menu item name
-function extract (el) {
-  // return description if available, or else return name
-  try {
-    return el.meta.description || el.name
-  } catch (e) {
-    return el.name
-  }
-}
 
 export default {
   components: {
