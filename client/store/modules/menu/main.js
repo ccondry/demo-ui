@@ -35,16 +35,5 @@ export default {
       },
       component: lazyLoading('main/upstream')
     }
-    // {
-    //   name: 'Verticals',
-    //   path: '/verticals/main/verticals',
-    //   meta: {
-    //     icon: 'copyright',
-    //     description: 'Custom branded demo website configuration',
-    //     created: '2018-10-29',
-    //     modified: '2018-10-29'
-    //   },
-    //   component: lazyLoading('main/verticals')
-    // }
   ]
 }
