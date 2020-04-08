@@ -91,6 +91,7 @@ export default {
       hasUpstream: 'hasUpstream'
     }),
     filteredMenu () {
+      console.log('sidebar.vue menu filter - hasUpstream = ', this.hasUpstream)
       // copy menu so we can filter it with fuzzy
       const m = JSON.parse(JSON.stringify(this.menu))
       // remove Upstream menu item if this demo does not feature Upstream
