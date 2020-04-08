@@ -91,7 +91,7 @@
             :verticals="verticals"
             ></session-config>
 
-            <div class="block">
+            <div class="block" style="padding-top: 1em;">
               <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
             </div>
           </div>
