@@ -87,7 +87,8 @@ export default {
     ...mapGetters({
       menu: 'menuitems',
       user: 'user',
-      demoConfig: 'demoConfig'
+      demoConfig: 'demoConfig',
+      hasUpstream: 'hasUpstream'
     }),
     filteredMenu () {
       // copy menu so we can filter it with fuzzy
