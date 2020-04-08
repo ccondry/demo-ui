@@ -67,7 +67,7 @@
         <!-- /Vertical Configuration -->
 
         <!-- Multichannel Configuration -->
-        <b-collapse class="content card" v-if="model.demo === 'pcce'">
+        <b-collapse class="content card" v-if="hasUpstream">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Multichannel Configuration</p>
             <a class="card-header-icon">
@@ -136,6 +136,9 @@ export default {
           {id: 'utility', name: 'Utility'}
         ]
       }
+    },
+    hasUpstream: {
+      type: Boolean
     }
   },
 

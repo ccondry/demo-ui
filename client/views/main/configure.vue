@@ -89,6 +89,7 @@
             :defaults="defaults.configuration"
             :user="user"
             :verticals="verticals"
+            :has-upstream="hasUpstream"
             ></session-config>
 
             <div class="block" style="padding-top: 1em;">
@@ -210,7 +211,8 @@ export default {
       'working',
       'defaults',
       'demoConfig',
-      'sessionInfo'
+      'sessionInfo',
+      'hasUpstream'
     ]),
     disableSave () {
       return false
