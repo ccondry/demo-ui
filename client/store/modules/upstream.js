@@ -6,7 +6,12 @@ const state = {
 }
 
 const getters = {
-  upstreamCustomers: state => state.upstreamCustomers
+  upstreamCustomers: state => state.upstreamCustomers,
+  hasUpstream: (state, getters) => {
+    // returns true if this demo has Upstream capabilities
+    return getters.sessionInfo.demo === 'pcce' &&
+    ['11.6v3', '12.0v1', '12.0v2', '12.5EFT'].includes(getters.sessionInfo.version)
+  }
 }
 
 const mutations = {
