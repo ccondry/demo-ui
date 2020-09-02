@@ -8,7 +8,7 @@ import store from './store'
 import * as filters from './filters'
 import * as types from 'vuex-store/mutation-types'
 
-import 'buefy/lib/buefy.css'
+import 'buefy/dist/buefy.css'
 // import 'vue-material-design-icons/styles.css'
 
 Vue.use(Buefy)
