@@ -67,7 +67,7 @@
         <!-- /Vertical Configuration -->
 
         <!-- Multichannel Configuration -->
-        <b-collapse class="content card" v-if="hasUpstream">
+        <b-collapse class="content card" v-if="hasUpstream || hasSfdc">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Multichannel Configuration</p>
             <a class="card-header-icon">
@@ -81,8 +81,8 @@
             <b-field label="Multichannel System">
               <b-select v-model="model.configuration.multichannel">
                 <option value="ece">ECE</option>
-                <!-- <option value="sfdc">SFDC</option> -->
-                <option value="upstream">Upstream Works</option>
+                <option v-if="hasSfdc" value="sfdc">SFDC</option>
+                <option v-if="hasUpstream" value="upstream">Upstream Works</option>
               </b-select>
             </b-field>
           </div>
@@ -97,6 +97,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -110,35 +111,6 @@ export default {
     'model': {
       type: Object,
       default () { return {} }
-    },
-    'sessionInfo': {
-      type: Object,
-      default () { return {} }
-    },
-    'working': {
-      type: Object
-    },
-    'loading': {
-      type: Object
-    },
-    'defaults': {
-      type: Object,
-      default () { return {} }
-    },
-    'verticals': {
-      type: Array,
-      default () {
-        return [
-          {id: 'travel', name: 'Travel'},
-          {id: 'city', name: 'City'},
-          {id: 'finance', name: 'Finance'},
-          {id: 'health', name: 'Health'},
-          {id: 'utility', name: 'Utility'}
-        ]
-      }
-    },
-    hasUpstream: {
-      type: Boolean
     }
   },
 
@@ -171,6 +143,15 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'hasSfdc',
+      'hasUpstream',
+      'sessionInfo',
+      'working',
+      'loading',
+      'user',
+      'verticals'
+    ]),
     chatBotConfigured () {
       return this.model.configuration.chatBotEnabled === undefined &&
       this.model.configuration.chatBotToken === undefined &&

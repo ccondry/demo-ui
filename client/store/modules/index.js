@@ -7,6 +7,7 @@ import defaults from './defaults'
 import user from './user'
 import usage from './usage'
 import upstream from './upstream'
+import dcloud from './dcloud'
 
 export default {
   app,
@@ -17,5 +18,6 @@ export default {
   user,
   usage,
   upstream,
-  defaults
+  defaults,
+  dcloud
 }
