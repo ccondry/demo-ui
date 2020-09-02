@@ -1,7 +1,7 @@
 function parseVersion (version) {
   // parse demo version into parts
   try {
-    const matches =  version.match(/^(\d{2})\.(\d)(v\d|\w*)/)
+    const matches = version.match(/^(\d{2})\.(\d)(v\d|\w*)/)
     return {
       // the original version string
       full: matches[0],
@@ -44,7 +44,6 @@ function versionSort (a, b) {
     return a.major - b.major
   }
 }
-
 
 const getters = {
   demoPlatform: (state, getters) => getters.demoConfig.demo,
