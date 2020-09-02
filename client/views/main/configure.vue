@@ -82,14 +82,8 @@
             <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
             <session-config
             :model.sync="formModel"
-            :session-info="sessionInfo"
             @save="clickSave"
-            :working="working"
-            :loading="loading"
             :defaults="defaults.configuration"
-            :user="user"
-            :verticals="verticals"
-            :has-upstream="hasUpstream"
             ></session-config>
 
             <div class="block" style="padding-top: 1em;">
@@ -205,14 +199,11 @@ export default {
 
   computed: {
     ...mapGetters([
-      'user',
-      'verticals',
       'loading',
       'working',
       'defaults',
       'demoConfig',
-      'sessionInfo',
-      'hasUpstream'
+      'sessionInfo'
     ]),
     disableSave () {
       return false
@@ -258,6 +249,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

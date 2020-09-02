@@ -7,13 +7,7 @@ const state = {
 
 const getters = {
   upstreamCustomers: state => state.upstreamCustomers,
-  hasUpstream: (state, getters) => {
-    // returns true if this demo has Upstream capabilities
-    const has = getters.demoConfig.demo === 'pcce' &&
-    ['11.6v3', '12.0v1', '12.0v2', '12.5EFT', '12.5v1'].includes(getters.demoConfig.version)
-    console.log('this demo', has ? 'has' : 'does not have', 'Upstream')
-    return has
-  }
+  hasUpstream: (state, getters) => getters.demoPlatform === 'pcce'
 }
 
 const mutations = {
