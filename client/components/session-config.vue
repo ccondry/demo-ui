@@ -67,7 +67,7 @@
         <!-- /Vertical Configuration -->
 
         <!-- Multichannel Configuration -->
-        <b-collapse class="content card" v-if="hasUpstream || hasSfdc">
+        <b-collapse class="content card" v-if="hasUpstream || hasSalesforce">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Multichannel Configuration</p>
             <a class="card-header-icon">
@@ -81,7 +81,8 @@
             <b-field label="Multichannel System">
               <b-select v-model="model.configuration.multichannel">
                 <option value="ece">ECE</option>
-                <option v-if="hasSfdc" value="sfdc">SFDC</option>
+                <option v-if="hasSalesforce" value="salesforce">Salesforce</option>
+                <option v-if="hasServiceNow" value="servicenow">ServiceNow</option>
                 <option v-if="hasUpstream" value="upstream">Upstream Works</option>
               </b-select>
             </b-field>
@@ -148,13 +149,15 @@ export default {
 
   computed: {
     ...mapGetters([
-      'hasSfdc',
+      'hasSalesforce',
+      'hasServiceNow',
       'hasUpstream',
       'sessionInfo',
       'working',
       'loading',
       'user',
-      'verticals'
+      'verticals',
+      'demoVersion'
     ]),
     chatBotConfigured () {
       return this.model.configuration.chatBotEnabled === undefined &&

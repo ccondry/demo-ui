@@ -1,7 +1,10 @@
 function parseVersion (version) {
+  if (!version) {
+    return {}
+  }
   // parse demo version into parts
   try {
-    const matches = version.match(/^(\d{2})\.(\d)(v\d|\w*)/)
+    const matches = version.match(/^(\d{2})\.(\d)(v(\d)|(\w*))/)
     return {
       // the original version string
       full: matches[0],
@@ -15,7 +18,7 @@ function parseVersion (version) {
       other: matches[5]
     }
   } catch (e) {
-    console.log('could not parse demo version into parts:', e.message)
+    console.log('could not parse demo version "' + version + '" into parts:', e.message)
   }
 }
 
@@ -48,15 +51,22 @@ function versionSort (a, b) {
 const getters = {
   demoPlatform: (state, getters) => getters.demoConfig.demo,
   demoVersion: (state, getters) => parseVersion(getters.demoConfig.version),
-  hasSfdc: (state, getters) => {
+  hasSalesforce: (state, getters) => {
     // returns true if this demo has SFDC capabilities
-    const version = getters.demoVersion
     // minimum PCCE version for SFDC is 12.5v2
     const minimum = parseVersion('12.5v2')
     // must be PCCE
     return getters.demoPlatform === 'pcce' &&
     // and version >= 12.5v2
-    versionSort(version, minimum) >= 0
+    versionSort(getters.demoVersion, minimum) >= 0
+  },
+  hasServiceNow: (state, getters) => {
+    // returns true if this demo has ServiceNow capabilities
+    const minimum = parseVersion('12.5v2')
+    // must be PCCE
+    return getters.demoPlatform === 'pcce' &&
+    // and version >= 12.5v2
+    versionSort(getters.demoVersion, minimum) >= 0
   }
 }
 
