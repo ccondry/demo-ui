@@ -199,14 +199,11 @@ export default {
 
   computed: {
     ...mapGetters([
-      'user',
-      'verticals',
       'loading',
       'working',
       'defaults',
       'demoConfig',
-      'sessionInfo',
-      'hasUpstream'
+      'sessionInfo'
     ]),
     disableSave () {
       return false
