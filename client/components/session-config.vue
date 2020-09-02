@@ -111,6 +111,10 @@ export default {
     'model': {
       type: Object,
       default () { return {} }
+    },
+    'defaults': {
+      type: Object,
+      default () { return {} }
     }
   },
 
