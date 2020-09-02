@@ -1,5 +1,7 @@
 <template>
   <div>
+    {{ demoVersion }}
+    {{ hasSfdc}}
     <!-- Demo Configuration -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
