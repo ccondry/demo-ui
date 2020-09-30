@@ -84,6 +84,7 @@
                 <option v-if="hasSalesforce" value="salesforce">Salesforce</option>
                 <option v-if="hasServiceNow" value="servicenow">ServiceNow</option>
                 <option v-if="hasUpstream" value="upstream">Upstream Works</option>
+                <option v-if="hasMsDynamics" value="msdynamics">MS Dynamics</option>
               </b-select>
             </b-field>
           </div>
@@ -151,6 +152,7 @@ export default {
     ...mapGetters([
       'hasSalesforce',
       'hasServiceNow',
+      'hasMsDynamics',
       'hasUpstream',
       'sessionInfo',
       'working',

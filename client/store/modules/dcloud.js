@@ -67,6 +67,14 @@ const getters = {
     return getters.demoPlatform === 'pcce' &&
     // and version >= 12.5v2
     versionSort(getters.demoVersion, minimum) >= 0
+  },
+  hasMsDynamics: (state, getters) => {
+    // returns true if this demo has Microsoft Dynamics capabilities
+    const minimum = parseVersion('12.5v2')
+    // must be PCCE
+    return getters.demoPlatform === 'pcce' &&
+    // and version >= 12.5v2
+    versionSort(getters.demoVersion, minimum) >= 0
   }
 }
 
