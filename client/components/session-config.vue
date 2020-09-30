@@ -158,8 +158,7 @@ export default {
       'working',
       'loading',
       'user',
-      'verticals',
-      'demoVersion'
+      'verticals'
     ]),
     chatBotConfigured () {
       return this.model.configuration.chatBotEnabled === undefined &&
