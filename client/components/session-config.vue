@@ -121,7 +121,8 @@ export default {
         salesforce: 'Salesforce',
         servicenow: 'ServiceNow',
         upstream: 'Upstream Works',
-        msdynamics: 'MS Dynamics'
+        msdynamics: 'MS Dynamics',
+        webex: 'Webex'
       }
     }
   },
