@@ -1,6 +1,6 @@
 import * as types from './mutation-types'
 import { load, put, post, httpDelete } from '../utils'
-import { Toast } from 'buefy'
+import { ToastProgrammatic as Toast } from 'buefy'
 
 export const toggleSidebar = ({ commit }, data) => {
   if (data instanceof Object) {

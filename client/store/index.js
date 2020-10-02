@@ -5,7 +5,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
 import modules from './modules'
-import config from '../config'
+import endpoints from './endpoints'
 
 Vue.use(Vuex)
 
@@ -15,7 +15,7 @@ const store = new Vuex.Store({
   getters,
   modules,
   state: {
-    endpoints: config.app.endpoints,
+    endpoints,
     pkg,
     working: {
       app: {},
@@ -38,8 +38,7 @@ const store = new Vuex.Store({
       templates: {},
       session: {},
       upstream: {}
-    },
-    defaultChatEntryPointId: config.ece.defaultChatEntryPointId
+    }
   },
   mutations
 })

@@ -205,8 +205,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bulma/sass/utilities/variables';
-@import '~bulma/sass/utilities/mixins';
+// @import '~bulma/sass/utilities/variables';
+// @import '~bulma/sass/utilities/mixins';
 
 .app-sidebar {
   position: fixed;
@@ -226,9 +226,9 @@ export default {
   overflow-x: hidden;
   margin-right: 20px;
 
-  @include mobile() {
-    transform: translate3d(-220px, 0, 0);
-  }
+  // @include mobile() {
+  //   transform: translate3d(-220px, 0, 0);
+  // }
 
   .icon {
     vertical-align: baseline;

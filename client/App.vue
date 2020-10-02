@@ -52,9 +52,6 @@ export default {
     window.addEventListener('DOMContentLoaded', handler)
     window.addEventListener('resize', handler)
 
-    console.log('getting endpoints...')
-    await this.getEndpoints()
-    console.log('getting endpoints done.')
     // load demo session configuration
     console.log('getting demo config...')
     await this.loadDemoConfig(false)
@@ -67,6 +64,10 @@ export default {
     console.log('getting verticals...')
     await this.loadVerticals(false)
     console.log('getting verticals done.')
+    // load demo base configuration
+    console.log('getting demo base config...')
+    await this.loadDemoBaseConfig(false)
+    console.log('getting demo base config done.')
   },
 
   async mounted () {
@@ -85,8 +86,8 @@ export default {
     ...mapActions([
       'toggleDevice',
       'toggleSidebar',
-      'getEndpoints',
       'loadDemoConfig',
+      'loadDemoBaseConfig',
       'loadSessionInfo',
       'loadVerticals'
     ])
@@ -99,16 +100,26 @@ export default {
 // .animated {
 //   animation-duration: .377s;
 // }
-
-@import '~bulma';
-
-@import '~wysiwyg.css/wysiwyg.sass';
+$navbar-box-shadow-color: hsla(0,0%,7%,.1);
+$navbar-box-shadow-size: 0 2px 3px 0;
+$primary: #7957d5;
+$link: #7957d5;
+// $link: $blue;
+// $info: $cyan;
+// $success: $green;
+// $warning: $yellow;
+// $danger: $red;
+// $dark: $grey-darker;
+// $text: $grey-dark;
+// $test: 0 2px 3px hsla(0,0%,7%,.1), 0 0 0 1px hsla(0,0%,7%,.1);
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
 
 $fa-font-path: '~font-awesome/fonts/';
 @import '~font-awesome/scss/font-awesome';
 
 html {
-  background-color: whitesmoke;
+  // background-color: whitesmoke;
 }
 
 .nprogress-container {

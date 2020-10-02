@@ -4,12 +4,10 @@
     <b-loading :is-full-page="false" :active="loading.session.config || loading.session.info || working.session.config" :can-cancel="false"></b-loading>
 
     <div class="tile is-ancestor">
-      <div class="tile is-parent is-vertical">
+      <div class="tile is-parent">
         <article class="tile is-child box">
           <h1 class="title">
             Demo Session Information
-            <!-- 'updated' tag -->
-            <!-- <b-tag v-if="isRecent('2018-10-24')" type="is-primary">Updated</b-tag> -->
           </h1>
           <div class="block">
             <!-- Basic Information -->
@@ -59,6 +57,7 @@
         </article>
       </div>
     </div>
+
     <div class="tile is-ancestor">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
@@ -66,29 +65,30 @@
             Demo Session Configuration
           </h1>
           <div class="content">
+
             <p>
               Use this form to choose the Vertical to use when you open
               <a :href="brandDemoLink" target="brand">
                 <strong>your demo website</strong>
-              </a>. Be sure to click Save after changing these settings.
+              </a><span v-if="hasMultichannel">, as well as which multichannel system you want to demo</span>.
             </p>
-            <!-- <p>
-              You can create and configure your own vertical on the
-              <a :href="brandEditorLink" target="brand-toolbox">
-                <strong>Demo Branding Toolbox</strong>
-              </a>.
-            </p> -->
-            <!-- <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button> -->
-            <b-loading :is-full-page="false" :active="loading.app.verticals || working.app.verticals" :can-cancel="false"></b-loading>
+
+            <p>
+              Your settings are automatically saved when you change them.
+            </p>
+
+            <b-loading
+            :is-full-page="false"
+            :active="loading.app.verticals || working.app.verticals"
+            :can-cancel="false"
+            />
+            
             <session-config
             :model.sync="formModel"
             @save="clickSave"
             :defaults="defaults.configuration"
-            ></session-config>
+            />
 
-            <div class="block" style="padding-top: 1em;">
-              <button type="button" class="button is-success" @click.prevent="clickSave" :disabled="disableSave">Save</button>
-            </div>
           </div>
 
         </article>
@@ -124,17 +124,10 @@ export default {
       'errorNotification',
       'saveDemoConfig'
     ]),
-    confirmSaveDemoConfig ({data}) {
+    async confirmSaveDemoConfig ({data}) {
       console.log('confirmSaveDemoConfig', data)
-      // pop confirmation dialog
-      this.$dialog.confirm({
-        message: `Are you sure you want to save your demo configuration?`,
-        onConfirm: async () => {
-          // this.$toast.open('Save demo configuration confirmed')
-          await this.saveDemoConfig({data})
-          await this.loadDemoConfig(false)
-        }
-      })
+      await this.saveDemoConfig({data})
+      await this.loadDemoConfig(false)
     },
     isRecent (date) {
       try {
@@ -203,7 +196,8 @@ export default {
       'working',
       'defaults',
       'demoConfig',
-      'sessionInfo'
+      'sessionInfo',
+      'hasMultichannel'
     ]),
     disableSave () {
       return false

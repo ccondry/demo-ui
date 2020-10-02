@@ -1,15 +1,17 @@
 import * as types from '../mutation-types'
-import {Toast} from 'buefy'
+import { ToastProgrammatic as Toast } from 'buefy'
 
 const state = {
   verticals: [],
   demoConfig: {},
+  demoBaseConfig: {},
   sessionInfo: {}
 }
 
 const getters = {
   verticals: state => state.verticals,
   demoConfig: state => state.demoConfig,
+  demoBaseConfig: state => state.demoBaseConfig,
   sessionInfo: state => state.sessionInfo
 }
 
@@ -20,12 +22,36 @@ const mutations = {
   [types.SET_DEMO_CONFIG] (state, data) {
     state.demoConfig = data
   },
+  [types.SET_DEMO_BASE_CONFIG] (state, data) {
+    state.demoBaseConfig = data
+  },
   [types.SET_SESSION_INFO] (state, data) {
     state.sessionInfo = data
   }
 }
 
 const actions = {
+  async loadDemoBaseConfig ({getters, dispatch}, showNotification = true) {
+    dispatch('setLoading', {group: 'app', type: 'baseConfig', value: true})
+    try {
+      await dispatch('loadToState', {
+        name: 'baseConfig',
+        endpoint: getters.endpoints.demo,
+        mutation: types.SET_DEMO_BASE_CONFIG,
+        showNotification
+      })
+    } catch (e) {
+      console.error('error loading demo base config', e)
+      // notify user
+      Toast.open({
+        duration: 5000,
+        message: `load demo base configuration failed`,
+        type: 'is-danger'
+      })
+    } finally {
+      dispatch('setLoading', {group: 'app', type: 'baseConfig', value: false})
+    }
+  },
   async loadVerticals ({getters, commit, dispatch}, showNotification = true) {
     dispatch('setLoading', {group: 'app', type: 'verticals', value: true})
     try {

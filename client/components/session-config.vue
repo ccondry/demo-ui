@@ -26,40 +26,46 @@
           </div>
           <div class="card-content" v-else>
             <div class="block">
-              <div class="field">
-                <!-- <div class="field">
-                  <b-radio v-model="verticalFilter"
-                  native-value="all">Show all verticals</b-radio>
-                </div> -->
-                <div class="field">
-                  <b-radio v-model="verticalFilter"
-                  native-value="other">
-                  Show this user's verticals:
-                  <b-autocomplete
-                    v-model="ownerFilter"
-                    :data="autocompleteOwners">
-                    <template slot="empty">No results found</template>
-                  </b-autocomplete>
-                </b-radio>
-                </div>
-                <!-- <b-field>
-                  <b-checkbox v-model="showOnlyMyVerticals">Show only my verticals</b-checkbox>
-                </b-field> -->
-                <!-- <b-checkbox v-model="filterTemplates">Show only this user's verticals:</b-checkbox> -->
-                <b-field grouped>
-                  <!-- <b-input v-model="ownerFilter" /> -->
+              <b-field label="Filter verticals by owner" grouped>
+                <b-autocomplete
+                v-model="ownerFilter"
+                :data="autocompleteOwners"
+                >
+                  <template slot="empty">No results found</template>
+                </b-autocomplete>
+              </b-field>
 
-                </b-field>
-              </div>
-              <div class="select">
-                <select class="input" v-model="model.configuration.vertical">
-                  <option value="" disabled selected>Choose a vertical to use</option>
-                  <option v-for="vertical in systemVerticals" :value="vertical.id">{{ `${vertical.name} (${vertical.id})` }}</option>
-                  <option disabled>-----------------------------------------</option>
-                  <option v-for="vertical in userVerticals" :value="vertical.id" v-if="verticalFilter === 'all'">{{ `${vertical.name} (${vertical.id})` }}</option>
-                  <option v-for="vertical in filteredSortedVerticals" :value="vertical.id" v-if="verticalFilter === 'other'">{{ `${vertical.name} (${vertical.id})` }}</option>
-                </select>
-              </div>
+              <b-field label="Choose your demo vertical">
+                <div class="select">
+                  <select class="input" v-model="model.configuration.vertical" @change="selectVertical">
+                    <option value="" disabled selected>Choose a vertical to use</option>
+                    <option
+                    v-for="vertical in systemVerticals"
+                    :value="vertical.id"
+                    :key="vertical.id"
+                    >
+                      {{ `${vertical.name} (${vertical.id})` }}
+                    </option>
+                    <option disabled>-----------------------------------------</option>
+                    <option
+                    v-for="vertical in userVerticals"
+                    :value="vertical.id"
+                    :key="vertical.id"
+                    v-if="verticalFilter === 'all'"
+                    >
+                      {{ `${vertical.name} (${vertical.id})` }}
+                    </option>
+                    <option
+                    v-for="vertical in filteredSortedVerticals"
+                    :value="vertical.id"
+                    :key="vertical.id"
+                    v-if="verticalFilter === 'other'"
+                    >
+                      {{ `${vertical.name} (${vertical.id})` }}
+                    </option>
+                  </select>
+                </div>
+              </b-field>
             </div>
 
           </div>
@@ -67,7 +73,7 @@
         <!-- /Vertical Configuration -->
 
         <!-- Multichannel Configuration -->
-        <b-collapse class="content card" v-if="hasUpstream || hasSalesforce">
+        <b-collapse class="content card" v-if="hasMultichannel">
           <div slot="trigger" slot-scope="props" class="card-header">
             <p class="card-header-title">Multichannel Configuration</p>
             <a class="card-header-icon">
@@ -79,12 +85,17 @@
           </div>
           <div class="card-content" v-else>
             <b-field label="Multichannel System">
-              <b-select v-model="model.configuration.multichannel">
-                <option value="ece">ECE</option>
-                <option v-if="hasSalesforce" value="salesforce">Salesforce</option>
-                <option v-if="hasServiceNow" value="servicenow">ServiceNow</option>
-                <option v-if="hasUpstream" value="upstream">Upstream Works</option>
-                <option v-if="hasMsDynamics" value="msdynamics">MS Dynamics</option>
+              <b-select
+              v-model="model.configuration.multichannel"
+              @input="selectMultichannel"
+              >
+                <option
+                v-for="channel of multichannelOptions"
+                :key="channel"
+                :value="channel"
+                >
+                  {{ channelNames[channel] || channel }}
+                </option>
               </b-select>
             </b-field>
           </div>
@@ -105,7 +116,13 @@ export default {
     return {
       ownerFilter: '',
       verticalFilter: 'other',
-      intentsZipFile: 'https://mm-static.cxdemo.net/intents.zip'
+      channelNames: {
+        ece: 'ECE',
+        salesforce: 'Salesforce',
+        servicenow: 'ServiceNow',
+        upstream: 'Upstream Works',
+        msdynamics: 'MS Dynamics'
+      }
     }
   },
 
@@ -121,6 +138,12 @@ export default {
   },
 
   methods: {
+    selectVertical (e) {
+      this.$emit('save')
+    },
+    selectMultichannel (e) {
+      this.$emit('save')
+    },
     setDefaults () {
       // if this is a PCCE demo and multichannel is not set yet
       try {
@@ -135,10 +158,6 @@ export default {
     pushChanges (data) {
       this.$emit('update:data', JSON.stringify(data, null, 2))
     },
-    submit () {
-      console.log('vertical config form submitted')
-      this.$emit('save', this.model)
-    },
     configureChatBot () {
       this.$set(this.model.configuration, 'chatBotEnabled', this.defaults.chatBotEnabled)
       this.$set(this.model.configuration, 'chatBotToken', this.defaults.chatBotEnabled)
@@ -150,15 +169,14 @@ export default {
 
   computed: {
     ...mapGetters([
-      'hasSalesforce',
-      'hasServiceNow',
-      'hasMsDynamics',
-      'hasUpstream',
       'sessionInfo',
       'working',
       'loading',
       'user',
-      'verticals'
+      'verticals',
+      'demoBaseConfig',
+      'hasMultichannel',
+      'multichannelOptions'
     ]),
     chatBotConfigured () {
       return this.model.configuration.chatBotEnabled === undefined &&

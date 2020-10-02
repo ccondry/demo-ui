@@ -7,7 +7,13 @@ const state = {
 
 const getters = {
   upstreamCustomers: state => state.upstreamCustomers,
-  hasUpstream: (state, getters) => getters.demoPlatform === 'pcce'
+  hasUpstream: (state, getters) => {
+    try {
+      return getters.demoBaseConfig.multichannel.includes('upstream')
+    } catch (e) {
+      return false
+    }
+  }
 }
 
 const mutations = {

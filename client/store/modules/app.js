@@ -1,7 +1,4 @@
 import * as types from '../mutation-types'
-import {load} from '../../utils'
-const getters = {
-}
 
 const state = {
   device: {
@@ -47,28 +44,7 @@ const mutations = {
   }
 }
 
-const endpoint = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'http://localhost:3022/api/v1/endpoints'
-// const endpoint = process.env.NODE_ENV === 'production' ? '/api/v1/endpoints' : 'https://branding.dcloud.cisco.com/api/v1/endpoints'
-
-const actions = {
-  async getEndpoints ({getters, commit, dispatch}, showNotification = true) {
-    dispatch('setLoading', {group: 'app', type: 'endpoints', value: true})
-    try {
-      const response = await load(endpoint)
-      commit(types.SET_ENDPOINTS, response.data)
-      // dispatch('successNotification', `Successfully loaded endpoints`)
-    } catch (e) {
-      console.error(`error during GET endpoints`, e)
-      dispatch('errorNotification', {title: `Failed to GET endpoints`, error: e})
-    } finally {
-      dispatch('setLoading', {group: 'app', type: 'endpoints', value: false})
-    }
-  }
-}
-
 export default {
   state,
-  actions,
-  getters,
   mutations
 }

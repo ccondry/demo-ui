@@ -10,9 +10,6 @@ export const SET_SESSION = 'SET_SESSION'
 export const SET_WORKING = 'SET_WORKING'
 export const SET_LOADING = 'SET_LOADING'
 
-// app
-export const SET_ENDPOINTS = 'SET_ENDPOINTS'
-
 // dCloud Cumulus
 export const SET_VERTICALS = 'SET_VERTICALS'
 export const SET_IMAGE = 'SET_IMAGE'
@@ -30,5 +27,6 @@ export const SET_DEFAULTS = 'SET_DEFAULTS'
 
 // SET_DEMO_CONFIG
 export const SET_DEMO_CONFIG = 'SET_DEMO_CONFIG'
+export const SET_DEMO_BASE_CONFIG = 'SET_DEMO_BASE_CONFIG'
 export const SET_SESSION_INFO = 'SET_SESSION_INFO'
 export const SET_UPSTREAM_CUSTOMERS = 'SET_UPSTREAM_CUSTOMERS'
