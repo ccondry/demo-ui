@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 1.4.0 (2020-10-02)
+
+### Features
+
+* **Multichannel:** add support for Webex multichannel option
+
+
 # 1.3.1 (2020-10-02)
 
 ### Bug Fixes
