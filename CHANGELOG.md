@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 1.3.1 (2020-10-02)
+
+### Bug Fixes
+
+* **Build Script:** rebuild node-sass during update.sh script
+
+
 # 1.3.0 (2020-10-01)
 
 ### Bug Fixes
