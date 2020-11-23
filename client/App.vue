@@ -32,29 +32,6 @@ export default {
   },
 
   async beforeMount () {
-    const { body } = document
-    const WIDTH = 768
-    const RATIO = 3
-
-    const handler = () => {
-      if (!document.hidden) {
-        let rect = body.getBoundingClientRect()
-        let isMobile = rect.width - RATIO < WIDTH
-        this.toggleDevice(isMobile ? 'mobile' : 'other')
-        this.toggleSidebar({
-          opened: !isMobile
-        })
-      }
-    }
-
-    // add event listeners for DOM events
-    document.addEventListener('visibilitychange', handler)
-    window.addEventListener('DOMContentLoaded', handler)
-    window.addEventListener('resize', handler)
-
-    console.log('getting endpoints...')
-    await this.getEndpoints()
-    console.log('getting endpoints done.')
     // load demo session configuration
     console.log('getting demo config...')
     await this.loadDemoConfig(false)
@@ -67,6 +44,10 @@ export default {
     console.log('getting verticals...')
     await this.loadVerticals(false)
     console.log('getting verticals done.')
+    // load demo base configuration
+    console.log('getting demo base config...')
+    await this.loadDemoBaseConfig(false)
+    console.log('getting demo base config done.')
   },
 
   async mounted () {
@@ -85,51 +66,11 @@ export default {
     ...mapActions([
       'toggleDevice',
       'toggleSidebar',
-      'getEndpoints',
       'loadDemoConfig',
+      'loadDemoBaseConfig',
       'loadSessionInfo',
       'loadVerticals'
     ])
   }
 }
 </script>
-
-<style lang="scss">
-// @import '~animate.css';
-// .animated {
-//   animation-duration: .377s;
-// }
-
-@import '~bulma';
-
-$fa-font-path: '~font-awesome/fonts/';
-@import '~font-awesome/scss/font-awesome';
-
-html {
-  background-color: whitesmoke;
-}
-
-.nprogress-container {
-  position: fixed !important;
-  width: 100%;
-  height: 50px;
-  z-index: 2048;
-  pointer-events: none;
-
-  #nprogress {
-    $color: #48e79a;
-
-    .bar {
-      background: $color;
-    }
-    .peg {
-      box-shadow: 0 0 10px $color, 0 0 5px $color;
-    }
-
-    .spinner-icon {
-      border-top-color: $color;
-      border-left-color: $color;
-    }
-  }
-}
-</style>
