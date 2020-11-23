@@ -22,31 +22,45 @@
 
                 <b-field grouped>
                   <b-field label="Session ID">
-                    <b-input v-model="sessionInfo.id" disabled />
+                    <p class="control">
+                      {{ sessionInfo.id }}
+                    </p>
                   </b-field>
                   <b-field label="Datacenter">
-                    <b-input v-model="sessionInfo.datacenter" disabled />
+                    <p class="control">
+                      {{ sessionInfo.datacenter }}
+                    </p>
                   </b-field>
                   <b-field label="Owner">
-                    <b-input v-model="sessionInfo.owner" disabled />
+                    <p class="control">
+                      {{ sessionInfo.owner }}
+                    </p>
                   </b-field>
                 </b-field>
 
                 <b-field grouped>
                   <b-field label="Demo">
-                    <b-input v-model="demoConfig.demo" disabled />
+                    <p class="control">
+                      {{ demoConfig.demo }}
+                    </p>
                   </b-field>
                   <b-field label="Version">
-                    <b-input v-model="demoConfig.version" disabled />
+                    <p class="control">
+                      {{ demoConfig.version }}
+                    </p>
                   </b-field>
                 </b-field>
 
                 <b-field grouped>
                   <b-field label="AnyConnect Username">
-                    <b-input :value="`v${sessionInfo.vpod}user1`" disabled />
+                    <p class="control">
+                      {{ `v${sessionInfo.vpod}user1` }}
+                    </p>
                   </b-field>
                   <b-field label="Password">
-                    <b-input :value="sessionInfo.anycpwd" disabled />
+                    <p class="control">
+                      {{ sessionInfo.anycpwd }}
+                    </p>
                   </b-field>
                 </b-field>
 
