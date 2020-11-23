@@ -86,7 +86,6 @@
             <session-config
             :model.sync="formModel"
             @save="clickSave"
-            :defaults="defaults.configuration"
             />
 
           </div>
@@ -113,7 +112,6 @@ export default {
     return {
       activeTab: 0,
       verticalDataString: '',
-      showModal: false,
       formModel: {}
     }
   },
@@ -168,7 +166,6 @@ export default {
     },
     async clickSaveVertical ({id, name}) {
       console.log('saving vertical as', id, '-', name)
-      this.showModal = false
       try {
         let data
         if (this.activeTab === 0) {
@@ -194,7 +191,6 @@ export default {
     ...mapGetters([
       'loading',
       'working',
-      'defaults',
       'demoConfig',
       'sessionInfo',
       'hasMultichannel'

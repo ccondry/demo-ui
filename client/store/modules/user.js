@@ -1,175 +1,59 @@
 import * as types from '../mutation-types'
-// import axios from 'axios'
-// import { load } from '../../utils'
+
+function parseJwt (token) {
+  var base64Url = token.split('.')[1]
+  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+  return JSON.parse(window.atob(base64))
+}
 
 const state = {
-  user: {}
+  jwt: null
 }
 
 const getters = {
-  user: state => state.user
+  // decoded JWT
+  jwtUser: state => {
+    try {
+      return parseJwt(state.jwt)
+    } catch (e) {
+      return {}
+    }
+  },
+  // encoded JWT from server
+  jwt: state => state.jwt
 }
 
 const mutations = {
-  [types.SET_USER] (state, data) {
-    state.user = data
+  [types.SET_JWT] (state, data) {
+    state.jwt = data
   }
 }
 
-// function getErrorMessage (error) {
-//   console.log(error.response)
-//   if (error.response.data.body) {
-//     return error.response.body
-//   } else {
-//     return error.response.data
-//   }
-// }
-
 const actions = {
-  async patchUser ({getters, commit, dispatch}, {body, field}) {
-    // try {
-    //   const options = {}
-    //   if (getters.authEnabled === true) {
-    //     const jwt = getters.jwt
-    //     options.headers = {
-    //       Authorization: 'Bearer ' + jwt
-    //     }
-    //   }
-    //   dispatch('setWorking', {group: 'app', type: 'user', value: true})
-    //   const response = await axios.patch(`/users/${getters.user.username}?field=${field}`, body, options)
-    //   dispatch('setWorking', {group: 'app', type: 'user', value: false})
-    //   console.log('response:', response)
-    //   dispatch('successNotification', {
-    //     title: 'User Saved',
-    //     message: 'User details updated successfully.'
-    //   })
-    //   // load user again
-    //   dispatch('loadUser', false)
-    //   return true
-    // } catch (error) {
-    //   console.log('axios error: ', error)
-    //   const title = `Failed to update your user details.`
-    //   const message = getErrorMessage(error)
-    //   dispatch('errorNotification', {
-    //     title,
-    //     message
-    //   })
-    //   return false
-    // }
+  setJwt ({commit}, data) {
+    // set JWT in state
+    commit(types.SET_JWT, data)
+    // set authToken in localStorage also
+    window.localStorage.setItem('jwt', data)
   },
-  async putUser ({commit, getters, dispatch}, data) {
-    // try {
-    //   const options = {}
-    //   if (getters.authEnabled === true) {
-    //     const jwt = getters.jwt
-    //     options.headers = {
-    //       Authorization: 'Bearer ' + jwt
-    //     }
-    //   }
-    //   dispatch('setWorking', {group: 'app', type: 'user', value: true})
-    //   await axios.put(`/user`, data, options)
-    //   dispatch('setWorking', {group: 'app', type: 'user', value: false})
-    //   // console.log(response)
-    //   dispatch('successNotification', {
-    //     title: 'User Saved',
-    //     message: 'User details saved successfully.'
-    //   })
-    //   // reload user, but don't notify user on success
-    //   dispatch('loadUser', false)
-    // } catch (e) {
-    //   dispatch('errorNotification', {
-    //     title: 'User Not Saved',
-    //     message: getErrorMessage(e)
-    //   })
-    // }
+  unsetJwt ({commit}) {
+    // unset JWT in state
+    commit(types.SET_JWT, null)
+    // remove JWT from localStorage
+    window.localStorage.removeItem('jwt')
   },
-  async loadUser ({getters, commit, dispatch}, showNotification = true) {
-    // try {
-    //   dispatch('setLoading', {group: 'app', type: 'user', value: true})
-    //   const response = await load(getters, 'user')
-    //   dispatch('setLoading', {group: 'app', type: 'user', value: false})
-    //   console.log('load user details:', response)
-    //   commit(types.SET_USER, response.data)
-    //   if (showNotification) {
-    //     dispatch('successNotification', 'Successfully loaded user details')
-    //   }
-    // } catch (e) {
-    //   console.log('error loading defaults', e)
-    //   dispatch('errorNotification', {title: 'Failed to load user details', error: e})
-    // }
-  },
-  addUserData ({getters, dispatch}, params) {
-    // console.log(`adding ${params.field} ${params.data}`)
-    // // copy getters data into body
-    // let body = []
-    // try {
-    //   body = getters.user[params.field].slice()
-    // } catch (e) {}
-    // // check that we're not trying to add something alread in the list
-    // if (body.indexOf(params.data) < 0) {
-    //   // data not already in list, so add it
-    //   body.push(params.data)
-    //   dispatch('patchUser', {body, field: params.field})
-    // } else {
-    //   // no change
-    //   dispatch('infoNotification', {
-    //     title: 'User Not Changed',
-    //     message: 'Data you tried to add was already in the set.'
-    //   })
-    // }
-  },
-  deleteUserData ({commit, getters, dispatch}, params) {
-    // console.log(`deleting ${params.phone} ${params.data}`)
-    // // copy getters data into body
-    // let body = []
-    // try {
-    //   body = getters.user[params.field].slice()
-    // } catch (e) {}
-    // try {
-    //   // remove desired entry
-    //   body.splice(body.indexOf(params.data), 1)
-    //   // patch server data
-    //   dispatch('patchUser', {body, field: params.field})
-    // } catch (e) {
-    //   // no change
-    //   dispatch('infoNotification', {
-    //     title: 'User Not Changed',
-    //     message: 'Data you tried to delete was not in the set.'
-    //   })
-    // }
-  },
-  setDemo ({dispatch, getters}, {dnis, demo, name, params, type}) {
-    // console.log(`updating user's ${type} demo ${dnis}`)
-    // // copy user's demo property
-    // let demos = {}
-    // try {
-    //   demos = JSON.parse(JSON.stringify(getters.user.demos))
-    // } catch (e) {}
-    // // make sure we have an object for this demo type to work with
-    // if (!demos[type]) {
-    //   demos[type] = {}
-    // }
-    // // set demo config using input params
-    // demos[type][dnis] = {
-    //   demo,
-    //   name,
-    //   params
-    // }
-    //
-    // console.log(`patching user demos:`, demos)
-    // return dispatch('patchUser', {body: demos, field: 'demos'})
-  },
-  async provisionUser ({dispatch}) {
-    // console.log(`provisioning user department and demos`)
-    // dispatch('setWorking', {group: 'app', type: 'user', value: true})
-    // await dispatch('postData', {
-    //   path: 'user/provision',
-    //   name: 'Provision User',
-    //   showNotification: true
-    // })
-    // dispatch('setWorking', {group: 'app', type: 'user', value: false})
-    // // update user data in state
-    // dispatch('loadUser')
+  async login ({dispatch, getters}, body) {
+    dispatch('fetch', {
+      group: 'user',
+      type: 'login',
+      url: getters.endpoints.login,
+      options: {
+        method: 'POST',
+        body
+      },
+      message: 'log in',
+      mutation: types.SET_JWT
+    })
   }
 }
 

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <pre>{{ciscoRedirectUri}}</pre>
     <!-- Demo Configuration -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -9,7 +10,13 @@
         </a>
       </div>
       <div class="card-content" v-if="!model.configuration">
-        <button class="button is-primary" @click="$set(model, 'configuration', JSON.parse(JSON.stringify(defaults)))">Configure</button>
+        <b-button
+        type="is-primary"
+        rounded
+        @click="$set(model, 'configuration', {vertical: 'travel'})"
+        >
+          Configure
+        </b-button>
       </div>
       <div class="card-content" v-else>
 
@@ -22,23 +29,32 @@
             </a>
           </div>
           <div class="card-content" v-if="!model.configuration.vertical">
-            <button class="button is-primary" @click="$set(model.configuration, 'vertical', defaults.vertical)">Configure</button>
+            <b-button
+            type="is-primary"
+            rounded
+            @click="$set(model.configuration, 'vertical', 'trave')"
+            >
+              Configure
+            </b-button>
           </div>
           <div class="card-content" v-else>
             <div class="block">
-              <b-field label="Filter verticals by owner" grouped>
-                <b-autocomplete
-                v-model="ownerFilter"
-                :data="autocompleteOwners"
+              <b-field label="Log in to load your custom verticals">
+                <b-button
+                type="is-primary"
+                rounded
+                @click="clickLogin"
                 >
-                  <template slot="empty">No results found</template>
-                </b-autocomplete>
+                  Log In
+                </b-button>
               </b-field>
 
               <b-field label="Choose your demo vertical">
                 <div class="select">
                   <select class="input" v-model="model.configuration.vertical" @change="selectVertical">
-                    <option value="" disabled selected>Choose a vertical to use</option>
+                    <option value="" disabled selected>
+                      Choose a vertical to use
+                    </option>
                     <option
                     v-for="vertical in systemVerticals"
                     :value="vertical.id"
@@ -81,7 +97,7 @@
             </a>
           </div>
           <div class="card-content" v-if="!model.configuration.multichannel">
-            <button class="button is-primary" @click="$set(model.configuration, 'multichannel', defaults.multichannel)">Configure</button>
+            <button class="button is-primary" @click="$set(model.configuration, 'multichannel', 'ece')">Configure</button>
           </div>
           <div class="card-content" v-else>
             <b-field label="Multichannel System">
@@ -110,8 +126,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
+import Login from './modals/login'
+
 export default {
+  components: {
+    Login
+  },
+
   data () {
     return {
       ownerFilter: '',
@@ -131,14 +153,31 @@ export default {
     'model': {
       type: Object,
       default () { return {} }
-    },
-    'defaults': {
-      type: Object,
-      default () { return {} }
     }
   },
 
   methods: {
+    ...mapActions([
+      'login'
+    ]),
+    clickLogin () {
+      this.$buefy.modal.open({
+        parent: this,
+        component: Login,
+        hasModalCard: true,
+        trapFocus: true,
+        events: {
+          login: (data) => {
+            // log user in with username and password
+            this.login(data)
+          },
+          sso: () => {
+            // forward to SSO login page
+            window.location = this.ciscoSsoUrl
+          }
+        }
+      })
+    },
     selectVertical (e) {
       this.$emit('save')
     },
@@ -150,7 +189,7 @@ export default {
       try {
         if (this.model.demo === 'pcce' && !this.model.configuration.multichannel) {
           // set a default multichannel option so the user doesn't have to click 'Configure' button
-          this.$set(this.model.configuration, 'multichannel', this.defaults.multichannel)
+          this.$set(this.model.configuration, 'multichannel', 'ece')
         }
       } catch (e) {
         // do nothing if fail
@@ -158,13 +197,6 @@ export default {
     },
     pushChanges (data) {
       this.$emit('update:data', JSON.stringify(data, null, 2))
-    },
-    configureChatBot () {
-      this.$set(this.model.configuration, 'chatBotEnabled', this.defaults.chatBotEnabled)
-      this.$set(this.model.configuration, 'chatBotToken', this.defaults.chatBotEnabled)
-      this.$set(this.model.configuration, 'language', this.defaults.chatBotEnabled)
-      this.$set(this.model.configuration, 'region', this.defaults.chatBotEnabled)
-      this.$set(this.model.configuration, 'chatBotSurveyEnabled', this.defaults.chatBotEnabled)
     }
   },
 
@@ -177,7 +209,9 @@ export default {
       'verticals',
       'demoBaseConfig',
       'hasMultichannel',
-      'multichannelOptions'
+      'multichannelOptions',
+      'ciscoSsoUrl',
+      'ciscoRedirectUri'
     ]),
     chatBotConfigured () {
       return this.model.configuration.chatBotEnabled === undefined &&

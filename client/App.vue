@@ -32,26 +32,6 @@ export default {
   },
 
   async beforeMount () {
-    const { body } = document
-    const WIDTH = 768
-    const RATIO = 3
-
-    const handler = () => {
-      if (!document.hidden) {
-        let rect = body.getBoundingClientRect()
-        let isMobile = rect.width - RATIO < WIDTH
-        this.toggleDevice(isMobile ? 'mobile' : 'other')
-        this.toggleSidebar({
-          opened: !isMobile
-        })
-      }
-    }
-
-    // add event listeners for DOM events
-    document.addEventListener('visibilitychange', handler)
-    window.addEventListener('DOMContentLoaded', handler)
-    window.addEventListener('resize', handler)
-
     // load demo session configuration
     console.log('getting demo config...')
     await this.loadDemoConfig(false)
@@ -94,55 +74,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-// @import '~animate.css';
-// .animated {
-//   animation-duration: .377s;
-// }
-$navbar-box-shadow-color: hsla(0,0%,7%,.1);
-$navbar-box-shadow-size: 0 2px 3px 0;
-$primary: #7957d5;
-$link: #7957d5;
-// $link: $blue;
-// $info: $cyan;
-// $success: $green;
-// $warning: $yellow;
-// $danger: $red;
-// $dark: $grey-darker;
-// $text: $grey-dark;
-// $test: 0 2px 3px hsla(0,0%,7%,.1), 0 0 0 1px hsla(0,0%,7%,.1);
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
-
-$fa-font-path: '~font-awesome/fonts/';
-@import '~font-awesome/scss/font-awesome';
-
-html {
-  // background-color: whitesmoke;
-}
-
-.nprogress-container {
-  position: fixed !important;
-  width: 100%;
-  height: 50px;
-  z-index: 2048;
-  pointer-events: none;
-
-  #nprogress {
-    $color: #48e79a;
-
-    .bar {
-      background: $color;
-    }
-    .peg {
-      box-shadow: 0 0 10px $color, 0 0 5px $color;
-    }
-
-    .spinner-icon {
-      border-top-color: $color;
-      border-left-color: $color;
-    }
-  }
-}
-</style>
