@@ -1,6 +1,5 @@
 <template>
   <div>
-    <pre>{{ciscoRedirectUri}}</pre>
     <!-- Demo Configuration -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
