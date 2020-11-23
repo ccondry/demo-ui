@@ -7,6 +7,10 @@ const state = {
   ]
 }
 
+const getters = {
+  menuitems: state => state.items
+}
+
 const mutations = {
   [types.EXPAND_MENU] (state, menuItem) {
     if (menuItem.index > -1) {
@@ -21,5 +25,6 @@ const mutations = {
 
 export default {
   state,
-  mutations
+  mutations,
+  getters
 }

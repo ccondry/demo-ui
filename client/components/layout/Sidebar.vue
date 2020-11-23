@@ -1,18 +1,10 @@
 <template>
   <aside class="menu app-sidebar">
-    <!-- <p class="menu-label">
-    General
-  </p> -->
-
-  <!-- <p class="control">
-  <button class="button is-primary">Search</button>
-</p> -->
 </b-field>
 <ul class="menu-list">
   <!-- for each menu item - but only show admins the Admin menu -->
   <li v-for="(item, index) in filteredMenu" :key="index">
     <router-link :to="item.path" :exact="true" :aria-expanded="isExpanded(item) ? 'true' : 'false'" v-if="item.path" @click.native="toggle(index, item)">
-      <!-- <span class="icon is-small"><i :class="['fa', item.meta.icon]"></i></span> -->
       <!-- icon -->
       <b-icon :icon="item.meta.icon"></b-icon>
       <!-- label -->
@@ -21,30 +13,20 @@
       <b-icon v-if="item.children && item.children.length" :icon="isExpanded(item) ? 'chevron-up' : 'chevron-down'" ></b-icon>
     </router-link>
     <a :aria-expanded="isExpanded(item)" v-else @click="toggle(index, item)">
-      <!-- <span class="icon is-small"><i :class="isExpanded(item) && item.meta.iconExpanded ? ['fa', item.meta.iconExpanded] : ['fa', item.meta.icon]"></i></span> -->
       <!-- expanded folder icon, or else the defined icon -->
       <b-icon :icon="isExpanded(item) && item.meta.iconExpanded ? item.meta.iconExpanded : item.meta.icon" ></b-icon>
       <!-- label -->
       {{ item.meta.label || item.name }}
       <!-- down arrow -->
       <b-icon v-if="item.children && item.children.length" :icon="isExpanded(item) ? 'chevron-up' : 'chevron-down'" ></b-icon>
-      <!-- 'new' tag -->
-      <b-tag v-if="isNew(item)" type="is-info">New</b-tag>
-      <!-- 'updated' tag -->
-      <b-tag v-if="isUpdated(item)" type="is-primary">Updated</b-tag>
     </a>
 
     <span v-if="item.children && item.children.length">
       <ul v-show="isExpanded(item)">
         <li v-for="subItem in item.children" v-if="subItem.path && (subItem.meta.filter ? subItem.meta.filter.includes(demoConfig.demo) : true)" :key="subItem.name">
           <router-link :to="generatePath(item, subItem)">
-            <!-- <span v-if="subItem.meta && subItem.meta.icon" class="icon is-small"><i :class="['fa', subItem.meta.icon]"></i></span> -->
             <b-icon v-if="subItem.meta && subItem.meta.icon" :icon="subItem.meta.icon" ></b-icon>
             {{ subItem.meta && subItem.meta.label || subItem.name }}
-            <!-- 'new' tag -->
-            <b-tag v-if="isNew(subItem)" type="is-info">New</b-tag>
-            <!-- 'updated' tag -->
-            <b-tag v-if="isUpdated(subItem)" type="is-primary">Updated</b-tag>
           </router-link>
         </li>
       </ul>
@@ -70,7 +52,6 @@ export default {
   data () {
     return {
       isReady: false
-      // menuFilter: ''
     }
   },
 
@@ -143,13 +124,6 @@ export default {
       return item.meta.expanded || this.menuFilter.length
     },
 
-    toggle (index, item) {
-      this.expandMenu({
-        index: index,
-        expanded: !item.meta.expanded
-      })
-    },
-
     shouldExpandMatchItem (route) {
       let matched = route.matched
       let lastMatched = matched[matched.length - 1]
@@ -161,17 +135,6 @@ export default {
           parent = p
         }
       }
-
-      this.expandMenu({
-        item: parent,
-        expanded: true
-      })
-      // if ('expanded' in parent.meta && !isParent) {
-      //   this.expandMenu({
-      //     item: parent,
-      //     expanded: true
-      //   })
-      // }
     },
 
     generatePath (item, subItem) {
@@ -205,9 +168,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bulma/sass/utilities/variables';
-@import '~bulma/sass/utilities/mixins';
-
 .app-sidebar {
   position: fixed;
   // top: 50px;
@@ -226,9 +186,9 @@ export default {
   overflow-x: hidden;
   margin-right: 20px;
 
-  @include mobile() {
-    transform: translate3d(-220px, 0, 0);
-  }
+  // @include mobile() {
+  //   transform: translate3d(-220px, 0, 0);
+  // }
 
   .icon {
     vertical-align: baseline;

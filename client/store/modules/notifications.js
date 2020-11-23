@@ -1,20 +1,4 @@
-import Vue from 'vue'
-import Notification from 'vue-bulma-notification'
-const NotificationComponent = Vue.extend(Notification)
-
-const openNotification = (propsData = {
-  title: '',
-  message: '',
-  type: '',
-  direction: '',
-  duration: 4500,
-  container: '.notifications'
-}) => {
-  return new NotificationComponent({
-    el: document.createElement('div'),
-    propsData
-  })
-}
+import { ToastProgrammatic as Toast } from 'buefy'
 
 function getErrorMessage (error) {
   // console.log('raw error keys:', Object.keys(error))
@@ -33,7 +17,7 @@ function getErrorMessage (error) {
 
 const actions = {
   notification ({state}, options) {
-    openNotification({
+    Toast.open({
       title: options.title || '',
       message: options.message || '',
       type: options.type || 'info',
@@ -42,14 +26,14 @@ const actions = {
   },
   successNotification ({state}, options) {
     if (typeof options === 'string') {
-      return openNotification({
+      return Toast.open({
         title: options,
         message: '',
         type: 'success',
         duration: 2500
       })
     } else {
-      return openNotification({
+      return Toast.open({
         title: options.title,
         message: options.message,
         type: 'success',
@@ -59,7 +43,7 @@ const actions = {
   },
   errorNotification ({state}, options) {
     if (typeof options === 'string') {
-      return openNotification({
+      return Toast.open({
         title: options,
         message: '',
         type: 'danger',
@@ -67,7 +51,7 @@ const actions = {
       })
     } else if (typeof options.error === 'object') {
       // exception
-      openNotification({
+      Toast.open({
         title: options.title,
         message: getErrorMessage(options.error),
         type: 'danger',
@@ -75,7 +59,7 @@ const actions = {
       })
     } else {
       // config
-      openNotification({
+      Toast.open({
         title: options.title,
         message: options.message,
         type: 'danger',
@@ -84,7 +68,7 @@ const actions = {
     }
   },
   infoNotification ({state}, options) {
-    openNotification({
+    Toast.open({
       title: options.title,
       message: options.message,
       type: 'info',
@@ -92,7 +76,7 @@ const actions = {
     })
   },
   warningNotification ({state}, options) {
-    openNotification({
+    Toast.open({
       title: options.title,
       message: options.message,
       type: 'warning',

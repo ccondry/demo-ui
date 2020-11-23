@@ -1,45 +1,19 @@
-import axios from 'axios'
-
-export const load = async function (endpoint, query) {
-  try {
-    const options = {
-      params: query
+// helper function to append query parameters to a URL for fetch
+export const addUrlQueryParams = function (endpoint, params) {
+  let url = endpoint
+  if (typeof params === 'object') {
+    // append URL query paramenters
+    const keys = Object.keys(params)
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i]
+      const value = params[key]
+      if (i === 0) {
+        url += '?'
+      } else {
+        url += '&'
+      }
+      url += encodeURIComponent(key) + '=' + encodeURIComponent(value)
     }
-    return await axios.get(endpoint, options)
-  } catch (e) {
-    throw e
   }
-}
-
-export const put = async function (endpoint, query, data) {
-  try {
-    const options = {
-      params: query
-    }
-    return await axios.put(endpoint, data, options)
-  } catch (e) {
-    throw e
-  }
-}
-
-export const post = async function (endpoint, query, data) {
-  try {
-    const options = {
-      params: query
-    }
-    return await axios.post(endpoint, data, options)
-  } catch (e) {
-    throw e
-  }
-}
-
-export const httpDelete = async function (endpoint, query) {
-  try {
-    const options = {
-      params: query
-    }
-    return await axios.delete(endpoint, options)
-  } catch (e) {
-    throw e
-  }
+  return url
 }

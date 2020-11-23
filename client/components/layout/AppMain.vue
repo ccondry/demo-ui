@@ -36,17 +36,16 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bulma/sass/utilities/variables';
-@import '~bulma/sass/utilities/mixins';
+// @import '~bulma/sass/utilities/variables';
+// @import '~bulma/sass/utilities/mixins';
 
 .app-main {
-  padding-top: 50px;
-  margin-left: 220px;
+  margin-left: 210px;
   transform: translate3d(0, 0, 0);
 
-  @include mobile() {
-    margin-left: 0;
-  }
+  // @include mobile() {
+  //   margin-left: 0;
+  // }
 
 }
 
