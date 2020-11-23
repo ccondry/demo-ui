@@ -21,7 +21,7 @@ const getters = {
     const params = {
       client_id: 'dcloud-collab-toolbox',
       response_type: 'code',
-      redirect_uri: this.ciscoRedirectUri,
+      redirect_uri: getters.ciscoRedirectUri,
       scope: scopes.join(' '),
       state: 'demo-ui-login'
     }
