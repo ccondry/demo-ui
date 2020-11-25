@@ -73,7 +73,10 @@ const actions = {
       url: getters.endpoints.configure,
       options: {
         method: 'POST',
-        body: data
+        body: data,
+        headers: {
+          Authorization: `Bearer ${getters.jwt}`
+        }
       },
       message: 'save demo session configuration'
     })

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pre>{{ciscoRedirectUri}}</pre>
+    <!-- <pre>{{ciscoRedirectUri}}</pre> -->
     <!-- Demo Configuration -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -39,7 +39,10 @@
           </div>
           <div class="card-content" v-else>
             <div class="block">
-              <b-field label="Log in to load your custom verticals">
+              <b-field
+              v-if="!isLoggedIn"
+              label="Log in to load your custom verticals"
+              >
                 <b-button
                 type="is-primary"
                 rounded
@@ -62,20 +65,12 @@
                     >
                       {{ `${vertical.name} (${vertical.id})` }}
                     </option>
-                    <option disabled>-----------------------------------------</option>
+                    <option v-if="isLoggedIn" disabled>-----------------------------------------</option>
                     <option
+                    v-if="isLoggedIn"
                     v-for="vertical in userVerticals"
                     :value="vertical.id"
                     :key="vertical.id"
-                    v-if="verticalFilter === 'all'"
-                    >
-                      {{ `${vertical.name} (${vertical.id})` }}
-                    </option>
-                    <option
-                    v-for="vertical in filteredSortedVerticals"
-                    :value="vertical.id"
-                    :key="vertical.id"
-                    v-if="verticalFilter === 'other'"
                     >
                       {{ `${vertical.name} (${vertical.id})` }}
                     </option>
@@ -205,31 +200,15 @@ export default {
       'sessionInfo',
       'working',
       'loading',
-      'user',
       'verticals',
       'demoBaseConfig',
       'hasMultichannel',
       'multichannelOptions',
       'ciscoSsoUrl',
-      'ciscoRedirectUri'
+      'ciscoRedirectUri',
+      'isLoggedIn',
+      'jwtUser'
     ]),
-    chatBotConfigured () {
-      return this.model.configuration.chatBotEnabled === undefined &&
-      this.model.configuration.chatBotToken === undefined &&
-      this.model.configuration.language === undefined &&
-      this.model.configuration.region === undefined &&
-      this.model.configuration.chatBotSurveyEnabled === undefined
-    },
-    autocompleteOwners () {
-      const allOwners = this.verticals.map(v => v.owner)
-      const uniqueOwners = Array.from(new Set(allOwners))
-      return uniqueOwners.filter((option) => {
-        return option
-        .toString()
-        .toLowerCase()
-        .indexOf(this.ownerFilter.toLowerCase()) >= 0
-      })
-    },
     sortedVerticals () {
       // make a mutable copy of the store data
       try {
@@ -253,14 +232,14 @@ export default {
       }
     },
     systemVerticals () {
-      return this.sortedVerticals.filter(v => !v.owner || v.owner === 'system' || v.owner === null)
+      return this.sortedVerticals.filter(v => {
+        return !v.owner || v.owner === 'system' || v.owner === null
+      })
     },
     userVerticals () {
-      return this.sortedVerticals.filter(v => v.owner && v.owner !== 'system' && v.owner !== null)
-    },
-    filteredSortedVerticals () {
-      // filter to only show the verticals owned by specified user
-      return this.sortedVerticals.filter(v => v.owner === this.ownerFilter)
+      return this.sortedVerticals.filter(v => {
+        return v.owner && v.owner === this.jwtUser.username
+      })
     }
   },
 

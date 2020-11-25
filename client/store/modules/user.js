@@ -11,6 +11,13 @@ const state = {
 }
 
 const getters = {
+  isLoggedIn: (state, getters) => {
+    try {
+      return typeof getters.jwtUser.email === 'string'
+    } catch (e) {
+      return false
+    }
+  },
   // decoded JWT
   jwtUser: state => {
     try {
@@ -30,6 +37,15 @@ const mutations = {
 }
 
 const actions = {
+  logout ({dispatch}) {
+    dispatch('unsetJwt')
+  },
+  checkLogin ({dispatch}) {
+    const jwt = window.localStorage.getItem('jwt')
+    if (jwt) {
+      dispatch('setJwt', jwt)
+    }
+  },
   setJwt ({commit}, data) {
     // set JWT in state
     commit(types.SET_JWT, data)
@@ -43,7 +59,7 @@ const actions = {
     window.localStorage.removeItem('jwt')
   },
   async login ({dispatch, getters}, body) {
-    dispatch('fetch', {
+    const response = await dispatch('fetch', {
       group: 'user',
       type: 'login',
       url: getters.endpoints.login,
@@ -51,9 +67,9 @@ const actions = {
         method: 'POST',
         body
       },
-      message: 'log in',
-      mutation: types.SET_JWT
+      message: 'log in'
     })
+    dispatch('setJwt', response.jwt)
   }
 }
 

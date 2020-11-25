@@ -1,5 +1,6 @@
 import * as types from '../mutation-types'
 import {addUrlQueryParams} from '../../utils'
+import {ToastProgrammatic as Toast} from 'buefy'
 
 const state = {
   oauthError: null
@@ -9,7 +10,7 @@ const getters = {
   oauthError: state => state.oauthError,
   ciscoRedirectUri: () => {
     // the URL to come back to after SSO
-    return `${window.location.protocol}//${window.location.host}/ciscosso/`
+    return `${window.location.protocol}//${window.location.host}/`
   },
   ciscoSsoUrl: (state, getters) => {
     // URL to forward user to when requesting SSO login
@@ -37,22 +38,27 @@ const mutations = {
 
 const actions = {
   async ciscoOauth2Login ({commit, dispatch, getters}, code) {
-    try {
-      const response = await dispatch('fetch', {
-        group: 'user',
-        type: 'login',
-        url: getters.endpoints.ciscoOauth2,
+    const response = await dispatch('fetch', {
+      group: 'user',
+      type: 'login',
+      url: getters.endpoints.ciscoOauth2,
+      options: {
         method: 'POST',
-        body: {code},
-        message: 'SSO login'
-      })
+        body: {code}
+      },
+      message: 'SSO login',
+      onError (e) {
+        commit(types.SET_OAUTH_ERROR, e.message)
+      },
+      showNotification: true
+    })
+    if (response) {
+      console.log('ciscoOauth2Login', response)
       dispatch('setJwt', response.jwt)
-      dispatch('successNotification', {
-        title: `Logged in Successfully`,
-        message: ''
+      Toast.open({
+        message: 'Logged in Successfully',
+        type: 'is-success'
       })
-    } catch (e) {
-      commit(types.SET_OAUTH_ERROR, e.message)
     }
   }
 }

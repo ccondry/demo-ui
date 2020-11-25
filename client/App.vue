@@ -32,6 +32,8 @@ export default {
   },
 
   async beforeMount () {
+    // check if JWT is in localstorage
+    this.checkLogin()
     // load demo session configuration
     console.log('getting demo config...')
     await this.loadDemoConfig(false)
@@ -69,7 +71,8 @@ export default {
       'loadDemoConfig',
       'loadDemoBaseConfig',
       'loadSessionInfo',
-      'loadVerticals'
+      'loadVerticals',
+      'checkLogin'
     ])
   }
 }

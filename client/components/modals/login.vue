@@ -17,21 +17,25 @@
         <b-field label="dCloud Toolbox Username">
           <b-input
           v-model="username"
-          placeholder="Your Toolbox Username Email Address"
+          placeholder="Your Toolbox Username"
+          @keyup.enter.native="clickLogin"
+          required
           />
         </b-field>
 
         <b-field label="dCloud Toolbox Password">
           <b-input
           type="password"
-          :value="password"
+          v-model="password"
           password-reveal
           placeholder="Your Toolbox Password"
+          @keyup.enter.native="clickLogin"
+          required
           />
         </b-field>
         <b-field>
           <b-button
-          @click="activeStep = 1"
+          @click="clickLogin"
           type="is-primary"
           expanded
           >
@@ -71,7 +75,7 @@ export default {
       this.$emit('sso')
       this.$emit('close')
     },
-    submit () {
+    clickLogin () {
       this.$emit('login', {
         username: this.username,
         password: this.password

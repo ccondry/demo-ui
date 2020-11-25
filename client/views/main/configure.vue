@@ -1,76 +1,14 @@
 <template>
   <div>
+    <!-- <pre>{{ jwtUser }}</pre> -->
     <!-- Loading Indicator -->
     <b-loading :is-full-page="false" :active="loading.session.config || loading.session.info || working.session.config" :can-cancel="false"></b-loading>
-
-    <div class="tile is-ancestor">
-      <div class="tile is-parent">
-        <article class="tile is-child box">
-          <h1 class="title">
-            Demo Session Information
-          </h1>
-          <div class="block">
-            <!-- Basic Information -->
-            <b-collapse class="content card">
-              <div slot="trigger" slot-scope="props" class="card-header">
-                <p class="card-header-title">Basic Information</p>
-                <a class="card-header-icon">
-                  <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
-                </a>
-              </div>
-              <div class="card-content">
-
-                <b-field grouped>
-                  <b-field label="Session ID">
-                    <p class="control">
-                      {{ sessionInfo.id }}
-                    </p>
-                  </b-field>
-                  <b-field label="Datacenter">
-                    <p class="control">
-                      {{ sessionInfo.datacenter }}
-                    </p>
-                  </b-field>
-                  <b-field label="Owner">
-                    <p class="control">
-                      {{ sessionInfo.owner }}
-                    </p>
-                  </b-field>
-                </b-field>
-
-                <b-field grouped>
-                  <b-field label="Demo">
-                    <p class="control">
-                      {{ demoConfig.demo }}
-                    </p>
-                  </b-field>
-                  <b-field label="Version">
-                    <p class="control">
-                      {{ demoConfig.version }}
-                    </p>
-                  </b-field>
-                </b-field>
-
-                <b-field grouped>
-                  <b-field label="AnyConnect Username">
-                    <p class="control">
-                      {{ `v${sessionInfo.vpod}user1` }}
-                    </p>
-                  </b-field>
-                  <b-field label="Password">
-                    <p class="control">
-                      {{ sessionInfo.anycpwd }}
-                    </p>
-                  </b-field>
-                </b-field>
-
-              </div>
-            </b-collapse>
-            <!-- /Basic Information -->
-          </div>
-        </article>
-      </div>
-    </div>
+    <b-notification type="is-danger" v-model="oauthError">
+      Sorry, there was an error during OAUTH authorization:
+      {{ oauthError }}
+    </b-notification>
+    
+    <session-info />
 
     <div class="tile is-ancestor">
       <div class="tile is-parent is-vertical">
@@ -113,13 +51,15 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import SessionConfig from '../../components/session-config.vue'
+import SessionConfig from '../../components/session-config'
+import SessionInfo from '../../components/session-info'
 import moment from 'moment'
 
 export default {
 
   components: {
-    SessionConfig
+    SessionConfig,
+    SessionInfo
   },
 
   data () {
@@ -134,7 +74,8 @@ export default {
     ...mapActions([
       'loadDemoConfig',
       'errorNotification',
-      'saveDemoConfig'
+      'saveDemoConfig',
+      'ciscoOauth2Login'
     ]),
     async confirmSaveDemoConfig ({data}) {
       console.log('confirmSaveDemoConfig', data)
@@ -207,7 +148,9 @@ export default {
       'working',
       'demoConfig',
       'sessionInfo',
-      'hasMultichannel'
+      'hasMultichannel',
+      'oauthError',
+      'jwtUser'
     ]),
     disableSave () {
       return false
@@ -220,10 +163,17 @@ export default {
     }
   },
 
-  mounted () {
+  async mounted () {
     // if demo config is loaded, make sure to update the cache when we mount
     if (Object.keys(this.demoConfig).length) {
       this.updateCache(this.demoConfig)
+    }
+    // check if SSO is in progress
+    if (this.$route.query.code) {
+      await this.ciscoOauth2Login(this.$route.query.code)
+      // unset URL query
+      // this.$route.query.code
+      this.$router.push({query: {}}).catch(e => {})
     }
   },
 

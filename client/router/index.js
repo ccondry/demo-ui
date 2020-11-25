@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import menuModule from 'vuex-store/modules/menu'
+import {lazyLoading} from '../utils'
+
 Vue.use(Router)
 
 /***
@@ -13,6 +15,10 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     ...generateRoutesFromMenu(menuModule.state.items),
+    {
+      path: '/ciscosso',
+      component: lazyLoading('main/cisco-sso')
+    },
     {
       path: '*',
       redirect: '/configure'

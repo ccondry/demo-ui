@@ -93,7 +93,9 @@ const actions = {
     options = {},
     mutation,
     message,
-    showNotification = true
+    showNotification = true,
+    onError,
+    transform
   }) {
     message = message || `${options.method === 'POST' ? 'save' : 'get'} ${group} ${type}`
     if (!url) {
@@ -113,7 +115,7 @@ const actions = {
       // set JWT auth header by default
       options.headers['Authorization'] = options.headers['Authorization'] || 'Bearer ' + getters.jwt
       // set instant demo instance name
-      options.headers['Instance'] = getters.instanceName
+      // options.headers['Instance'] = getters.instanceName
       // stringify body if it is an object
       if (typeof options.body === 'object') {
         options.body = JSON.stringify(options.body)
@@ -130,9 +132,14 @@ const actions = {
           // parse response text into JSON
           const json = JSON.parse(text)
           console.log(`${message} success:`, json)
-          if (mutation) {
-            // put JSON data into state
-            commit(mutation, json)
+          if (typeof mutation === 'string') {
+            if (typeof transform === 'function') {
+              // put transformed JSON data into state
+              commit(mutation, transform(json))
+            } else {
+              // put JSON data into state
+              commit(mutation, json)
+            }
           }
           return json
         } catch (e) {
@@ -150,11 +157,12 @@ const actions = {
         let m = text
         try {
           const json = JSON.parse(text)
-          m = json.message || json.apiError || json[Object.keys(json)[0]]
+          m = json.message || json.apiError || json.error_description || json[Object.keys(json)[0]]
         } catch (e) {
           // use empty string instead of text/html content
           const regex = /text\/html/i
           if (response.headers.get('content-type').match(regex)) {
+            console.log('removing html response from message')
             m = ''
           }
         }
@@ -167,7 +175,10 @@ const actions = {
         error.status = response.status
         error.statusText = response.statusText
         error.text = m
-        throw error
+        // throw error
+        if (typeof onError === 'function') {
+          onError(error)
+        }
       }
     } catch (e) {
       console.error(`${message} failed: ${e.message}`)

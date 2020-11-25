@@ -12,7 +12,13 @@
         {{ oauthError }}
       </p>
       <b-field>
-        <b-button @click="clickHome" class="is-primary">Return to Log In Page</b-button>
+        <b-button
+        @click="clickHome"
+        type="is-primary"
+        rounded
+        >
+          Return
+        </b-button>
       </b-field>
     </div>
   </div>
@@ -27,7 +33,7 @@ export default {
       'ciscoOauth2Login'
     ]),
     clickHome () {
-      this.$router.push({name: 'Login'}).catch(e => {})
+      this.$router.push({name: 'Configure'}).catch(e => {})
     }
   },
   async mounted () {
