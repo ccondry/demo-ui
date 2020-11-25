@@ -59,16 +59,7 @@
                       Choose a vertical to use
                     </option>
                     <option
-                    v-for="vertical in systemVerticals"
-                    :value="vertical.id"
-                    :key="vertical.id"
-                    >
-                      {{ `${vertical.name} (${vertical.id})` }}
-                    </option>
-                    <option v-if="isLoggedIn" disabled>-----------------------------------------</option>
-                    <option
-                    v-if="isLoggedIn"
-                    v-for="vertical in userVerticals"
+                    v-for="vertical in verticalOptions"
                     :value="vertical.id"
                     :key="vertical.id"
                     >
@@ -209,6 +200,13 @@ export default {
       'isLoggedIn',
       'jwtUser'
     ]),
+    verticalOptions () {
+      if (this.isLoggedIn) {
+        return [...this.systemVerticals, ...this.userVerticals]
+      } else {
+        return this.systemVerticals
+      }
+    },
     sortedVerticals () {
       // make a mutable copy of the store data
       try {
