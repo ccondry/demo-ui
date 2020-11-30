@@ -3,6 +3,16 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2020.11.30
+
+### Features
+
+* **Vertical Selection:** add toolbox login support for selecting one's own
+verticals
+* **CVA:** demos with CVA feature enabled will install vertical CVA
+configuration into PCCE when selecting a vertical with custom gcpProjectId
+
+
 # 1.4.0 (2020-10-02)
 
 ### Features
