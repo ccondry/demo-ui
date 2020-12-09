@@ -99,7 +99,7 @@ export default {
     confirmCreate (data) {
       console.log('confirmCreate', data)
       // pop confirmation dialog
-      this.$dialog.confirm({
+      this.$buefy.dialog.confirm({
         message: `Are you sure you want to create this customer in Upstream Works?`,
         onConfirm: async () => {
           await this.createUpstreamCustomer({data})
