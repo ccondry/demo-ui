@@ -64,6 +64,8 @@ export default {
 
   data () {
     return {
+      activeTab: 0,
+      verticalDataString: '',
       formModel: {}
     }
   },
@@ -91,7 +93,14 @@ export default {
     },
     async clickSave () {
       try {
-        let data = JSON.parse(JSON.stringify(this.formModel)).configuration
+        let data
+        if (this.activeTab === 0) {
+          // use Form model data
+          data = JSON.parse(JSON.stringify(this.formModel)).configuration
+        } else if (this.activeTab === 1) {
+          // use Raw JSON string data
+          data = JSON.parse(this.verticalDataString).configuration
+        }
         // remove empty strings from the data, so that those values are not unset on server side
         for (const key of Object.keys(data)) {
           if (data[key] === '') {
@@ -108,7 +117,28 @@ export default {
     },
     updateCache (data) {
       // copy state data to local data
-      this.formModel = JSON.stringify(data, null, 2)
+      this.verticalDataString = JSON.stringify(data, null, 2)
+    },
+    async clickSaveVertical ({id, name}) {
+      console.log('saving vertical as', id, '-', name)
+      try {
+        let data
+        if (this.activeTab === 0) {
+          // use Form model
+          data = JSON.parse(JSON.stringify(this.formModel))
+        } else if (this.activeTab === 1) {
+          // use Raw JSON string
+          data = JSON.parse(this.verticalDataString)
+        }
+        // set id and name in the request data
+        data.id = id
+        data.name = name
+        // confirm with user and save the data to the server
+        await this.confirmSaveDemoConfig({id, data})
+      } catch (e) {
+        console.log('failed to save vertical', id, e)
+        this.errorNotification(`Failed to save vertical ${id} - check JSON syntax. Error message: ${e.message}`)
+      }
     }
   },
 
@@ -150,8 +180,25 @@ export default {
   watch: {
     demoConfig (val, oldVal) {
       // demo configuration state changed
-      // update mutable cache copy of it
+      // update the raw JSON string
       this.updateCache(val)
+      // update the form with a copy of the template object
+      this.formModel = JSON.parse(JSON.stringify(val))
+    },
+    activeTab (val, oldVal) {
+      console.log('activeTab changed')
+      if (val !== oldVal) {
+        // editor tab changed, so sync the changes to the destination editor tab
+        if (val === 0) {
+          // switched to Form tab
+          // sync the raw JSON to the form model
+          this.formModel = JSON.parse(this.verticalDataString)
+        } else if (val === 1) {
+          // switched to Raw JSON tab
+          // sync the form model to the raw JSON string
+          this.updateCache(this.formModel)
+        }
+      }
     }
   }
 }
