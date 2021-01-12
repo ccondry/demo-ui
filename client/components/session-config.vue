@@ -9,17 +9,7 @@
           <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
         </a>
       </div>
-      <div class="card-content" v-if="!model.configuration">
-        <b-button
-        type="is-primary"
-        rounded
-        @click="$set(model, 'configuration', {vertical: 'travel'})"
-        >
-          Configure
-        </b-button>
-      </div>
-      <div class="card-content" v-else>
-
+      <div class="card-content">
         <!-- Vertical Configuration -->
         <b-collapse class="content card">
           <div slot="trigger" slot-scope="props" class="card-header">
@@ -28,16 +18,7 @@
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
           </div>
-          <div class="card-content" v-if="!model.configuration.vertical">
-            <b-button
-            type="is-primary"
-            rounded
-            @click="$set(model.configuration, 'vertical', 'trave')"
-            >
-              Configure
-            </b-button>
-          </div>
-          <div class="card-content" v-else>
+          <div class="card-content">
             <div class="block">
               <b-field
               v-if="!isLoggedIn"
@@ -82,10 +63,7 @@
               <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
             </a>
           </div>
-          <div class="card-content" v-if="!model.configuration.multichannel">
-            <button class="button is-primary" @click="$set(model.configuration, 'multichannel', 'ece')">Configure</button>
-          </div>
-          <div class="card-content" v-else>
+          <div class="card-content">
             <b-field label="Multichannel System">
               <b-select
               v-model="model.configuration.multichannel"
@@ -138,7 +116,11 @@ export default {
   props: {
     'model': {
       type: Object,
-      default () { return {} }
+      default () {
+        return {
+          configuration: {}
+        }
+      }
     }
   },
 
