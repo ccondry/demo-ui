@@ -31,7 +31,7 @@ const mutations = {
 
 const actions = {
   async loadDemoBaseConfig ({getters, dispatch}) {
-    dispatch('fetch', {
+    await dispatch('fetch', {
       group: 'demo',
       type: 'baseConfig',
       url: getters.endpoints.demo,
@@ -40,7 +40,7 @@ const actions = {
     })
   },
   async loadVerticals ({getters, dispatch}) {
-    dispatch('fetch', {
+    await dispatch('fetch', {
       group: 'vertical',
       type: 'list',
       url: getters.endpoints.verticals,
@@ -49,7 +49,7 @@ const actions = {
     })
   },
   async loadSessionInfo ({getters, dispatch}) {
-    dispatch('fetch', {
+    await dispatch('fetch', {
       group: 'session',
       type: 'info',
       url: getters.endpoints.session,
@@ -58,7 +58,7 @@ const actions = {
     })
   },
   async loadDemoConfig ({getters, dispatch}) {
-    dispatch('fetch', {
+    await dispatch('fetch', {
       group: 'session',
       type: 'config',
       url: getters.endpoints.configure,
@@ -67,7 +67,7 @@ const actions = {
     })
   },
   async saveDemoConfig ({getters, dispatch}, {data}) {
-    dispatch('fetch', {
+    await dispatch('fetch', {
       group: 'session',
       type: 'config',
       url: getters.endpoints.configure,
