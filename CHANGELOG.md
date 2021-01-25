@@ -3,11 +3,20 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.1.25
+
+### Bug Fixes
+
+* **Vertical Selection:** fix issue where vertical selection choice was not
+updating properly after being changed
+
+
 # 2020.12.9
 
 ### Bug Fixes
 
 * **Upstream:** fix submit button
+
 
 # 2020.11.30
 
