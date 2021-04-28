@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.4.28-1
+
+### Fixes
+* **SSO:** fix SSO login again.
+
+
 # 2021.4.28
 
 ### Fixes
