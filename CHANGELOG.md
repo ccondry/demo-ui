@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.4.28
+
+### Fixes
+* **SSO:** fix SSO/OAUTH2 redirect URI mismatch.
+
+
 # 2021.1.25
 
 ### Bug Fixes
