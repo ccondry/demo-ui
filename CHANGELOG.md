@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.7.27-1
+
+### Fixes
+* **Dependencies:** Re-add Bulma dependency that is actually necessary.
+
+
 # 2021.7.27
 
 ### Fixes
