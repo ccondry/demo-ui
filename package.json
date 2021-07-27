@@ -31,8 +31,7 @@
     "test": "node test"
   },
   "dependencies": {
-    "buefy": "^0.9.4",
-    "bulma": "^0.9.1",
+    "buefy": "^0.9.8",
     "mdi": "^1.8.36",
     "moment": "^2.20.1",
     "vue": "^2.5.17",
