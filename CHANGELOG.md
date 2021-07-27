@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.7.27
+
+### Fixes
+* **Dependencies:** Updated Buefy dependency from 0.9.4 to 0.9.8 and removed
+explicit Bulma dependency that is not necessary.
+
+
 # 2021.4.28-1
 
 ### Fixes
