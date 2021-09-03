@@ -10,7 +10,8 @@ const getters = {
   oauthError: state => state.oauthError,
   ciscoRedirectUri: () => {
     // the URL to come back to after SSO
-    return window.location.href.split('?')[0].split('#')[0]
+    // return window.location.href.split('?')[0].split('#')[0]
+    return window.location.origin
   },
   ciscoSsoUrl: (state, getters) => {
     // URL to forward user to when requesting SSO login
