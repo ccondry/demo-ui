@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.9.3
+
+### Fixes
+* **Login:** Remove username/password login option (SSO only).
+* **SSO:** Fix SSO login for PCCE scheduled demos.
+
+
 # 2021.7.27-1
 
 ### Fixes
