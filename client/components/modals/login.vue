@@ -13,45 +13,14 @@
     </header>
 
     <section class="modal-card-body">
-      <div style="display: flex; flex-direction: column;">
-        <b-field label="dCloud Toolbox Username">
-          <b-input
-          v-model="username"
-          placeholder="Your Toolbox Username"
-          @keyup.enter.native="clickLogin"
-          required
-          />
-        </b-field>
-
-        <b-field label="dCloud Toolbox Password">
-          <b-input
-          type="password"
-          v-model="password"
-          password-reveal
-          placeholder="Your Toolbox Password"
-          @keyup.enter.native="clickLogin"
-          required
-          />
-        </b-field>
-        <b-field>
-          <b-button
-          @click="clickLogin"
-          type="is-primary"
-          expanded
-          >
-            Log In
-          </b-button>
-        </b-field>
-        <hr>
-        <b-field>
-          <b-button
-          @click="clickSso"
-          type="is-info"
-          expanded
-          >
-            Log In with Cisco SSO
-          </b-button>
-        </b-field>
+      <div class="buttons">
+        <b-button
+        @click="clickSso"
+        type="is-info"
+        expanded
+        >
+          Log In with Cisco SSO
+        </b-button>
       </div>
     </section>
 
@@ -74,14 +43,14 @@ export default {
     clickSso () {
       this.$emit('sso')
       this.$emit('close')
-    },
-    clickLogin () {
-      this.$emit('login', {
-        username: this.username,
-        password: this.password
-      })
-      this.$emit('close')
     }
+    // clickLogin () {
+    //   this.$emit('login', {
+    //     username: this.username,
+    //     password: this.password
+    //   })
+    //   this.$emit('close')
+    // }
   }
 }
 </script>
