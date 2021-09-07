@@ -19,6 +19,9 @@
         <small style="padding-right: 2em; padding-left: 1em;">
           Auth API version {{ authApiVersion }}
         </small>
+        <small style="padding-right: 2em; padding-left: 1em;">
+          {{ ciscoRedirectUri }}
+        </small>
       </div>
     </footer>
   </div>
@@ -79,7 +82,8 @@ export default {
       'endpoints',
       'uiVersion',
       'apiVersion',
-      'authApiVersion'
+      'authApiVersion',
+      'ciscoRedirectUri'
     ])
   },
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <pre>{{ciscoRedirectUri}}</pre> -->
     <!-- Demo Configuration -->
     <b-collapse class="content card">
       <div slot="trigger" slot-scope="props" class="card-header">
@@ -196,7 +195,6 @@ export default {
       'hasMultichannel',
       'multichannelOptions',
       'ciscoSsoUrl',
-      'ciscoRedirectUri',
       'isLoggedIn',
       'jwtUser'
     ]),
