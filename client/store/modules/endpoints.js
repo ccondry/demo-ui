@@ -18,7 +18,9 @@ const endpoints = {
   demo: urlBase + '/demo',
   ciscoSso: 'https://cloudsso.cisco.com/as/authorization.oauth2',
   ciscoOauth2: 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth/login/oauth2/cisco',
-  login: 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth/login'
+  login: 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth/login',
+  version: urlBase + '/version',
+  authApiVersion: 'https://dcloud-collab-toolbox-rtp.cxdemo.net/api/v1/auth/version'
 }
 
 const state = {

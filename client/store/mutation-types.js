@@ -19,3 +19,7 @@ export const SET_UPSTREAM_CUSTOMERS = 'SET_UPSTREAM_CUSTOMERS'
 
 // Cisco SSO
 export const SET_OAUTH_ERROR = 'SET_OAUTH_ERROR'
+
+// version info
+export const SET_API_VERSION = 'SET_API_VERSION'
+export const SET_AUTH_API_VERSION = 'SET_AUTH_API_VERSION'

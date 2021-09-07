@@ -2,8 +2,11 @@ import * as types from '../mutation-types'
 import Vue from 'vue'
 import {ToastProgrammatic as Toast} from 'buefy'
 import {addUrlQueryParams} from '../../utils'
+import pkg from '../../../package.json'
 
 const state = {
+  apiVersion: 'Loading...',
+  authApiVersion: 'Loading...',
   device: {
     isMobile: false,
     isTablet: false
@@ -44,10 +47,21 @@ const getters = {
   working: state => state.working,
   sidebar: state => state.sidebar,
   effect: state => state.effect,
-  device: state => state.device
+  device: state => state.device,
+  uiVersion: () => pkg.version,
+  apiVersion: state => state.apiVersion,
+  authApiVersion: state => state.authApiVersion
 }
 
 const mutations = {
+  [types.SET_API_VERSION] (state, data) {
+    state.apiVersion = data.version
+  },
+
+  [types.SET_AUTH_API_VERSION] (state, data) {
+    state.authApiVersion = data.version
+  },
+
   [types.SET_WORKING] (state, data) {
     // if state container for this group is not existing, create it
     if (!state.working[data.group]) {
@@ -78,6 +92,26 @@ const mutations = {
 }
 
 const actions = {
+  async getApiVersion ({getters, dispatch}) {
+    return dispatch('fetch', {
+      group: 'app',
+      type: 'apiVersion',
+      url: getters.endpoints.version,
+      message: 'get API server version',
+      mutation: types.SET_API_VERSION,
+      showNotification: false
+    })
+  },
+  async getAuthApiVersion ({getters, dispatch}) {
+    return dispatch('fetch', {
+      group: 'app',
+      type: 'authApiVersion',
+      url: getters.endpoints.authApiVersion,
+      message: 'get authentication API server version',
+      mutation: types.SET_AUTH_API_VERSION,
+      showNotification: false
+    })
+  },
   setWorking ({commit}, {group, type, value = true}) {
     commit(types.SET_WORKING, {group, type, value})
   },

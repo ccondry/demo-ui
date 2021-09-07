@@ -8,6 +8,19 @@
       <app-main></app-main>
     </div>
     <!-- <footer-bar></footer-bar> -->
+    <footer class="footer" style="margin-left: 220px; height: 1.6em; padding: 0; background-color: #ebebeb">
+      <div class="content">
+        <small style="padding-right: 2em; padding-left: 1em;">
+          UI version {{ uiVersion }}
+        </small>
+        <small style="padding-right: 2em; padding-left: 1em;">
+          API version {{ apiVersion }}
+        </small>
+        <small style="padding-right: 2em; padding-left: 1em;">
+          Auth API version {{ authApiVersion }}
+        </small>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -50,6 +63,9 @@ export default {
     console.log('getting demo base config...')
     await this.loadDemoBaseConfig(false)
     console.log('getting demo base config done.')
+    // get API version info
+    this.getApiVersion()
+    this.getAuthApiVersion()
   },
 
   async mounted () {
@@ -60,7 +76,10 @@ export default {
     ...mapGetters([
       'sidebar',
       'loading',
-      'endpoints'
+      'endpoints',
+      'uiVersion',
+      'apiVersion',
+      'authApiVersion'
     ])
   },
 
@@ -72,7 +91,9 @@ export default {
       'loadDemoBaseConfig',
       'loadSessionInfo',
       'loadVerticals',
-      'checkLogin'
+      'checkLogin',
+      'getApiVersion',
+      'getAuthApiVersion'
     ])
   }
 }
