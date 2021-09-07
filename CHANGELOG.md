@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.9.7
+
+### Fixes
+* **SSO:** Fix SSO login for scheduled demos when using Chrome.
+
+
 # 2021.9.3
 
 ### Fixes
