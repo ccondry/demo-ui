@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.9.7-2
+
+### Features
+* **Site:** Add SSO redirect URL to the footer for troubleshooting.
+
+
 # 2021.9.7-1
 
 ### Features
