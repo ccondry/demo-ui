@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.9.7-1
+
+### Features
+* **Site:** Add site footer with version info for the UI and APIs.
+
+
 # 2021.9.7
 
 ### Fixes
