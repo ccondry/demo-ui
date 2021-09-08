@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.9.8
+
+### Fixes
+* **SSO:** Fixing SSO login again, for all browsers.
+
+
 # 2021.9.7-2
 
 ### Features
