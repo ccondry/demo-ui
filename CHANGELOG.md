@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2021.9.14
+
+### Fixes
+* **SSO:** Fixed SSO login again, for both UCCX and PCCE.
+
+
 # 2021.9.8
 
 ### Fixes
