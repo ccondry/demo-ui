@@ -45,9 +45,9 @@ const actions = {
       url: getters.endpoints.ciscoOauth2,
       options: {
         method: 'POST',
-        body: {code},
-        headers: {
-          Referer: getters.ciscoRedirectUri
+        body: {
+          code,
+          redirect: getters.ciscoRedirectUri
         }
       },
       message: 'SSO login',
