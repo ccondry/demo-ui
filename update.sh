@@ -10,14 +10,14 @@ CHANGES=$(git rev-list HEAD...@{u} --count)
 if [ $CHANGES = "0" ]; then
   echo "git repo is current"
 else
+  # reset any local changes so git pull does not fail (looking at you, package-lock.json)
+  git reset --hard HEAD
   echo "git repo is not current. updating..."
   git pull
   if [ $? -eq 0 ]; then
     echo "running npm install"
     npm i
     if [ $? -eq 0 ]; then
-      echo "running npm rebuild node-sass..."
-      npm rebuild node-sass
       echo "running npm run build..."
       npm run build
       if [ $? -eq 0 ]; then
