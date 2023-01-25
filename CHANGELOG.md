@@ -3,9 +3,16 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.1.25-1
+
+### Features
+* **Install:** Add install script.
+* **Uninstall:** Add uninstall script.
+
+
 # 2023.1.25
 
-### Fixes
+### Features
 * **Build:** Replace webpack build tools with rollup.
 * **Vertical:** Remove SSO login, add vertical lookup by owner username.
 * **UI:** Updated UI elements.
