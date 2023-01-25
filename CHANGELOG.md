@@ -3,6 +3,14 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.1.25
+
+### Fixes
+* **Build:** Replace webpack build tools with rollup.
+* **Vertical:** Remove SSO login, add vertical lookup by owner username.
+* **UI:** Updated UI elements.
+
+
 # 2021.9.14
 
 ### Fixes
