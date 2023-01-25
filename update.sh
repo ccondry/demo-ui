@@ -22,10 +22,11 @@ else
       npm run build
       if [ $? -eq 0 ]; then
         echo "npm build successful"
-        #echo "removing old web files"
-        #rm -rf /var/www/html/
+        echo "removing old web files"
+        rm -rf /var/www/html/*
         echo "copying new web files"
         cp -rf dist/* /var/www/html/
+        echo "update successful"
       else
         echo "npm failed to run build script"
       fi
