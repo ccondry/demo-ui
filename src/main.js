@@ -3,7 +3,7 @@ import App from './index.vue'
 import store from './store'
 import router from './router'
 import VueRouter from 'vue-router'
-import Loading from 'src/components/loading.vue'
+import Loading from './components/loading.vue'
 import './style.scss'
 // import 'buefy/dist/buefy.css'
 

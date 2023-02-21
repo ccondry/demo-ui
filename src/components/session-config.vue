@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import SelectVertical from 'src/components/select-vertical.vue'
-import SelectMultichannel from 'src/components/select-multichannel.vue'
+import SelectVertical from './select-vertical.vue'
+import SelectMultichannel from './select-multichannel.vue'
 
 export default {
   name: 'SessionConfig',

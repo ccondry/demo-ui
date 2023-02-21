@@ -1,5 +1,5 @@
-import Configure from 'src/views/configure.vue'
-import Upstream from 'src/views/upstream.vue'
+import Configure from '../views/configure.vue'
+import Upstream from '../views/upstream.vue'
 
 const routes = [{
   // catch-all to redirect to home view if no route matched
