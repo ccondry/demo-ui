@@ -26,8 +26,8 @@
     "start": "cross-env NODE_ENV=development node build/dev-server.js",
     "electron": "cross-env NODE_ELECTRON=true npm run build && electron electronIndex.js",
     "gh": "npm run build && gh-pages -d dist",
-    "lint": "eslint --ext .js .vue client/*",
-    "lint:fix": "eslint --fix --ext .js .vue electron.js client/* build/* config/*",
+    "lint": "eslint --ext .js .vue src/*",
+    "lint:fix": "eslint --fix --ext .js .vue electron.js src/* build/* config/*",
     "test": "node test"
   },
   "dependencies": {

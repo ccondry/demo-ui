@@ -7,7 +7,7 @@ const projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   entry: {
-    app: ['./client/index.js'],
+    app: ['./src/index.js'],
     // If you want to support IE < 11, should add `babel-polyfill` to vendor.
     // e.g. ['babel-polyfill', 'vue', 'vue-router', 'vuex']
     vendor: [
@@ -30,14 +30,14 @@ module.exports = {
       // https://github.com/vuejs/vue/wiki/Vue-2.0-RC-Starter-Resources
       // vue: 'vue/dist/vue',
       package: path.resolve(__dirname, '../package.json'),
-      src: path.resolve(__dirname, '../client'),
-      assets: path.resolve(__dirname, '../client/assets'),
-      components: path.resolve(__dirname, '../client/components'),
-      views: path.resolve(__dirname, '../client/views'),
+      src: path.resolve(__dirname, '../src'),
+      assets: path.resolve(__dirname, '../src/assets'),
+      components: path.resolve(__dirname, '../src/components'),
+      views: path.resolve(__dirname, '../src/views'),
       // third-party
       'plotly.js': 'plotly.js/dist/plotly',
       // vue-addon
-      'vuex-store': path.resolve(__dirname, '../client/store')
+      'vuex-store': path.resolve(__dirname, '../src/store')
     }
   },
   module: {
