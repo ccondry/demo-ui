@@ -37,7 +37,7 @@ const mutations = {
 const getters = {
   // datacenter: state => state.datacenter,
   // sessionId: state => state.sessionId,
-  // which vertical the demo website is set to 
+  // which vertical the demo website is set to
   verticals: state => state.verticals,
   // the customer-side demo website link
   brandDemoLink (state, getters) {

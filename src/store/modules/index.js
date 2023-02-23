@@ -15,5 +15,5 @@ export default {
   fetch,
   loading,
   upstream,
-  working,
+  working
 }

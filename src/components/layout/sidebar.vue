@@ -59,7 +59,7 @@ export default {
           description: 'dCloud demo configuration',
           created: '2018-11-19',
           modified: '2018-11-19'
-        },
+        }
       }, {
         name: 'Upstream',
         path: '/upstream',

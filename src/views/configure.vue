@@ -124,12 +124,12 @@ export default {
       'loadSessionConfig',
       'errorNotification',
       'saveDemoConfig',
-      'listVerticals',
+      'listVerticals'
     ]),
     save () {
       this.saveDemoConfig(this.model.configuration)
     },
-    clickLoadVerticals(owner) {
+    clickLoadVerticals (owner) {
       this.listVerticals(owner)
     },
     isRecent (date) {

@@ -49,7 +49,7 @@ export default {
 
   components: {
     SelectMultichannel,
-    SelectVertical,
+    SelectVertical
   },
 
   props: {
