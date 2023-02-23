@@ -35,7 +35,7 @@ module.exports = merge(baseWebpackConfig, {
       title: 'dCloud Toolbox - Demo Session Configuration',
       template: 'index.html',
       inject: true,
-      favicon: 'src/assets/logo.png'
+      // favicon: 'src/assets/logo.png'
     })
   ]
 })
