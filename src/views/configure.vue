@@ -13,7 +13,7 @@
           <div class="content">
 
             <p>
-              Use this form to choose the Vertical to use when you open
+              Use this form to choose the branding to use when you open
               <a :href="brandDemoLink" target="brand">
                 <strong>your demo website</strong>
               </a><span v-if="hasMultichannel">,

@@ -1,9 +1,9 @@
 <template>
   <!-- Vertical Selection -->
-  <b-message title="Vertical Selection" :closable="false">
+  <b-message title="Branding Selection" :closable="false">
     <div class="block" style="position: relative;">
       <loading group="vertical" type="list" />
-      <b-field label="Load verticals owned by this username:" grouped>
+      <b-field label="Load brandings owned by this username:" grouped>
         <b-input
         v-model="owner"
         @keyup.enter.native="clickLoad"
@@ -14,17 +14,17 @@
         @click="clickLoad"
         :disabled="owner.length === 0"
         >
-          Load User Verticals
+          Load User Brandings
         </b-button>
       </b-field>
-      <b-field :label="`Choose your demo vertical (${sortedVerticals.length} options):`">
+      <b-field :label="`Choose your demo branding (${sortedVerticals.length} options):`">
         <div class="select">
           <b-select
           :value="value"
           @input="selectVertical"
           >
             <option value="" disabled selected>
-              Choose a vertical to use
+              Choose a branding to use
             </option>
             <option
             v-for="vertical in systemVerticals"
