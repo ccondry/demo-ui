@@ -101,7 +101,13 @@ export default {
       //   }
       // }
       // return filtered menu
-      return this.menu
+      // return this.menu
+      return this.menu.filter(v => {
+        if (v.name === 'Upstream' && !this.hasUpstream) {
+          return false
+        }
+        return true
+      })
     }
   },
 
