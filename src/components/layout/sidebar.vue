@@ -101,7 +101,14 @@ export default {
       //   }
       // }
       // return filtered menu
-      return this.menu
+      // return this.menu
+      // remove Upstream from menu if this demo does not have Upstream feature
+      return this.menu.filter(v => {
+        if (v.name === 'Upstream' && !this.hasUpstream) {
+          return false
+        }
+        return true
+      })
     }
   },
 
