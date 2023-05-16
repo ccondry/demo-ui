@@ -26,7 +26,6 @@
         v-model="model.vertical"
         :verticals="verticals"
         @load="clickLoadVerticals"
-        @input="updateParent"
         />
 
         <select-multichannel
@@ -81,10 +80,54 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters([
+      'demoBaseConfig',
+      'verticals',
+    ]),
+    verticalId () {
+      return this.model.vertical
+    },
+    vertical () {
+      
+    },
+  },
+
   watch: {
     value () {
       this.updateCache()
-    }
+    },
+    verticalId (val) {
+      if (
+        // if demo uses CVA feature
+        Array.isArray(this.demoBaseConfig.features) &&
+        this.demoBaseConfig.features.includes('cva')
+      ) {
+        // find full vertical details
+        const vertical = this.verticals.find(v => v.id === val)
+        // if this vertical has a GCP project ID that is not the default one
+        if (
+          vertical.gcpProjectId &&
+          vertical.gcpProjectId !== 'cumulus-v2-hotikl'
+        ) {
+          // prompt user for the private key ID
+          this.$buefy.dialog.prompt({
+            title: 'Enter Private Key ID',
+            message: 'Please enter the private key ID to use the CVA features for this vertical.',
+            type: 'is-success',
+            confirmText: 'Submit',
+            rounded: true,
+            onConfirm: (privateKeyId) => {
+              // store privateKeyId in the config data. server will use it but
+              // not write it to the config data.
+              this.$set(this.model, 'privateKeyId', privateKeyId)
+              // update demo config
+              this.updateParent()
+            }
+          })
+        }
+      }
+    },
   },
 
   mounted () {
