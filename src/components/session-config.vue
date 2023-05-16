@@ -42,6 +42,7 @@
 <script>
 import SelectVertical from './select-vertical.vue'
 import SelectMultichannel from './select-multichannel.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'SessionConfig',
