@@ -87,10 +87,11 @@ export default {
       'verticals',
     ]),
     verticalId () {
-      return this.model.vertical
-    },
-    vertical () {
-      
+      try {
+        return this.model.vertical
+      } catch (e) {
+        return null
+      }
     },
   },
 
