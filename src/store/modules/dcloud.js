@@ -89,7 +89,7 @@ const actions = {
       options: {
         query: {
           owner,
-          summary: true
+          summary: !owner
         }
       },
       mutation: types.SET_VERTICALS,
