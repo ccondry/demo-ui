@@ -16,7 +16,7 @@ const state = {
 }
 
 const getters = {
-  working: state => state.working,
+  working: state => state.working
 }
 
 const mutations = {

@@ -50,8 +50,8 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import SessionConfig from 'src/components/session-config.vue'
-import SessionInfo from 'src/components/session-info.vue'
+import SessionConfig from '../components/session-config.vue'
+import SessionInfo from '../components/session-info.vue'
 import moment from 'moment'
 
 export default {
@@ -124,12 +124,12 @@ export default {
       'loadSessionConfig',
       'errorNotification',
       'saveDemoConfig',
-      'listVerticals',
+      'listVerticals'
     ]),
     save () {
       this.saveDemoConfig(this.model.configuration)
     },
-    clickLoadVerticals(owner) {
+    clickLoadVerticals (owner) {
       this.listVerticals(owner)
     },
     isRecent (date) {

@@ -128,7 +128,7 @@ const actions = {
       if (!silent) {
         console.error(`${message} failed: ${error.message}`)
       }
-      if (showNotification || showErrorNotification && !silent) {
+      if (showNotification || (showErrorNotification && !silent)) {
         Toast.open({
           message: `${message} failed: ${error.message}`,
           type: 'is-danger',

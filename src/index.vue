@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import AppMain from 'src/components/layout/main.vue'
-import Navbar from 'src/components/layout/navbar.vue'
-import Sidebar from 'src/components/layout/sidebar.vue'
-import SiteFooter from 'src/components/layout/footer.vue'
+import AppMain from './components/layout/main.vue'
+import Navbar from './components/layout/navbar.vue'
+import Sidebar from './components/layout/sidebar.vue'
+import SiteFooter from './components/layout/footer.vue'
 
 import { mapGetters, mapActions } from 'vuex'
 

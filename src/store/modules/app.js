@@ -33,7 +33,7 @@ const actions = {
       group: 'app',
       type: 'version',
       url: getters.endpoints.version,
-      mutation: types.SET_API_VERSION,
+      mutation: types.SET_API_VERSION
     })
   },
   async getAuthApiVersion ({commit, dispatch, getters}) {
@@ -42,10 +42,10 @@ const actions = {
       group: 'app',
       type: 'version',
       url: getters.endpoints.authVersion,
-      mutation: types.SET_AUTH_API_VERSION,
+      mutation: types.SET_AUTH_API_VERSION
     })
   },
-  copyToClipboard ({}, {string, type = 'Text'}) {
+  copyToClipboard (asdf, {string, type = 'Text'}) {
     // copy text to clipboard
     const input = document.createElement('input')
     document.body.appendChild(input)

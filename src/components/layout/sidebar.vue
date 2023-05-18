@@ -59,7 +59,7 @@ export default {
           description: 'dCloud demo configuration',
           created: '2018-11-19',
           modified: '2018-11-19'
-        },
+        }
       }, {
         name: 'Upstream',
         path: '/upstream',
@@ -102,7 +102,10 @@ export default {
       // }
       // return filtered menu
       // return this.menu
+<<<<<<< HEAD
       // remove Upstream from menu if this demo does not have Upstream feature
+=======
+>>>>>>> gitlab-develop
       return this.menu.filter(v => {
         if (v.name === 'Upstream' && !this.hasUpstream) {
           return false

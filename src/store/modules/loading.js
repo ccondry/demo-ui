@@ -12,7 +12,7 @@ const state = {
 }
 
 const getters = {
-  loading: state => state.loading,
+  loading: state => state.loading
 }
 
 const mutations = {
