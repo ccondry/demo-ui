@@ -100,12 +100,7 @@ export default {
       //     item.children = item.children.filter(v => v.name !== 'Upstream')
       //   }
       // }
-      // return filtered menu
-      // return this.menu
-<<<<<<< HEAD
       // remove Upstream from menu if this demo does not have Upstream feature
-=======
->>>>>>> gitlab-develop
       return this.menu.filter(v => {
         if (v.name === 'Upstream' && !this.hasUpstream) {
           return false
