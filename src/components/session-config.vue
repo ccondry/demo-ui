@@ -100,38 +100,49 @@ export default {
       this.updateCache()
     },
     verticalId (val) {
+      // did they select the current vertical?
+      if (val === this.sessionConfig.vertical) {
+        // do nothing
+        return
+      }
+
+      // if demo doesn't use CVA feature
       if (
-        // if demo uses CVA feature
-        Array.isArray(this.demoBaseConfig.features) &&
-        this.demoBaseConfig.features.includes('cva')
+        !Array.isArray(this.demoBaseConfig.features) ||
+        !this.demoBaseConfig.features.includes('cva')
       ) {
-        // find full vertical details
-        const vertical = this.verticals.find(v => v.id === val)
-        // if this vertical has a GCP project ID that is not the default one
-        if (
-          vertical.gcpProjectId &&
-          vertical.gcpProjectId !== 'cumulus-v2-hotikl'
-        ) {
-          // prompt user for the private key ID
-          this.$buefy.dialog.prompt({
-            title: 'Enter Private Key ID',
-            message: 'Please enter the Private Key ID to use the CVA features for this branding. You can find it into the json file or on your Google console Service Accounts page.',
-            type: 'is-success',
-            confirmText: 'Submit',
-            rounded: true,
-            onConfirm: (privateKeyId) => {
-              // store privateKeyId in the config data. server will use it but
-              // not write it to the config data.
-              this.$set(this.model, 'privateKeyId', privateKeyId)
-              // update demo config
-              this.updateParent()
-            }
-          })
-        }
-      } else {
-        // no CVA, just update the vertical ID
+        // just update the vertical ID
         this.updateParent()
       }
+
+      // find full vertical details
+      const vertical = this.verticals.find(v => v.id === val)
+      
+      // if new vertical doesn't use CVA feature or uses standard CVA
+      if (
+        !vertical.gcpProjectId ||
+        vertical.gcpProjectId === 'cumulus-v2-hotikl'
+      ) {
+        // just update the vertical ID
+        this.updateParent()
+      }
+
+      // else new vertical uses custom CVA
+      // prompt user for the private key ID
+      this.$buefy.dialog.prompt({
+        title: 'Enter Private Key ID',
+        message: 'Please enter the Private Key ID to use the CVA features for this branding. You can find it in the JSON file or on your Google console Service Accounts page.',
+        type: 'is-success',
+        confirmText: 'Submit',
+        rounded: true,
+        onConfirm: (privateKeyId) => {
+          // store privateKeyId in the config data. server will use it but
+          // not write it to the config data.
+          this.$set(this.model, 'privateKeyId', privateKeyId)
+          // update demo config
+          this.updateParent()
+        }
+      })
     },
   },
 
