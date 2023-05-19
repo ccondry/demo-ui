@@ -101,13 +101,13 @@ export default {
     },
     verticalId (val) {
       // if session config has not loaded yet
-      if (!this.sessionConfig || !this.sessionConfig) {
+      if (!this.value) {
         // do nothing - probably this is the first page load
         return
       }
 
       // did they select the current vertical?
-      if (this.sessionConfig.vertical === val) {
+      if (this.value.vertical === val) {
         // do nothing
         return
       }
