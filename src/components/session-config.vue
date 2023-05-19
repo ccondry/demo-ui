@@ -100,6 +100,12 @@ export default {
       this.updateCache()
     },
     verticalId (val) {
+      // if session config has not loaded yet
+      if (!this.sessionConfig || !this.sessionConfig) {
+        // do nothing - probably this is the first page load
+        return
+      }
+
       // did they select the current vertical?
       if (val === this.sessionConfig.vertical) {
         // do nothing
