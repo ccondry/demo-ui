@@ -107,7 +107,7 @@ export default {
       }
 
       // did they select the current vertical?
-      if (val === this.sessionConfig.vertical) {
+      if (this.sessionConfig.vertical === val) {
         // do nothing
         return
       }
