@@ -48,6 +48,16 @@
           </b-select>
         </div>
       </b-field>
+
+      <b-field>
+        <b-button
+        rounded
+        type="is-success"
+        @click="clickSave"
+        >
+          Save
+        </b-button>
+      </b-field>
     </div>
   </b-message>
 </template>
@@ -115,6 +125,9 @@ export default {
     },
     selectVertical (e) {
       this.$emit('input', e)
+    },
+    clickSave () {
+      this.$emit('save')
     },
     setDefaults () {
       // if this is a PCCE demo and multichannel is not set yet

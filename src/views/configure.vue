@@ -33,7 +33,7 @@
             v-model="model.configuration"
             :demo="model.demo"
             @load="clickLoadVerticals"
-            @input="save"
+            @save="save"
             :verticals="verticals"
             :has-multichannel="hasMultichannel"
             :multichannel-options="multichannelOptions"
@@ -72,6 +72,7 @@ export default {
     ...mapGetters([
       'loading',
       'working',
+      'demoBaseConfig',
       'sessionConfig',
       'sessionInfo',
       'verticals',
@@ -126,8 +127,60 @@ export default {
       'saveDemoConfig',
       'listVerticals'
     ]),
-    save () {
+    saveOnServer () {
       this.saveDemoConfig(this.model.configuration)
+    },
+    save () {
+      // if demo doesn't use CVA feature
+      if (
+        !Array.isArray(this.demoBaseConfig.features) ||
+        !this.demoBaseConfig.features.includes('cva')
+      ) {
+        // save
+        this.saveOnServer()
+        return
+      }
+
+      // if user did not change the vertical ID
+      if (this.model.configuration.vertical === this.sessionConfig.vertical) {
+        // save
+        this.saveOnServer()
+        return
+      }
+
+      // find full vertical details for user-selected vertical
+      const vertical = this.verticals.find(v => v.id === this.model.configuration.vertical)
+      
+      // if new vertical doesn't use CVA feature or uses standard CVA
+      if (
+        !vertical.gcpProjectId ||
+        vertical.gcpProjectId === 'cumulus-v2-hotikl'
+      ) {
+        // save
+        this.saveOnServer()
+        return
+      }
+
+      // else new vertical uses custom CVA
+      // prompt user for the private key ID
+      this.$buefy.dialog.prompt({
+        title: 'Enter Private Key ID',
+        message: 'Please enter the Private Key ID to use the CVA features for this branding. You can find it in the JSON file or on your Google console Service Accounts page.',
+        type: 'is-success',
+        confirmText: 'Submit',
+        rounded: true,
+        onConfirm: (privateKeyId) => {
+          // store privateKeyId in the config data. server will use it but
+          // not write it to the config data.
+          this.$set(this.model.configuration, 'privateKeyId', privateKeyId)
+          // save
+          this.saveOnServer()
+        },
+        onCancel: () => {
+          // save without CVA?
+          this.saveOnServer()
+        }
+      })
     },
     clickLoadVerticals (owner) {
       this.listVerticals(owner)

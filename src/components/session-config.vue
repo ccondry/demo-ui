@@ -26,6 +26,8 @@
         v-model="model.vertical"
         :verticals="verticals"
         @load="clickLoadVerticals"
+        @input="updateParent" 
+        @save="clickSave"
         />
 
         <select-multichannel
@@ -33,6 +35,7 @@
         v-model="model.multichannel"
         :options="multichannelOptions"
         @input="updateParent"
+        @save="clickSave"
         />
       </div>
     </div>
@@ -99,57 +102,6 @@ export default {
     value () {
       this.updateCache()
     },
-    verticalId (val) {
-      // if session config has not loaded yet
-      if (!this.value) {
-        // do nothing - probably this is the first page load
-        return
-      }
-
-      // did they select the current vertical?
-      if (this.value.vertical === val) {
-        // do nothing
-        return
-      }
-
-      // if demo doesn't use CVA feature
-      if (
-        !Array.isArray(this.demoBaseConfig.features) ||
-        !this.demoBaseConfig.features.includes('cva')
-      ) {
-        // just update the vertical ID
-        this.updateParent()
-      }
-
-      // find full vertical details
-      const vertical = this.verticals.find(v => v.id === val)
-      
-      // if new vertical doesn't use CVA feature or uses standard CVA
-      if (
-        !vertical.gcpProjectId ||
-        vertical.gcpProjectId === 'cumulus-v2-hotikl'
-      ) {
-        // just update the vertical ID
-        this.updateParent()
-      }
-
-      // else new vertical uses custom CVA
-      // prompt user for the private key ID
-      this.$buefy.dialog.prompt({
-        title: 'Enter Private Key ID',
-        message: 'Please enter the Private Key ID to use the CVA features for this branding. You can find it in the JSON file or on your Google console Service Accounts page.',
-        type: 'is-success',
-        confirmText: 'Submit',
-        rounded: true,
-        onConfirm: (privateKeyId) => {
-          // store privateKeyId in the config data. server will use it but
-          // not write it to the config data.
-          this.$set(this.model, 'privateKeyId', privateKeyId)
-          // update demo config
-          this.updateParent()
-        }
-      })
-    },
   },
 
   mounted () {
@@ -158,6 +110,9 @@ export default {
   },
 
   methods: {
+    clickSave () {
+      this.$emit('save')
+    },
     clickConfigure () {
       this.model = {vertical: 'travel'}
       this.updateParent()

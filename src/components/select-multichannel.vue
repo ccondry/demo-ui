@@ -23,6 +23,16 @@
         </option>
       </b-select>
     </b-field>
+
+    <b-field>
+      <b-button
+      rounded
+      type="is-success"
+      @click="clickSave"
+      >
+        Save
+      </b-button>
+    </b-field>
   </b-message>
 </template>
 
@@ -55,6 +65,9 @@ export default {
   },
 
   methods: {
+    clickSave () {
+      this.$emit('save')
+    },
     clickConfigure () {
       this.$set(this.model, 'multichannel', 'ece')
     },
