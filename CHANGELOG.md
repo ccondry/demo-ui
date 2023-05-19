@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.5.19-2
+
+### Fixes
+* **Vertical:** Don't save if user cancels the private key ID prompt.
+
+
 # 2023.5.19-1
 
 ### Updates
