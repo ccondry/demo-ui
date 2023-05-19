@@ -3,6 +3,16 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.5.19-1
+
+### Updates
+* **Vertical:** Add save button to actually save the configuration.
+* **Multichannel:** Add save button to actually save the configuration.
+
+### Fixes
+* **Vertical:** Fix saving vertical that doesn't use CVA.
+
+
 # 2023.5.19
 
 ### Fixes
