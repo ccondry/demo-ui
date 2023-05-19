@@ -115,7 +115,7 @@ export default {
           // prompt user for the private key ID
           this.$buefy.dialog.prompt({
             title: 'Enter Private Key ID',
-            message: 'Please enter the private key ID to use the CVA features for this vertical.',
+            message: 'Please enter the Private Key ID to use the CVA features for this branding. You can find it into the json file or on your Google console Service Accounts page.',
             type: 'is-success',
             confirmText: 'Submit',
             rounded: true,
