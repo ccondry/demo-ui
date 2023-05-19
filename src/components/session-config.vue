@@ -128,6 +128,9 @@ export default {
             }
           })
         }
+      } else {
+        // no CVA, just update the vertical ID
+        this.updateParent()
       }
     },
   },
