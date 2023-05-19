@@ -1,6 +1,6 @@
 {
   "name": "dcloud-demo-ui",
-  "version": "2023.1.25-1",
+  "version": "2023.5.19",
   "description": "dCloud demo configuration UI for PCCE and UCCX scheduled demos. This service is intended to run inside each demo session.",
   "repository": "dcloud-collab/dcloud-demo-ui",
   "license": "UNLICENSED",

@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.5.19
+
+### Fixes
+* **Vertical:** Prompt user for the private key ID for their selected vertical
+if the vertical uses CVA and doesn't use the default project ID.
+
+
 # 2023.1.25-1
 
 ### Features
