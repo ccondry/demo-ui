@@ -177,8 +177,8 @@ export default {
           this.saveOnServer()
         },
         onCancel: () => {
-          // save without CVA?
-          this.saveOnServer()
+          // cancel save
+          return
         }
       })
     },
