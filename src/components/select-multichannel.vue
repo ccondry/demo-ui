@@ -72,7 +72,7 @@ export default {
       this.$set(this.model, 'multichannel', 'ece')
     },
     select (e) {
-      // console.log('input', e.target.value)
+      console.log('select multichannel input:', e)
       this.$emit('input', e.target.value)
     }
   }
