@@ -73,7 +73,7 @@ export default {
     },
     select (e) {
       console.log('select multichannel input:', e)
-      this.$emit('input', e.target.value)
+      this.$emit('input', e)
     }
   }
 }
