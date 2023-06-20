@@ -122,6 +122,7 @@ export default {
     },
     updateCache () {
       this.model = JSON.parse(JSON.stringify(this.value))
+      // if demo is PCCE and multichannel hasn't been configured yet
       if (this.demo === 'pcce' && !this.model.multichannel) {
         // set a default multichannel option so the user doesn't have to click 'Configure' button
         this.$set(this.model, 'multichannel', 'ece')
