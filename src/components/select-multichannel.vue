@@ -12,7 +12,7 @@
       <b-select
       v-else
       :value="value"
-      @change="select"
+      @input="select"
       >
         <option
         v-for="channel of options"
