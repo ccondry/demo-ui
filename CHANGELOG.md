@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2023.6.20
+
+### Fixes
+* **Multichannel:** Fix multichannel selection not saving the value.
+
+
 # 2023.5.19-2
 
 ### Fixes
