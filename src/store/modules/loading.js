@@ -5,6 +5,7 @@ const state = {
   loading: {
     app: {},
     demo: {},
+    multichannel: {},
     session: {},
     upstream: {},
     vertical: {}

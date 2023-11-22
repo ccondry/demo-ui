@@ -36,22 +36,31 @@ export default {
   async beforeMount () {
     // get API version info
     this.getApiVersion()
+
     // load dcloud verticals list
     console.log('getting verticals...')
     await this.listVerticals()
     console.log('getting verticals done.')
+
     // load demo session configuration
     console.log('getting demo config...')
     await this.loadSessionConfig()
     console.log('getting demo config done.')
+
     // load dcloud session info
     console.log('getting session info...')
     await this.loadSessionInfo()
     console.log('getting session info done.')
+
     // load demo base configuration
     console.log('getting demo base config...')
     await this.loadDemoBaseConfig()
     console.log('getting demo base config done.')
+
+    // load multichannel options
+    console.log('getting multichannel options...')
+    await this.listMultichannels()
+    console.log('getting multichannel options done.')
   },
 
   methods: {
@@ -60,6 +69,7 @@ export default {
       'loadDemoBaseConfig',
       'loadSessionInfo',
       'listVerticals',
+      'listMultichannels',
       'getApiVersion',
     ])
   }

@@ -6,7 +6,9 @@ const state = {
   verticals: [],
   sessionConfig: {},
   demoBaseConfig: {},
-  sessionInfo: {}
+  sessionInfo: {},
+  // list of all multichannel settings
+  multichannels: []
 }
 
 const mutations = {
@@ -31,6 +33,9 @@ const mutations = {
   },
   [types.SET_SESSION_INFO] (state, data) {
     state.sessionInfo = data
+  },
+  [types.SET_MULTICHANNELS] (state, data) {
+    state.multichannels = data
   }
 }
 
@@ -55,9 +60,24 @@ const getters = {
   sessionInfo: state => state.sessionInfo,
   demoPlatform: (state, getters) => getters.sessionConfig.demo,
   demoVersion: (state, getters) => getters.sessionConfig.version,
+  multichannels: (state, getters) => getters.sessionConfig.multichannels,
   multichannelOptions (state, getters) {
+    // filter all multichannels to the ones valid for this demo
+    const validMultichannels = getters.multichannels.filter(v => {
+      return getters.validDemoMultichannels.includes(v.id)
+    })
+
+    // and map to option element format
+    return validMultichannels.map(v => {
+      return {
+        value: v.id,
+        label: v.name
+      }
+    })
+  },
+  validDemoMultichannels (state, getters) {
     try {
-      return getters.demoBaseConfig.multichannel
+      return getters.demoBaseConfig.multichannels
     } catch (e) {
       return []
     }
@@ -94,6 +114,15 @@ const actions = {
       },
       mutation: types.SET_VERTICALS,
       message: 'get verticals list'
+    })
+  },
+  listMultichannels ({dispatch, getters}, owner) {
+    return dispatch('fetch', {
+      group: 'multichannel',
+      type: 'list',
+      url: getters.endpoints.multichannel,
+      mutation: types.SET_MULTICHANNELS,
+      message: 'get multichannels list'
     })
   },
   async loadDemoBaseConfig ({getters, dispatch}) {

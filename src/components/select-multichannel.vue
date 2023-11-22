@@ -16,10 +16,10 @@
       >
         <option
         v-for="channel of options"
-        :key="channel"
-        :value="channel"
+        :key="channel.value"
+        :value="channel.value"
         >
-          {{ channelNames[channel] || channel }}
+          {{ channel.label || channel.value }}
         </option>
       </b-select>
     </b-field>
@@ -48,19 +48,6 @@ export default {
     options: {
       type: Array,
       default () { return [] }
-    }
-  },
-
-  data () {
-    return {
-      channelNames: {
-        ece: 'ECE',
-        salesforce: 'Salesforce',
-        servicenow: 'ServiceNow',
-        upstream: 'Upstream Works',
-        msdynamics: 'MS Dynamics',
-        webex: 'Webex'
-      }
     }
   },
 

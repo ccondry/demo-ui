@@ -11,6 +11,7 @@ if (process.env.NODE_ENV === 'development') {
 
 const endpoints = {
   configure: urlBase + '/configure',
+  multichannel: 'https://mm.cxdemo.net/api/v1/multichannel',
   session: urlBase + '/session',
   upstream: {
     customer: urlBase + '/upstream/customer'
