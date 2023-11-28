@@ -1,23 +1,23 @@
-import VueRouter from 'vue-router'
-import routes from './routes'
+import { createRouter, createWebHistory } from 'vue-router'
+import Configure from '../views/Configure.vue'
 
-const router = new VueRouter({
-  mode: 'history',
-  linkExactActiveClass: 'is-active',
-  scrollBehavior: (to, from, savedPosition) => {
-    // same page name?
-    if (to.name === from.name) {
-      // don't scroll when navigating same page (for example setting query only)
-      return
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'configure',
+      component: Configure
+    },
+    {
+      path: '/about',
+      name: 'about',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/AboutView.vue')
     }
-    if (savedPosition) {
-      // is the browser going back/forward? use the saved scroll position
-      return savedPosition
-    }
-    // scroll to top-left when navigating to different page
-    return { x: 0, y: 0 }
-  },
-  routes
+  ]
 })
 
 export default router

@@ -1,28 +1,14 @@
-import Vue from 'vue'
-import App from './index.vue'
-import store from './store'
+import './assets/main.css'
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
+import App from './App.vue'
 import router from './router'
-import VueRouter from 'vue-router'
-import Loading from './components/loading.vue'
-import './style.scss'
-// import 'buefy/dist/buefy.css'
 
-import Buefy from 'buefy'
+const app = createApp(App)
 
-// add Buefy to Vue
-Vue.use(Buefy)
+app.use(createPinia())
+app.use(router)
 
-Vue.use(VueRouter)
-// load these components globally
-Vue.component('loading', Loading)
-// load clipboard copy button component globally
-// Vue.component('copy', Copy)
-
-const app = new Vue({
-  // el: '#app',
-  render: h => h(App),
-  router,
-  store
-}).$mount('#app')
-
-export default app
+app.mount('#app')
