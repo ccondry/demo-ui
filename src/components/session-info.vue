@@ -16,49 +16,49 @@
             </div>
             <div class="card-content">
 
-              <field grouped>
-                <field label="Datacenter">
+              <Field grouped>
+                <Field label="Datacenter">
                   <p class="control">
                     {{ sessionInfo.datacenter }}
                   </p>
-                </field>
-                <field label="Session ID">
+                </Field>
+                <Field label="Session ID">
                   <p class="control">
                     {{ sessionInfo.id }}
                   </p>
-                </field>
-                <field label="Owner">
+                </Field>
+                <Field label="Owner">
                   <p class="control">
                     {{ sessionInfo.owner }}
                   </p>
-                </field>
-              </field>
+                </Field>
+              </Field>
 
-              <field grouped>
-                <field label="Demo">
+              <Field grouped>
+                <Field label="Demo">
                   <p class="control">
                     {{ sessionConfig.demo }}
                   </p>
-                </field>
-                <field label="Version">
+                </Field>
+                <Field label="Version">
                   <p class="control">
                     {{ sessionConfig.version }}
                   </p>
-                </field>
-              </field>
+                </Field>
+              </Field>
 
-              <field grouped>
-                <field label="AnyConnect Username">
+              <Field grouped>
+                <Field label="AnyConnect Username">
                   <p class="control">
                     {{ `v${sessionInfo.vpod}user1` }}
                   </p>
-                </field>
-                <field label="Password">
+                </Field>
+                <Field label="Password">
                   <p class="control">
                     {{ sessionInfo.anycpwd }}
                   </p>
-                </field>
-              </field>
+                </Field>
+              </Field>
 
             </div>
           </Collapse>

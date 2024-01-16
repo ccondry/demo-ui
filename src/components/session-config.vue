@@ -1,44 +1,21 @@
 <template>
-  <div v-if="model">
+  <div>
     <!-- Demo Configuration -->
-    <div v-if="!model">
-      <Button
-      type="is-primary"
-      rounded
-      @click="clickConfigure"
-      >
-        Configure
-      </Button>
-    </div>
-    <div v-else>
-      <div v-if="!model.vertical">
-        <Button
-        type="is-primary"
-        rounded
-        @click="$set(model, 'vertical', 'travel')"
-        >
-          Configure
-        </Button>
-      </div>
+    <select-vertical
+    v-model="vertical"
+    :verticals="verticals"
+    @load="clickLoadVerticals"
+    @update:modelValue="updateParent" 
+    @save="clickSave"
+    />
 
-      <div v-else>
-        <select-vertical
-        v-model="model.vertical"
-        :verticals="verticals"
-        @load="clickLoadVerticals"
-        @input="updateParent" 
-        @save="clickSave"
-        />
-
-        <select-multichannel
-        v-if="hasMultichannel"
-        v-model="model.multichannel"
-        :options="multichannelOptions"
-        @input="updateParent"
-        @save="clickSave"
-        />
-      </div>
-    </div>
+    <select-multichannel
+    v-if="hasMultichannel"
+    v-model="multichannel"
+    :options="multichannelOptions"
+    @update:modelValue="updateParent"
+    @save="clickSave"
+    />
   </div>
 </template>
 
@@ -60,7 +37,7 @@ export default {
       type: String,
       default () { return '' }
     },
-    value: {
+    modelValue: {
       type: Object,
       default () { return null }
     },
@@ -77,6 +54,8 @@ export default {
       default () { return [] }
     }
   },
+
+  emits: ['update:modelValue', 'load', 'save'],
 
   data () {
     return {
@@ -95,6 +74,36 @@ export default {
         return null
       }
     },
+    vertical: {
+      get () {
+        try {
+          return this.model.vertical
+        } catch (e) {
+          return 'travel'
+        }
+      },
+      set (value) {
+        if (!this.model) {
+          this.model = {}
+        }
+        this.model.vertical = value
+      }
+    },
+    multichannel: {
+      get () {
+        try {
+          return this.model.multichannel
+        } catch (e) {
+          return 'ece'
+        }
+      },
+      set (value) {
+        if (!this.model) {
+          this.model = {}
+        }
+        this.model.multichannel = value
+      }
+    }
   },
 
   watch: {
@@ -104,7 +113,7 @@ export default {
   },
 
   mounted () {
-    console.log('mounted session-config', this.value)
+    console.log('mounted session-config', this.modelValue)
     this.updateCache()
   },
 
@@ -112,23 +121,19 @@ export default {
     clickSave () {
       this.$emit('save')
     },
-    clickConfigure () {
-      this.model = {vertical: 'travel'}
-      this.updateParent()
-    },
     clickLoadVerticals (owner) {
       this.$emit('load', owner)
     },
     updateCache () {
-      this.model = JSON.parse(JSON.stringify(this.value))
+      this.model = JSON.parse(JSON.stringify(this.modelValue))
       // if demo is PCCE and multichannel hasn't been configured yet
       if (this.demo === 'pcce' && this.model && !this.model.multichannel) {
         // set a default multichannel option so the user doesn't have to click 'Configure' button
-        this.$set(this.model, 'multichannel', 'ece')
+        this.model['multichannel'] = 'ece'
       }
     },
     updateParent () {
-      this.$emit('input', this.model)
+      this.$emit('update:modelValue', this.model)
     }
   }
 }

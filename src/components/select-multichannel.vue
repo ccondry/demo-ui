@@ -1,18 +1,18 @@
 <template>
-  <b-message title="Multichannel Configuration" :closable="false">
-    <field label="Choose your multichannel system:">
+  <Message title="Multichannel Configuration" :closable="false">
+    <Field label="Choose your multichannel system:">
       <Button
-      v-if="typeof value === 'undefined'"
+      v-if="typeof modelValue === 'undefined'"
       type="is-primary"
       rounded
       @click="clickConfigure"
       >
         Configure
       </Button>
-      <b-select
+      <Select
       v-else
-      :value="value"
-      @input="select"
+      :model-value="modelValue"
+      @update:modelValue="select"
       >
         <option
         v-for="channel of options"
@@ -21,10 +21,10 @@
         >
           {{ channel.label || channel.value }}
         </option>
-      </b-select>
-    </field>
+      </Select>
+    </Field>
 
-    <field>
+    <Field>
       <Button
       rounded
       type="is-success"
@@ -32,8 +32,8 @@
       >
         Save
       </Button>
-    </field>
-  </b-message>
+    </Field>
+  </Message>
 </template>
 
 <script>
@@ -41,7 +41,7 @@ export default {
   name: 'SelectMultichannel',
 
   props: {
-    value: {
+    modelValue: {
       type: String,
       default () { return '' }
     },
@@ -51,16 +51,18 @@ export default {
     }
   },
 
+  emits: ['update:modelValue', 'save'],
+
   methods: {
     clickSave () {
       this.$emit('save')
     },
     clickConfigure () {
-      this.$set(this.model, 'multichannel', 'ece')
+      this.model['multichannel'] = 'ece'
     },
     select (e) {
       console.log('select multichannel input:', e)
-      this.$emit('input', e)
+      this.$emit('update:modelValue', modelValue)
     }
   }
 }

@@ -130,6 +130,7 @@ export default {
       this.saveDemoConfig(this.model.configuration)
     },
     save () {
+      console.log('click save')
       // if demo doesn't use CVA feature
       if (
         !Array.isArray(this.demoBaseConfig.features) ||

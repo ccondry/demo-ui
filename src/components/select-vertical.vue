@@ -1,10 +1,10 @@
 <template>
   <!-- Vertical Selection -->
-  <b-message title="Branding Selection" :closable="false">
+  <Message title="Branding Selection" :closable="false">
     <div class="block" style="position: relative;">
       <Loading group="vertical" type="list" />
-      <field label="Load brandings owned by this username:" grouped>
-        <b-input
+      <Field label="Load brandings owned by this username:" grouped>
+        <Input
         v-model="owner"
         @keyup.enter.native="clickLoad"
         />
@@ -16,40 +16,38 @@
         >
           Load User Brandings
         </Button>
-      </field>
-      <field :label="`Choose your demo branding (${sortedVerticals.length} options):`">
-        <div class="select">
-          <b-select
-          :value="value"
-          @input="selectVertical"
+      </Field>
+      <Field :label="`Choose your demo branding (${sortedVerticals.length} options):`">
+        <Select
+        :modelValue="modelValue"
+        @update:modelValue="selectVertical"
+        >
+          <option value="" disabled selected>
+            Choose a branding to use
+          </option>
+          <option
+          v-for="vertical in systemVerticals"
+          :value="vertical.id"
+          :key="vertical.id"
           >
-            <option value="" disabled selected>
-              Choose a branding to use
-            </option>
-            <option
-            v-for="vertical in systemVerticals"
-            :value="vertical.id"
-            :key="vertical.id"
-            >
-              {{ `${vertical.name} (${vertical.id})` }}
-            </option>
-            <option
-            disabled
-            >
-              --------------------------------
-            </option>
-            <option
-            v-for="vertical in userVerticals"
-            :value="vertical.id"
-            :key="vertical.id"
-            >
-              {{ `${vertical.name} (${vertical.id})` }}
-            </option>
-          </b-select>
-        </div>
-      </field>
+            {{ `${vertical.name} (${vertical.id})` }}
+          </option>
+          <option
+          disabled
+          >
+            --------------------------------
+          </option>
+          <option
+          v-for="vertical in userVerticals"
+          :value="vertical.id"
+          :key="vertical.id"
+          >
+            {{ `${vertical.name} (${vertical.id})` }}
+          </option>
+        </Select>
+      </Field>
 
-      <field>
+      <Field>
         <Button
         rounded
         type="is-success"
@@ -57,9 +55,9 @@
         >
           Save
         </Button>
-      </field>
+      </Field>
     </div>
-  </b-message>
+  </Message>
 </template>
 
 <script>
@@ -67,7 +65,7 @@ export default {
   name: 'SelectVertical',
 
   props: {
-    value: {
+    modelValue: {
       type: String,
       default () { return '' }
     },
@@ -78,6 +76,8 @@ export default {
       }
     }
   },
+
+  emits: ['update:modelValue', 'load', 'save'],
 
   data () {
     return {
@@ -113,7 +113,7 @@ export default {
     },
     userVerticals () {
       return this.sortedVerticals.filter(v => {
-        // return v.owner && (v.id === this.value || v.owner === this.owner)
+        // return v.owner && (v.id === this.modelValue || v.owner === this.owner)
         return this.systemVerticals.findIndex(x => x.id === v.id) < 0
       })
     }
@@ -124,7 +124,7 @@ export default {
       this.$emit('load', this.owner)
     },
     selectVertical (e) {
-      this.$emit('input', e)
+      this.$emit('update:modelValue', e)
     },
     clickSave () {
       this.$emit('save')
@@ -134,7 +134,7 @@ export default {
       try {
         if (this.model.demo === 'pcce' && !this.model.configuration.multichannel) {
           // set a default multichannel option so the user doesn't have to click 'Configure' button
-          this.$set(this.model.configuration, 'multichannel', 'ece')
+          this.model.configuration['multichannel'] = 'ece'
         }
       } catch (e) {
         // do nothing if fail

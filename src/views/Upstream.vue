@@ -12,33 +12,33 @@
             Set Customer Interaction History
           </h1>
           <div class="block">
-            <field label="First Name">
-              <b-input v-model="form.firstName" placeholder="Michael" />
-            </field>
-            <field label="Last Name">
-              <b-input v-model="form.lastName" placeholder="Littlefoot" />
-            </field>
-            <!-- <field label="Contact ID">
-              <b-input v-model="form.contactId" placeholder="5551112222" />
-            </field> -->
-            <field label="Phone">
-              <b-input v-model="form.phone" placeholder="5551112222" />
-            </field>
-            <field label="Email">
-              <b-input v-model="form.email" placeholder="michael.littlefoot@gmail.com" />
-            </field>
-            <!-- <field label="Vertical">
-              <b-select v-model="form.vertical">
+            <Field label="First Name">
+              <Input v-model="form.firstName" placeholder="Michael" />
+            </Field>
+            <Field label="Last Name">
+              <Input v-model="form.lastName" placeholder="Littlefoot" />
+            </Field>
+            <!-- <Field label="Contact ID">
+              <Input v-model="form.contactId" placeholder="5551112222" />
+            </Field> -->
+            <Field label="Phone">
+              <Input v-model="form.phone" placeholder="5551112222" />
+            </Field>
+            <Field label="Email">
+              <Input v-model="form.email" placeholder="michael.littlefoot@gmail.com" />
+            </Field>
+            <!-- <Field label="Vertical">
+              <Select v-model="form.vertical">
                 <option v-for="vertical of autocomplete.verticals" :value="vertical">
                   {{ vertical }}
                 </option>
-              </b-select>
-            </field> -->
-            <field label="Create Interaction History">
+              </Select>
+            </Field> -->
+            <Field label="Create Interaction History">
               <b-checkbox v-model="form.interactionHistory" />
-            </field>
+            </Field>
 
-            <field>
+            <Field>
               <Button
               type="is-success"
               @click.prevent="clickCreate"
@@ -47,7 +47,7 @@
               >
                 Submit
               </Button>
-            </field>
+            </Field>
 
           </div>
         </article>
