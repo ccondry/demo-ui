@@ -17,3 +17,16 @@ a,
   }
 }
 
+#container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+/* .footer { */
+  /* This will push the footer down, effectively "sticking" it to the bottom */
+/* } */

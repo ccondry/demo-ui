@@ -1,9 +1,15 @@
 <template>
-  <div>
-    <navbar />
-    <sidebar />
-    <app-main />
-    <site-footer />
+  <div id="container">
+    <!-- main page content -->
+    <div class="content">
+      <navbar />
+      <sidebar />
+      <app-main />
+    </div>
+    <!-- footer -->
+    <div class="footer">
+      <site-footer />
+    </div>
   </div>
 </template>
 
