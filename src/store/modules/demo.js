@@ -1,4 +1,4 @@
-import {ToastProgrammatic as Toast} from 'buefy'
+import {toast} from '../../utils'
 
 const actions = {
   async startRetailJourneyDemo ({getters, dispatch}, body) {
@@ -16,7 +16,7 @@ const actions = {
       // let the normal error display
     } else {
       // success
-      Toast.open({
+      toast({
         message: 'The demo is starting - please check your phone for the message.',
         type: 'is-success',
         duration: 6 * 1000,
@@ -39,7 +39,7 @@ const actions = {
       // let the normal error display
     } else {
       // success
-      Toast.open({
+      toast({
         message: 'The demo is starting - please check your phone for the message.',
         type: 'is-success',
         duration: 6 * 1000,
@@ -62,7 +62,7 @@ const actions = {
       // let the normal error display
     } else {
       // success
-      Toast.open({
+      toast({
         message: 'The demo is starting - please check your phone for the message.',
         type: 'is-success',
         duration: 6 * 1000,
@@ -85,7 +85,7 @@ const actions = {
       // let the normal error display
     } else {
       // success
-      Toast.open({
+      toast.({
         message: 'The demo is starting - please check your phone for the message.',
         type: 'is-success',
         duration: 6 * 1000,

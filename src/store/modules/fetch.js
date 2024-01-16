@@ -1,4 +1,4 @@
-import {ToastProgrammatic as Toast} from 'buefy'
+import {toast} from '../../utils'
 import {addUrlQueryParams} from '../../utils'
 
 const actions = {
@@ -88,7 +88,7 @@ const actions = {
           ret = text
         }
         if (showNotification && !silent) {
-          Toast.open({
+          toast({
             message: userMessage || `${message} succeeded.`,
             type: 'is-success',
             duration: 4 * 1000,
@@ -129,7 +129,7 @@ const actions = {
         console.error(`${message} failed: ${error.message}`)
       }
       if (showNotification || (showErrorNotification && !silent)) {
-        Toast.open({
+        toast({
           message: `${message} failed: ${error.message}`,
           type: 'is-danger',
           duration: 8 * 1000,

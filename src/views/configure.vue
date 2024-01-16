@@ -163,24 +163,25 @@ export default {
 
       // else new vertical uses custom CVA
       // prompt user for the private key ID
-      this.$buefy.dialog.prompt({
-        title: 'Enter Private Key ID',
-        message: 'Please enter the Private Key ID to use the CVA features for this branding. You can find it in the JSON file or on your Google console Service Accounts page.',
-        type: 'is-success',
-        confirmText: 'Submit',
-        rounded: true,
-        onConfirm: (privateKeyId) => {
-          // store privateKeyId in the config data. server will use it but
-          // not write it to the config data.
-          this.$set(this.model.configuration, 'privateKeyId', privateKeyId)
-          // save
-          this.saveOnServer()
-        },
-        onCancel: () => {
-          // cancel save
-          return
-        }
-      })
+      // TODO implement dialog. use new html standard modal?
+      // this.$buefy.dialog.prompt({
+      //   title: 'Enter Private Key ID',
+      //   message: 'Please enter the Private Key ID to use the CVA features for this branding. You can find it in the JSON file or on your Google console Service Accounts page.',
+      //   type: 'is-success',
+      //   confirmText: 'Submit',
+      //   rounded: true,
+      //   onConfirm: (privateKeyId) => {
+      //     // store privateKeyId in the config data. server will use it but
+      //     // not write it to the config data.
+      //     this.$set(this.model.configuration, 'privateKeyId', privateKeyId)
+      //     // save
+      //     this.saveOnServer()
+      //   },
+      //   onCancel: () => {
+      //     // cancel save
+      //     return
+      //   }
+      // })
     },
     clickLoadVerticals (owner) {
       this.listVerticals(owner)

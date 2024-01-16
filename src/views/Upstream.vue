@@ -107,12 +107,13 @@ export default {
     confirmCreate (data) {
       console.log('confirmCreate', data)
       // pop confirmation dialog
-      this.$buefy.dialog.confirm({
-        message: `Are you sure you want to create this customer in Upstream Works?`,
-        onConfirm: async () => {
-          await this.createUpstreamCustomer({data})
-        }
-      })
+      // TODO implement dialog. use new html standard modal?
+      // this.$buefy.dialog.confirm({
+      //   message: `Are you sure you want to create this customer in Upstream Works?`,
+      //   onConfirm: async () => {
+      //     await this.createUpstreamCustomer({data})
+      //   }
+      // })
     }
   },
 

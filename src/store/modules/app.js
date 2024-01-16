@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import {ToastProgrammatic as Toast} from 'buefy'
+import {toast} from '../../utils'
 import {version} from '../../../package.json'
 
 const state = {
@@ -57,7 +57,7 @@ const actions = {
       console.error('Failed to copy text.')
     } else {
       // success
-      Toast.open({
+      toast({
         message: type + ' Copied to Your Clipboard',
         queue: false
       })
