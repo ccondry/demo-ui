@@ -52,7 +52,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import SessionConfig from '../components/session-config.vue'
 import SessionInfo from '../components/session-info.vue'
-import moment from 'moment'
 
 export default {
   name: 'Configure',
@@ -187,13 +186,7 @@ export default {
       this.listVerticals(owner)
     },
     isRecent (date) {
-      try {
-        // items are updated if updated property is less than 14 days old
-        return moment().diff(moment(date), 'days') < 14
-      } catch (e) {
-        // if anything fails, use false
-        return false
-      }
+      return false
     },
     updateCache () {
       // copy state data to local data

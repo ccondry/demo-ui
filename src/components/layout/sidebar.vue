@@ -37,7 +37,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import moment from 'moment'
 
 export default {
   components: {
@@ -116,32 +115,11 @@ export default {
     ]),
 
     isNew (item) {
-      // menu items are new if less than 14 days old
-      try {
-        if (item.meta.created) {
-          let diff = moment().diff(moment(item.meta.created), 'days')
-          return diff < 14
-        } else {
-          return false
-        }
-      } catch (e) {
-        return false
-      }
+      return false
     },
 
     isUpdated (item) {
-      try {
-        // menu items are updated if updated property less than 14 days old
-        // also prefer 'new' tag over 'updated' tag
-        if (!this.isNew(item) && item.meta.modified) {
-          let diff = moment().diff(moment(item.meta.modified), 'days')
-          return diff < 14
-        } else {
-          return false
-        }
-      } catch (e) {
-        return false
-      }
+      return false
     },
 
     isExpanded (item) {
