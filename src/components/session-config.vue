@@ -2,23 +2,23 @@
   <div v-if="model">
     <!-- Demo Configuration -->
     <div v-if="!model">
-      <b-button
+      <Button
       type="is-primary"
       rounded
       @click="clickConfigure"
       >
         Configure
-      </b-button>
+      </Button>
     </div>
     <div v-else>
       <div v-if="!model.vertical">
-        <b-button
+        <Button
         type="is-primary"
         rounded
         @click="$set(model, 'vertical', 'travel')"
         >
           Configure
-        </b-button>
+        </Button>
       </div>
 
       <div v-else>
@@ -87,7 +87,6 @@ export default {
   computed: {
     ...mapGetters([
       'demoBaseConfig',
-      'verticals',
     ]),
     verticalId () {
       try {
@@ -123,7 +122,7 @@ export default {
     updateCache () {
       this.model = JSON.parse(JSON.stringify(this.value))
       // if demo is PCCE and multichannel hasn't been configured yet
-      if (this.demo === 'pcce' && !this.model.multichannel) {
+      if (this.demo === 'pcce' && this.model && !this.model.multichannel) {
         // set a default multichannel option so the user doesn't have to click 'Configure' button
         this.$set(this.model, 'multichannel', 'ece')
       }

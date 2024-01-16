@@ -7,61 +7,61 @@
         </h1>
         <div class="block">
           <!-- Basic Information -->
-          <b-collapse class="content card">
+          <Collapse class="content card">
             <div slot="trigger" slot-scope="props" class="card-header">
               <p class="card-header-title">Basic Information</p>
               <a class="card-header-icon">
-                <b-icon :icon="props.open ? 'menu-down' : 'menu-up'" />
+                <Icon :icon="props.open ? 'menu-down' : 'menu-up'" />
               </a>
             </div>
             <div class="card-content">
 
-              <b-field grouped>
-                <b-field label="Datacenter">
+              <field grouped>
+                <field label="Datacenter">
                   <p class="control">
                     {{ sessionInfo.datacenter }}
                   </p>
-                </b-field>
-                <b-field label="Session ID">
+                </field>
+                <field label="Session ID">
                   <p class="control">
                     {{ sessionInfo.id }}
                   </p>
-                </b-field>
-                <b-field label="Owner">
+                </field>
+                <field label="Owner">
                   <p class="control">
                     {{ sessionInfo.owner }}
                   </p>
-                </b-field>
-              </b-field>
+                </field>
+              </field>
 
-              <b-field grouped>
-                <b-field label="Demo">
+              <field grouped>
+                <field label="Demo">
                   <p class="control">
                     {{ sessionConfig.demo }}
                   </p>
-                </b-field>
-                <b-field label="Version">
+                </field>
+                <field label="Version">
                   <p class="control">
                     {{ sessionConfig.version }}
                   </p>
-                </b-field>
-              </b-field>
+                </field>
+              </field>
 
-              <b-field grouped>
-                <b-field label="AnyConnect Username">
+              <field grouped>
+                <field label="AnyConnect Username">
                   <p class="control">
                     {{ `v${sessionInfo.vpod}user1` }}
                   </p>
-                </b-field>
-                <b-field label="Password">
+                </field>
+                <field label="Password">
                   <p class="control">
                     {{ sessionInfo.anycpwd }}
                   </p>
-                </b-field>
-              </b-field>
+                </field>
+              </field>
 
             </div>
-          </b-collapse>
+          </Collapse>
           <!-- /Basic Information -->
         </div>
       </article>
@@ -71,9 +71,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Icon from './Icon.vue'
 
 export default {
   name: 'SessionInfo',
+
+  components: {
+    Icon,
+  },
+  
   computed: {
     ...mapGetters([
       'sessionInfo',

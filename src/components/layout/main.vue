@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <transition
+    <!-- <transition
     mode="out-in"
     enter-active-class="fadeIn"
     leave-active-class="fadeOut"
@@ -9,7 +9,15 @@
       <keep-alive>
         <router-view style="width: 100%; min-height: 100vh; padding: 1rem;" />
       </keep-alive>
-    </transition>
+    </transition> -->
+
+    <!-- <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view> -->
+    
+    <RouterView />
   </div>
 </template>
 

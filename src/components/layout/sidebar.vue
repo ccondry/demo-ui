@@ -5,26 +5,26 @@
       <li v-for="(item, index) in filteredMenu" :key="index">
         <router-link :to="item.path" :exact="true" :aria-expanded="isExpanded(item) ? 'true' : 'false'" v-if="item.path">
           <!-- icon -->
-          <b-icon :icon="item.meta.icon"></b-icon>
+          <Icon :icon="item.meta.icon"></Icon>
           <!-- label -->
           {{ item.meta.label || item.name }}
           <!-- down arrow -->
-          <b-icon v-if="item.children && item.children.length" :icon="isExpanded(item) ? 'chevron-up' : 'chevron-down'" ></b-icon>
+          <Icon v-if="item.children && item.children.length" :icon="isExpanded(item) ? 'chevron-up' : 'chevron-down'" ></Icon>
         </router-link>
         <a :aria-expanded="isExpanded(item)" v-else>
           <!-- expanded folder icon, or else the defined icon -->
-          <b-icon :icon="isExpanded(item) && item.meta.iconExpanded ? item.meta.iconExpanded : item.meta.icon" ></b-icon>
+          <Icon :icon="isExpanded(item) && item.meta.iconExpanded ? item.meta.iconExpanded : item.meta.icon" ></Icon>
           <!-- label -->
           {{ item.meta.label || item.name }}
           <!-- down arrow -->
-          <b-icon v-if="item.children && item.children.length" :icon="isExpanded(item) ? 'chevron-up' : 'chevron-down'" ></b-icon>
+          <Icon v-if="item.children && item.children.length" :icon="isExpanded(item) ? 'chevron-up' : 'chevron-down'" ></Icon>
         </a>
 
         <span v-if="item.children && item.children.length">
           <ul v-show="isExpanded(item)">
             <li v-for="subItem in item.children" v-if="subItem.path && (subItem.meta.filter ? subItem.meta.filter.includes(sessionConfig.demo) : true)" :key="subItem.name">
               <router-link :to="generatePath(item, subItem)">
-                <b-icon v-if="subItem.meta && subItem.meta.icon" :icon="subItem.meta.icon" ></b-icon>
+                <Icon v-if="subItem.meta && subItem.meta.icon" :icon="subItem.meta.icon" ></Icon>
                 {{ subItem.meta && subItem.meta.label || subItem.name }}
               </router-link>
             </li>
@@ -37,11 +37,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Icon from '../Icon.vue'
 
 export default {
   components: {
+    Icon,
   },
-
+  
   props: {
     show: Boolean,
     menuFilter: String
@@ -169,38 +171,22 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .app-sidebar {
   position: fixed;
-  // top: 50px;
-  // position: -webkit-sticky;
-  // position: sticky;
-  // top: 0;
-  // top: 0;
   left: 0;
-  // bottom: 0;
   width: 220px;
-  // min-width: 45px;
-  // max-height: 100vh;
   height: 100%;
-  // z-index: 3;
   background: #FFF;
   box-shadow: 0 2px 3px rgba(17, 17, 17, 0.1), 0 0 0 1px rgba(17, 17, 17, 0.1);
   background-color: rgb(245, 245, 245);
-  // overflow-y: auto;
-  // overflow-x: hidden;
   margin-right: 20px;
-
-  // @include mobile() {
-  //   transform: translate3d(-220px, 0, 0);
-  // }
 
   .icon {
     vertical-align: baseline;
     &.is-angle {
       position: absolute;
       right: 10px;
-      // transition: transform .377s ease;
     }
   }
 
@@ -209,14 +195,6 @@ export default {
   }
 
   .menu-list {
-    // li a {
-    //   &[aria-expanded="true"] {
-    //     .is-angle {
-    //       transform: rotate(180deg);
-    //     }
-    //   }
-    // }
-
     li a + ul {
       margin: 0 10px 0 15px;
     }

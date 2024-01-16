@@ -85,7 +85,7 @@ const actions = {
       // let the normal error display
     } else {
       // success
-      toast.({
+      toast({
         message: 'The demo is starting - please check your phone for the message.',
         type: 'is-success',
         duration: 6 * 1000,

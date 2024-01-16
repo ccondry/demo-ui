@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loading :active="showLoading" />
+    <Loading :active="showLoading" />
     
     <!-- <session-info />  -->
 
@@ -24,7 +24,7 @@
               Your settings are automatically saved when you change them.
             </p>
 
-            <loading
+            <Loading
             :active="['loading.app.verticals', 'working.app.verticals']"
             />
             

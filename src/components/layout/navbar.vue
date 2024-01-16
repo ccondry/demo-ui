@@ -1,21 +1,27 @@
 <template>
-  <b-navbar
+  <div
   id="navbar"
   :fixed-top="false"
   :shadow="true"
   :centered="true"
   >
     <template slot="start">
-      <b-navbar-item style="margin-left: 10rem;"> 
+      <NavbarItem style="margin-left: 10rem;"> 
         <strong>dCloud Toolbox - Demo Session Configuration</strong>
-      </b-navbar-item>
+      </NavbarItem>
     </template>
-  </b-navbar>
+  </div>
 </template>
 
 <script>
+import NavbarItem from './NavbarItem.vue'
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  
+  components: {
+    NavbarItem
+  } 
 }
 </script>
 

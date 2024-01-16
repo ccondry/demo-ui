@@ -1,7 +1,7 @@
 <template>
   <footer
   class="footer"
-  style="position: sticky; bottom: 0; height: 1.6em; padding: 0; background-color: #ebebeb"
+  style="position: sticky; bottom: 0; height: 1.6em; padding: 0; background-color: #ebebeb; color: black;"
   >
     <div class="content">
       <small style="padding-right: 2em; padding-left: 1em;">

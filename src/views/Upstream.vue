@@ -1,7 +1,9 @@
 <template>
   <div>
     <!-- Loading Indicator -->
-    <b-loading :is-full-page="false" :active="loading.upstream.customer || working.upstream.customer" :can-cancel="false"></b-loading>
+    <Loading
+    :active="loading.upstream.customer || working.upstream.customer"
+    />
 
     <div class="tile is-ancestor">
       <div class="tile is-parent is-4">
@@ -10,42 +12,42 @@
             Set Customer Interaction History
           </h1>
           <div class="block">
-            <b-field label="First Name">
+            <field label="First Name">
               <b-input v-model="form.firstName" placeholder="Michael" />
-            </b-field>
-            <b-field label="Last Name">
+            </field>
+            <field label="Last Name">
               <b-input v-model="form.lastName" placeholder="Littlefoot" />
-            </b-field>
-            <!-- <b-field label="Contact ID">
+            </field>
+            <!-- <field label="Contact ID">
               <b-input v-model="form.contactId" placeholder="5551112222" />
-            </b-field> -->
-            <b-field label="Phone">
+            </field> -->
+            <field label="Phone">
               <b-input v-model="form.phone" placeholder="5551112222" />
-            </b-field>
-            <b-field label="Email">
+            </field>
+            <field label="Email">
               <b-input v-model="form.email" placeholder="michael.littlefoot@gmail.com" />
-            </b-field>
-            <!-- <b-field label="Vertical">
+            </field>
+            <!-- <field label="Vertical">
               <b-select v-model="form.vertical">
                 <option v-for="vertical of autocomplete.verticals" :value="vertical">
                   {{ vertical }}
                 </option>
               </b-select>
-            </b-field> -->
-            <b-field label="Create Interaction History">
+            </field> -->
+            <field label="Create Interaction History">
               <b-checkbox v-model="form.interactionHistory" />
-            </b-field>
+            </field>
 
-            <b-field>
-              <b-button
+            <field>
+              <Button
               type="is-success"
               @click.prevent="clickCreate"
               :disabled="disableCreate"
               rounded
               >
                 Submit
-              </b-button>
-            </b-field>
+              </Button>
+            </field>
 
           </div>
         </article>

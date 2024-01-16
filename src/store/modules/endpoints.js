@@ -29,7 +29,7 @@ const getters = {
   endpoints: state => state.endpoints
 }
 
-module.exports = {
+export default {
   state,
   getters
 }

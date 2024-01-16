@@ -1,5 +1,5 @@
 <template>
-  <b-loading :is-full-page="false" :active="isActive" />
+  <div v-show="isActive">loading...</div>
 </template>
 
 <script>

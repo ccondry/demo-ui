@@ -1,14 +1,14 @@
 <template>
   <b-message title="Multichannel Configuration" :closable="false">
-    <b-field label="Choose your multichannel system:">
-      <b-button
+    <field label="Choose your multichannel system:">
+      <Button
       v-if="typeof value === 'undefined'"
       type="is-primary"
       rounded
       @click="clickConfigure"
       >
         Configure
-      </b-button>
+      </Button>
       <b-select
       v-else
       :value="value"
@@ -22,17 +22,17 @@
           {{ channel.label || channel.value }}
         </option>
       </b-select>
-    </b-field>
+    </field>
 
-    <b-field>
-      <b-button
+    <field>
+      <Button
       rounded
       type="is-success"
       @click="clickSave"
       >
         Save
-      </b-button>
-    </b-field>
+      </Button>
+    </field>
   </b-message>
 </template>
 

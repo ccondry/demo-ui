@@ -2,22 +2,22 @@
   <!-- Vertical Selection -->
   <b-message title="Branding Selection" :closable="false">
     <div class="block" style="position: relative;">
-      <loading group="vertical" type="list" />
-      <b-field label="Load brandings owned by this username:" grouped>
+      <Loading group="vertical" type="list" />
+      <field label="Load brandings owned by this username:" grouped>
         <b-input
         v-model="owner"
         @keyup.enter.native="clickLoad"
         />
-        <b-button
+        <Button
         type="is-primary"
         rounded
         @click="clickLoad"
         :disabled="owner.length === 0"
         >
           Load User Brandings
-        </b-button>
-      </b-field>
-      <b-field :label="`Choose your demo branding (${sortedVerticals.length} options):`">
+        </Button>
+      </field>
+      <field :label="`Choose your demo branding (${sortedVerticals.length} options):`">
         <div class="select">
           <b-select
           :value="value"
@@ -47,17 +47,17 @@
             </option>
           </b-select>
         </div>
-      </b-field>
+      </field>
 
-      <b-field>
-        <b-button
+      <field>
+        <Button
         rounded
         type="is-success"
         @click="clickSave"
         >
           Save
-        </b-button>
-      </b-field>
+        </Button>
+      </field>
     </div>
   </b-message>
 </template>
