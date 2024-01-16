@@ -1,75 +1,77 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import Title from './components/Title.vue'
-</script>
-
 <template>
-  <Title />
-  <div id="content">
-    <nav>
-      <RouterLink to="/configure">Configure</RouterLink>
-      <RouterLink to="/upstream">Upstream Works</RouterLink>
-    </nav>
-
-    <RouterView />
+  <div>
+    <navbar />
+    <sidebar />
+    <app-main />
+    <site-footer />
   </div>
 </template>
 
-<style scoped>
-#content {
-  display: flex;
-}
+<script>
+import AppMain from './components/layout/main.vue'
+import Navbar from './components/layout/navbar.vue'
+import Sidebar from './components/layout/sidebar.vue'
+import SiteFooter from './components/layout/footer.vue'
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+import { mapGetters, mapActions } from 'vuex'
 
-nav {
-  width: 28rem;
-  font-size: 2rem;
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  background: var(--color-background-soft);
-}
+export default {
+  name: 'Index',
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
+  components: {
+    AppMain,
+    Navbar,
+    Sidebar,
+    SiteFooter,
+  },
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
+  computed: {
+    ...mapGetters([
+      'loading',
+      'uiVersion',
+      'apiVersion',
+    ])
+  },
+  
+  async beforeMount () {
+    // get API version info
+    this.getApiVersion()
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
+    // load dcloud verticals list
+    console.log('getting verticals...')
+    await this.listVerticals()
+    console.log('getting verticals done.')
 
-nav a:first-of-type {
-  border: 0;
-}
+    // load demo session configuration
+    console.log('getting demo config...')
+    await this.loadSessionConfig()
+    console.log('getting demo config done.')
 
-/* @media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    // load dcloud session info
+    console.log('getting session info...')
+    await this.loadSessionInfo()
+    console.log('getting session info done.')
+
+    // load demo base configuration
+    console.log('getting demo base config...')
+    await this.loadDemoBaseConfig()
+    console.log('getting demo base config done.')
+
+    // load multichannel options
+    console.log('getting multichannel options...')
+    await this.listMultichannels()
+    console.log('getting multichannel options done.')
+  },
+
+  methods: {
+    ...mapActions([
+      'loadSessionConfig',
+      'loadDemoBaseConfig',
+      'loadSessionInfo',
+      'listVerticals',
+      'listMultichannels',
+      'getApiVersion',
+    ])
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-} */
-</style>
+}
+</script>
