@@ -68,6 +68,12 @@ export default {
     DocumentationIcon,
     ToolingIcon,
     EcosystemIcon
-  }
+  },
+
+  computed: {
+    verticals () {
+      return ['Cumulus Finance', 'Cumulus Travel', 'My Custom Vertical']
+    },
+  },
 }
 </script>
