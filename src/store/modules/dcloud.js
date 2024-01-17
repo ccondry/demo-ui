@@ -60,7 +60,7 @@ const getters = {
   sessionInfo: state => state.sessionInfo,
   demoPlatform: (state, getters) => getters.sessionConfig.demo,
   demoVersion: (state, getters) => getters.sessionConfig.version,
-  multichannels: (state, getters) => getters.sessionConfig.multichannels,
+  multichannels: (state, getters) => state.multichannels,
   multichannelOptions (state, getters) {
     // filter all multichannels to the ones valid for this demo
     const validMultichannels = getters.multichannels.filter(v => {
@@ -77,7 +77,7 @@ const getters = {
   },
   validDemoMultichannels (state, getters) {
     try {
-      return getters.demoBaseConfig.multichannels
+      return getters.demoBaseConfig.multichannel
     } catch (e) {
       return []
     }

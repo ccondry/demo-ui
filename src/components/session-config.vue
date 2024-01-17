@@ -64,9 +64,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters([
-      'demoBaseConfig',
-    ]),
     verticalId () {
       try {
         return this.model.vertical

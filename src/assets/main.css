@@ -30,3 +30,144 @@ a,
 /* .footer { */
   /* This will push the footer down, effectively "sticking" it to the bottom */
 /* } */
+
+/* .field {
+  display: block;
+} */
+
+/* grouped field content should be in horizontal row */
+.field .grouped {
+  display: flex;
+}
+
+/* space out multiple fields in a column */
+.field:not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.field-content > .control:not(:last-child) {
+  margin-right: 0.75rem;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+}
+
+.message {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* header is dark background with light text */
+/* TODO use css vars */
+.message-header {
+  /* align-items: center; */
+  background-color: #4a4a4a;
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+  /* display: flex; */
+  font-weight: 700;
+  /* justify-content: space-between; */
+  /* line-height: 1.25; */
+  padding: 0.75em 1em;
+  /* position: relative; */
+}
+
+.message-header + .message-body {
+  border-width: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.message-body {
+  border-color: hsl(0deg, 0%, 86%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 0 0 0 4px;
+  /* color: hsl(0deg, 0%, 29%); */
+  color: black;
+  background-color: #dbdbdb;
+  padding: 1.25em 1.5em;
+}
+
+button.is-primary {
+  background-color: #00A0D1;
+  border-color: transparent;
+  color: #fff;
+}
+
+/* button.is-primary[disabled], fieldset[disabled] .button.is-primary {
+  background-color: #79cae2;
+  border-color: #79cae2;
+  box-shadow: none;
+} */
+
+button:disabled {
+  opacity: 0.5;
+}
+
+button.is-rounded {
+  border-radius: 9999px;
+  padding-left: calc(1em + 0.25em);
+  padding-right: calc(1em + 0.25em);
+}
+
+button {
+  background-color: hsl(0deg, 0%, 100%);
+  border-color: hsl(0deg, 0%, 86%);
+  border-width: 1px;
+  color: hsl(0deg, 0%, 21%);
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+h1.title {
+  color: hsl(0deg, 0%, 21%);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.125;
+  margin-bottom: 1rem;
+}
+
+.tile {
+  align-items: stretch;
+  /* display: block; */
+  flex-basis: 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  min-height: min-content;
+  /* padding: 0.75rem; */
+  margin: 1rem;
+}
+
+.box {
+  background-color: hsl(0deg, 0%, 100%);
+  border-radius: 6px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+  color: hsl(0deg, 0%, 29%);
+  display: block;
+  padding: 1.25rem;
+}
+
+input, select {
+  line-height: 1.75rem;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+select {
+  padding: 0.6rem;
+}
+
+div.buttons {
+  margin-top: 0.75rem;
+}

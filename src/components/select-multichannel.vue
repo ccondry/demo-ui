@@ -1,5 +1,5 @@
 <template>
-  <Message title="Multichannel Configuration" :closable="false">
+  <Message title="Multichannel Configuration">
     <Field label="Choose your multichannel system:">
       <Button
       v-if="typeof modelValue === 'undefined'"

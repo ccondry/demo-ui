@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="control">
     <input :type="type" v-model="model">
   </div>
 </template>

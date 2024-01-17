@@ -1,8 +1,10 @@
 <template>
   <!-- Vertical Selection -->
-  <Message title="Branding Selection" :closable="false">
+  <Message title="Branding Selection">
     <div class="block" style="position: relative;">
       <Loading group="vertical" type="list" />
+
+      <!-- load verticals owned by username -->
       <Field label="Load brandings owned by this username:" grouped>
         <Input
         v-model="owner"
@@ -17,6 +19,8 @@
           Load User Brandings
         </Button>
       </Field>
+
+      <!-- choose vertical selection -->
       <Field :label="`Choose your demo branding (${sortedVerticals.length} options):`">
         <Select
         :modelValue="modelValue"
@@ -47,7 +51,8 @@
         </Select>
       </Field>
 
-      <Field>
+      <!-- save button -->
+      <div class="buttons">
         <Button
         rounded
         type="is-success"
@@ -55,7 +60,7 @@
         >
           Save
         </Button>
-      </Field>
+      </div>
     </div>
   </Message>
 </template>
@@ -77,7 +82,11 @@ export default {
     }
   },
 
-  emits: ['update:modelValue', 'load', 'save'],
+  emits: [
+    'update:modelValue',
+    'load',
+    'save'
+  ],
 
   data () {
     return {

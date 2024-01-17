@@ -4,46 +4,37 @@
     
     <!-- <session-info />  -->
 
-    <div class="tile is-ancestor">
-      <div class="tile is-parent is-vertical">
-        <article class="tile is-child box">
-          <h1 class="title">
-            Demo Session Configuration
-          </h1>
-          <div class="content">
+    <article class="tile is-child box">
+      <h1 class="title">
+        Demo Session Configuration
+      </h1>
+      <div class="content">
 
-            <p>
-              Use this form to choose the branding to use when you open
-              <a :href="brandDemoLink" target="brand">
-                <strong>your demo website</strong>
-              </a><span v-if="hasMultichannel">,
-                as well as which multichannel system you want to demo</span>.
-            </p>
+        <p>
+          Use this form to choose the branding to use when you open
+          <a :href="brandDemoLink" target="brand">
+            <strong>your demo website</strong>
+          </a><span v-if="hasMultichannel">,
+            as well as which multichannel system you want to demo</span>.
+        </p>
 
-            <p>
-              Your settings are automatically saved when you change them.
-            </p>
-
-            <Loading
-            :active="['loading.app.verticals', 'working.app.verticals']"
-            />
-            
-            <session-config
-            v-if="model"
-            v-model="model.configuration"
-            :demo="model.demo"
-            @load="clickLoadVerticals"
-            @save="save"
-            :verticals="verticals"
-            :has-multichannel="hasMultichannel"
-            :multichannel-options="multichannelOptions"
-            />
-
-          </div>
-
-        </article>
+        <Loading
+        :active="['loading.app.verticals', 'working.app.verticals']"
+        />
+        
+        <session-config
+        v-if="model"
+        v-model="model.configuration"
+        :demo="model.demo"
+        @load="clickLoadVerticals"
+        @save="save"
+        :verticals="verticals"
+        :has-multichannel="hasMultichannel"
+        :multichannel-options="multichannelOptions"
+        />
       </div>
-    </div>
+
+    </article>
 
   </div>
 </template>
@@ -75,6 +66,7 @@ export default {
       'sessionConfig',
       'sessionInfo',
       'verticals',
+      'multichannels',
       'hasMultichannel',
       'multichannelOptions'
     ]),
