@@ -4,16 +4,18 @@
   font-weight: normal;
 }
 
-a,
-.green {
+a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+  /* transition: 0.4s; */
+  color: #00A0D1;
+  cursor: pointer;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    /* background-color: #00A0D1; */
+    /* color: #006685; */
+    color: #008cb8;
   }
 }
 
@@ -97,11 +99,26 @@ button.is-primary {
   color: #fff;
 }
 
-/* button.is-primary[disabled], fieldset[disabled] .button.is-primary {
-  background-color: #79cae2;
-  border-color: #79cae2;
-  box-shadow: none;
-} */
+button.is-primary:focus:not(:active), button.is-primary.is-focused:not(:active) {
+  box-shadow: 0 0 0 0.125em rgba(0, 160, 209, 0.25);
+}
+
+button.is-primary:hover, button.is-primary.is-hovered {
+  background-color: #0096c4;
+  border-color: transparent;
+  color: #fff;
+}
+button.is-primary:focus, button.is-primary.is-focused {
+  border-color: transparent;
+  color: #fff;
+}
+
+/* button is being pressed */
+button.is-primary:active, button.is-primary.is-active {
+  background-color: #008cb8;
+  border-color: transparent;
+  color: #fff;
+}
 
 button:disabled {
   opacity: 0.5;
@@ -170,4 +187,8 @@ select {
 
 div.buttons {
   margin-top: 0.75rem;
+}
+
+strong {
+  font-weight: 700;
 }
