@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2024.1.18
+
+### Updates
+* **System:** Update project to Vue 3 to modernize and fix build errors.
+Replaced UI theme package with small CSS file.
+
+
 # 2023.6.20
 
 ### Fixes
