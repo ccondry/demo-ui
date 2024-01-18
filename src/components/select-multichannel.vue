@@ -20,15 +20,17 @@
       </Select>
     </Field>
 
-    <Field>
+    <!-- save button -->
+    <div class="buttons">
       <Button
       rounded
       type="is-success"
       @click="clickSave"
+      :disabled="busy"
       >
-        Save
+        {{ busy ? 'Working...' : 'Save' }}
       </Button>
-    </Field>
+    </div>
   </Message>
 </template>
 
@@ -37,6 +39,10 @@ export default {
   name: 'SelectMultichannel',
 
   props: {
+    busy: {
+      type: Boolean,
+      default: false
+    },
     modelValue: {
       type: String,
       default () { return '' }

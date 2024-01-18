@@ -7,6 +7,7 @@
     @load="clickLoadVerticals"
     @update:modelValue="updateParent" 
     @save="clickSave"
+    :busy="busy"
     />
 
     <select-multichannel
@@ -15,6 +16,7 @@
     :options="multichannelOptions"
     @update:modelValue="updateParent"
     @save="clickSave"
+    :busy="busy"
     />
   </div>
 </template>
@@ -33,6 +35,10 @@ export default {
   },
 
   props: {
+    busy: {
+      type: Boolean,
+      default: false
+    },
     demo: {
       type: String,
       default () { return '' }

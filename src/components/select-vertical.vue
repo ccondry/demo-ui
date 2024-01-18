@@ -2,7 +2,7 @@
   <!-- Vertical Selection -->
   <Message title="Branding Selection">
     <div class="block" style="position: relative;">
-      <Loading group="vertical" type="list" />
+      <Loading :active="['loading.vertical.list']" />
 
       <!-- load verticals owned by username -->
       <Field label="Load brandings owned by this username:" grouped>
@@ -14,9 +14,9 @@
         type="is-primary"
         rounded
         @click="clickLoad"
-        :disabled="owner.length === 0"
+        :disabled="owner.length === 0 || loading.vertical.list"
         >
-          Load User Brandings
+          {{ loading.vertical.list ? 'Working...' : 'Load User Brandings' }}
         </Button>
       </Field>
 
@@ -54,8 +54,9 @@
         rounded
         type="is-success"
         @click="clickSave"
+        :disabled="busy"
         >
-          Save
+          {{ busy ? 'Working...' : 'Save' }}
         </Button>
       </div>
     </div>
@@ -63,10 +64,16 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'SelectVertical',
 
   props: {
+    busy: {
+      type: Boolean,
+      default: false
+    },
     modelValue: {
       type: String,
       default () { return '' }
@@ -92,6 +99,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'loading'
+    ]),
     model: {
       get () {
         return this.modelValue

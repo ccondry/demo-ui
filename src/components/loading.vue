@@ -1,5 +1,5 @@
 <template>
-  <div v-show="isActive">loading...</div>
+  <Icon v-show="isActive" icon="mdi-loading mdi-spin" />
 </template>
 
 <script>

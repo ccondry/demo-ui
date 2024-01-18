@@ -1,14 +1,12 @@
 <template>
   <div>
-    <Loading :active="showLoading" />
-    
     <!-- <session-info />  -->
 
     <article class="tile is-child box">
       <h1 class="title">
         Demo Session Configuration
       </h1>
-      <div class="content">
+      <div class="content"> 
 
         <p>
           Use this form to choose the branding to use when you open
@@ -18,10 +16,8 @@
             as well as which multichannel system you want to demo</span>.
         </p>
 
-        <Loading
-        :active="['loading.app.verticals', 'working.app.verticals']"
-        />
-        
+        <Loading :active="showLoading" />
+
         <session-config
         v-if="model"
         v-model="model.configuration"
@@ -31,6 +27,7 @@
         :verticals="verticals"
         :has-multichannel="hasMultichannel"
         :multichannel-options="multichannelOptions"
+        :busy="isBusy"
         />
       </div>
 
@@ -70,14 +67,17 @@ export default {
       'hasMultichannel',
       'multichannelOptions'
     ]),
+    isBusy () {
+      return this.working.session.config || this.loading.session.config
+    },
     showLoading () {
       const a = [
-        'loading.vertical.list',
         'loading.demo.baseConfig',
         'loading.session.config',
         'loading.session.info',
-        'working.session.config'
+        'working.session.config',
       ]
+      // 'loading.vertical.list',
       try {
         if (this.model.configuration.vertical) {
           a.push('loading.vertical.' + this.model.configuration.vertical)
