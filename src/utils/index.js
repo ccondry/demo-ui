@@ -1,8 +1,3 @@
-export function toast ({title, message}) {
-  // TODO implement
-  console.log('toast', title, message)
-}
-
 // helper function to append query parameters to a URL for fetch
 export const addUrlQueryParams = function (endpoint, params) {
   let url = endpoint

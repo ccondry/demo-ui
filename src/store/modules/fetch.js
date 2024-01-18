@@ -1,4 +1,4 @@
-import {toast} from '../../utils'
+import { toast } from 'vue3-toastify'
 import {addUrlQueryParams} from '../../utils'
 
 const actions = {
@@ -88,12 +88,7 @@ const actions = {
           ret = text
         }
         if (showNotification && !silent) {
-          toast({
-            message: userMessage || `${message} succeeded.`,
-            type: 'is-success',
-            duration: 4 * 1000,
-            queue: false
-          })
+          toast(userMessage || `${message} succeeded.`, {type: 'success'})
         }
         return ret
       } else if (response.status === 401) {
@@ -107,11 +102,11 @@ const actions = {
           m = json.message || json.apiError || json.error_description || json[Object.keys(json)[0]]
         } catch (e) {
           // use empty string instead of text/html content
-          const regex = /text\/html/i
-          if (response.headers.get('content-type').match(regex)) {
-            console.log('removing html response from message')
-            m = ''
-          }
+          // const regex = /text\/html/i
+          // if (response.headers.get('content-type').match(regex)) {
+          //   console.log('removing html response from message')
+          //   m = ''
+          // }
         }
         // console.log('bad response', m)
         let message = `${response.status} ${response.statusText}`
@@ -129,12 +124,7 @@ const actions = {
         console.error(`${message} failed: ${error.message}`)
       }
       if (showNotification || (showErrorNotification && !silent)) {
-        toast({
-          message: `${message} failed: ${error.message}`,
-          type: 'is-danger',
-          duration: 8 * 1000,
-          queue: false
-        })
+        toast(`${message} failed: ${error.message}`, {type: 'error'})
       }
       // run error callback, if defined
       if (typeof onError === 'function') {

@@ -1,5 +1,4 @@
 import * as types from '../mutation-types'
-import {toast} from '../../utils'
 import {version} from '../../../package.json'
 
 const state = {
@@ -35,39 +34,6 @@ const actions = {
       url: getters.endpoints.version,
       mutation: types.SET_API_VERSION
     })
-  },
-  async getAuthApiVersion ({commit, dispatch, getters}) {
-    // get REST API version
-    dispatch('fetch', {
-      group: 'app',
-      type: 'version',
-      url: getters.endpoints.authVersion,
-      mutation: types.SET_AUTH_API_VERSION
-    })
-  },
-  copyToClipboard (asdf, {string, type = 'Text'}) {
-    // copy text to clipboard
-    const input = document.createElement('input')
-    document.body.appendChild(input)
-    input.value = string
-    input.select()
-    const result = document.execCommand('copy')
-    if (result === 'unsuccessful') {
-      // failed
-      console.error('Failed to copy text.')
-    } else {
-      // success
-      toast({
-        message: type + ' Copied to Your Clipboard',
-        queue: false
-      })
-    }
-
-    // Remove the selections - NOTE: Should use
-    // removeRange(range) when it is supported
-    window.getSelection().removeAllRanges()
-    // remove the input field
-    input.remove()
   }
 }
 

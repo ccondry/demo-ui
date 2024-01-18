@@ -1,8 +1,11 @@
 import './assets/main.css'
 // material design icons
 import '@mdi/font/css/materialdesignicons.css'
+// toast notifications
+import 'vue3-toastify/dist/index.css';
 
 import { createApp } from 'vue'
+import Vue3Toasity from 'vue3-toastify'
 import Loading from './components/loading.vue'
 import Field from './components/Field.vue'
 import Button from './components/Button.vue'
@@ -26,5 +29,6 @@ app.component('Message', Message)
 
 app.use(store)
 app.use(router)
+app.use(Vue3Toasity, {autoClose: 8000})
 
 app.mount('#app')
