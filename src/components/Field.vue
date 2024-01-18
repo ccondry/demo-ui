@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     <label v-if="label">{{ label }}</label>
-    <div class="field-content" v-bind:class="{ grouped }">
+    <div class="field-content" :class="{ grouped }">
       <slot></slot>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="control">
-    <input :type="type" v-model="model">
+    <input :type="type" v-model="model" :class="{ expanded }">
   </div>
 </template>
 
@@ -17,6 +17,10 @@ export default {
       default () {
         return 'text'
       }
+    },
+    expanded: {
+      type: Boolean,
+      default: false
     }
   },
 

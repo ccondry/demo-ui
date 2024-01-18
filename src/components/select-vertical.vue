@@ -22,10 +22,7 @@
 
       <!-- choose vertical selection -->
       <Field :label="`Choose your demo branding (${sortedVerticals.length} options):`">
-        <Select
-        :modelValue="modelValue"
-        @update:modelValue="selectVertical"
-        >
+        <Select v-model="model">
           <option value="" disabled selected>
             Choose a branding to use
           </option>
@@ -95,6 +92,14 @@ export default {
   },
 
   computed: {
+    model: {
+      get () {
+        return this.modelValue
+      },
+      set (value) {
+        this.$emit('update:modelValue', value)
+      }
+    },
     sortedVerticals () {
       // make a mutable copy of the store data
       try {
@@ -131,9 +136,6 @@ export default {
   methods: {
     clickLoad () {
       this.$emit('load', this.owner)
-    },
-    selectVertical (e) {
-      this.$emit('update:modelValue', e)
     },
     clickSave () {
       this.$emit('save')

@@ -44,7 +44,7 @@ const actions = {
       message: `set Upstream customer's vertical`
     })
   },
-  async createUpstreamCustomer ({getters, dispatch}, {data}) {
+  async createUpstreamCustomer ({getters, dispatch}, data) {
     dispatch('fetch', {
       group: 'upstream',
       type: 'customer',

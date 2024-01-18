@@ -13,6 +13,7 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@mdi/font": "^7.4.47",
     "@vitejs/plugin-vue": "^4.4.0",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "vite": "^4.4.11"

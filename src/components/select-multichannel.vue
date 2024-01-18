@@ -9,11 +9,7 @@
       >
         Configure
       </Button>
-      <Select
-      v-else
-      :model-value="modelValue"
-      @update:modelValue="select"
-      >
+      <Select v-else v-model="model">
         <option
         v-for="channel of options"
         :key="channel.value"
@@ -51,7 +47,22 @@ export default {
     }
   },
 
-  emits: ['update:modelValue', 'save'],
+  emits: [
+    'update:modelValue',
+    'save'
+  ],
+
+  computed: {
+    model: {
+      get () {
+        return this.modelValue
+      },
+      set (value) {
+        console.log('select-multichannel.vue update model', value)
+        this.$emit('update:modelValue', value)
+      }
+    }
+  },
 
   methods: {
     clickSave () {
@@ -59,10 +70,6 @@ export default {
     },
     clickConfigure () {
       this.model['multichannel'] = 'ece'
-    },
-    select (e) {
-      console.log('select multichannel input:', e)
-      this.$emit('update:modelValue', modelValue)
     }
   }
 }
