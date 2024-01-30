@@ -19,5 +19,5 @@ npm run dev
 Copy files to your www/html folder (or wherever you have your web server pointing to).
 ```sh
 npm run build
-cp dcloud-demo-ui/dist/* /var/www/html/
+cp ./dist/* /var/www/html/
 ```
