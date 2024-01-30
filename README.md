@@ -5,7 +5,7 @@ each demo session.
 
 ## Installation
 ```sh
-git clone https://gitlab.com/dcloud-collab/dcloud-demo-ui.git
+git clone https://github.com/ccondry/demo-ui.git dcloud-demo-ui
 cd dcloud-demo-ui
 npm install
 ```
