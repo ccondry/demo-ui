@@ -50,6 +50,10 @@ export default {
     options: {
       type: Array,
       default () { return [] }
+    },
+    defaultValue: {
+      type: String,
+      required: true
     }
   },
 
@@ -75,7 +79,7 @@ export default {
       this.$emit('save')
     },
     clickConfigure () {
-      this.model['multichannel'] = 'ece'
+      this.model['multichannel'] = this.defaultValue
     }
   }
 }

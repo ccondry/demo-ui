@@ -100,7 +100,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'loading'
+      'loading',
+      'defaultMultichannel',
     ]),
     model: {
       get () {
@@ -155,7 +156,7 @@ export default {
       try {
         if (this.model.demo === 'pcce' && !this.model.configuration.multichannel) {
           // set a default multichannel option so the user doesn't have to click 'Configure' button
-          this.model.configuration['multichannel'] = 'ece'
+          this.model.configuration['multichannel'] = this.defaultMultichannel
         }
       } catch (e) {
         // do nothing if fail

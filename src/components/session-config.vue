@@ -17,6 +17,7 @@
     @update:modelValue="updateParent"
     @save="clickSave"
     :busy="busy"
+    :defaultValue="defaultMultichannel"
     />
   </div>
 </template>
@@ -58,6 +59,10 @@ export default {
     multichannelOptions: {
       type: Array,
       default () { return [] }
+    },
+    defaultMultichannel: {
+      type: String,
+      required: true
     }
   },
 
@@ -97,7 +102,7 @@ export default {
         try {
           return this.model.multichannel
         } catch (e) {
-          return 'ece'
+          return this.defaultMultichannel
         }
       },
       set (value) {
@@ -132,7 +137,7 @@ export default {
       // if demo is PCCE and multichannel hasn't been configured yet
       if (this.demo === 'pcce' && this.model && !this.model.multichannel) {
         // set a default multichannel option so the user doesn't have to click 'Configure' button
-        this.model['multichannel'] = 'ece'
+        this.model['multichannel'] = this.defaultMultichannel
       }
     },
     updateParent () {

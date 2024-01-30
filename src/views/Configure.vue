@@ -28,6 +28,7 @@
         :has-multichannel="hasMultichannel"
         :multichannel-options="multichannelOptions"
         :busy="isBusy"
+        :default-multichannel="defaultMultichannel"
         />
       </div>
 
@@ -65,7 +66,8 @@ export default {
       'verticals',
       'multichannels',
       'hasMultichannel',
-      'multichannelOptions'
+      'multichannelOptions',
+      'defaultMultichannel'
     ]),
     isBusy () {
       return this.working.session.config || this.loading.session.config
