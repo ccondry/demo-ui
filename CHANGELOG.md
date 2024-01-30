@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2024.1.30
+
+### Updates
+* **Multichannel:** Set default multichannel to Webex Connect if ECE is not
+available, or set it to the first option if neither of those is available.
+
+
 # 2024.1.18
 
 ### Updates

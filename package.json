@@ -1,6 +1,6 @@
 {
   "name": "demo-ui",
-  "version": "2024.1.18",
+  "version": "2024.1.30",
   "private": true,
   "scripts": {
     "dev": "vite",
