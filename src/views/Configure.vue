@@ -19,7 +19,7 @@
         <Loading :active="showLoading" />
 
         <session-config
-        v-if="model"
+        v-if="model && defaultMultichannel && multichannelOptions.length"
         v-model="model.configuration"
         :demo="model.demo"
         @load="clickLoadVerticals"
