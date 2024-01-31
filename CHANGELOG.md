@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2024.1.31
+
+### Fixes
+* **Multichannel:** Fix default multichannel selection when ECE is not
+available.
+
+
 # 2024.1.30
 
 ### Updates
