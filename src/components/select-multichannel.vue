@@ -79,7 +79,7 @@ export default {
       this.$emit('save')
     },
     clickConfigure () {
-      this.model['multichannel'] = this.defaultValue
+      this.model = this.defaultValue
     }
   }
 }
