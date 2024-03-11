@@ -3,6 +3,14 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2024.3.11-1
+
+### Fixes
+* **Vertical:** Also pop modal asking for GCP project private key ID when saving
+vertical data for WXCCE demos with vertical that has non-default gcpProjectId.
+
+
+
 # 2024.3.11
 
 ### Fixes
