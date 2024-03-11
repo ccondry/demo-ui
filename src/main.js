@@ -3,9 +3,13 @@ import './assets/main.css'
 import '@mdi/font/css/materialdesignicons.css'
 // toast notifications
 import 'vue3-toastify/dist/index.css';
+// modal style
+import 'vue-final-modal/style.css'
 
 import { createApp } from 'vue'
 import Vue3Toasity from 'vue3-toastify'
+import { createVfm } from 'vue-final-modal'
+
 import Loading from './components/loading.vue'
 import Field from './components/Field.vue'
 import Button from './components/Button.vue'
@@ -30,5 +34,7 @@ app.component('Message', Message)
 app.use(store)
 app.use(router)
 app.use(Vue3Toasity, {autoClose: 8000})
+const vfm = createVfm()
+app.use(vfm)
 
 app.mount('#app')

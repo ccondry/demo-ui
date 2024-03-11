@@ -1,6 +1,7 @@
+<!-- Demo Configuration -->
 <template>
   <div>
-    <!-- Demo Configuration -->
+    <!-- demo brand/vertical selection -->
     <select-vertical
     v-model="vertical"
     :verticals="verticals"
@@ -10,6 +11,7 @@
     :busy="busy"
     />
 
+    <!-- multichannel selection -->
     <select-multichannel
     v-if="hasMultichannel"
     v-model="multichannel"

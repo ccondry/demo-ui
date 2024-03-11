@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "vue": "^3.3.4",
+    "vue-final-modal": "^4.5.4",
     "vue-router": "^4.2.5",
     "vue3-toastify": "^0.2.1",
     "vuex": "^4.1.0"

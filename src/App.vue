@@ -10,6 +10,8 @@
     <div class="footer">
       <site-footer />
     </div>
+    <!-- modals -->
+    <ModalsContainer />
   </div>
 </template>
 
@@ -18,6 +20,7 @@ import AppMain from './components/layout/main.vue'
 import Navbar from './components/layout/navbar.vue'
 import Sidebar from './components/layout/sidebar.vue'
 import SiteFooter from './components/layout/footer.vue'
+import { ModalsContainer } from 'vue-final-modal'
 
 import { mapGetters, mapActions } from 'vuex'
 
@@ -29,6 +32,7 @@ export default {
     Navbar,
     Sidebar,
     SiteFooter,
+    ModalsContainer,
   },
 
   computed: {

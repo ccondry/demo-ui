@@ -23,7 +23,7 @@
         v-model="model.configuration"
         :demo="model.demo"
         @load="clickLoadVerticals"
-        @save="save"
+        @save="saveOnServer"
         :verticals="verticals"
         :has-multichannel="hasMultichannel"
         :multichannel-options="multichannelOptions"
@@ -41,6 +41,8 @@
 import { mapGetters, mapActions } from 'vuex'
 import SessionConfig from '../components/session-config.vue'
 import SessionInfo from '../components/session-info.vue'
+import { ModalsContainer, useModal } from 'vue-final-modal'
+import ModalConfirmPlainCss from '../components/ModalConfirmPlainCss.vue'
 
 export default {
   name: 'Configure',
@@ -52,7 +54,8 @@ export default {
 
   data () {
     return {
-      model: null
+      model: null,
+      privateKeyId: null
     }
   },
 
@@ -112,10 +115,10 @@ export default {
         return false
       }
     },
-    isDefaultGcp () {
-      return !vertical.gcpProjectId ||
-        vertical.gcpProjectId === 'cumulus-v2-hotikl'
-    }
+    // isDefaultGcp () {
+    //   return !vertical.gcpProjectId ||
+    //     vertical.gcpProjectId === 'cumulus-v2-hotikl'
+    // },
   },
 
   async mounted () {
@@ -138,11 +141,43 @@ export default {
       'saveDemoConfig',
       'listVerticals'
     ]),
-    saveOnServer () {
+    saveOnServer (v) {
+      // console.log('v', v)
+      // console.log('this.demoBaseConfig', this.demoBaseConfig)
+      // console.log('this.model.configuration.vertical', this.model.configuration.vertical)
+      const vertical = this.verticals.find(v => v.id === this.model.configuration.vertical)
+      // console.log('vertical', vertical)
+      if (
+        this.demoBaseConfig.type === 'pcce' &&
+        vertical.gcpProjectId !== 'cumulus-v2-hotikl'
+      ) {
+        // define modal
+        const confirm = (privateKeyId) => {
+          this.saveDemoConfig({
+            ...this.model.configuration,
+            privateKeyId
+          })
+        }
+        const { open, close } = useModal({
+          component: ModalConfirmPlainCss,
+          attrs: {
+            title: `Enter the private key ID for Google Cloud Project ${vertical.gcpProjectId}:`,
+            onConfirm (privateKeyId) {
+              // console.log('onConfirm', privateKeyId)
+              confirm(privateKeyId)
+              close()
+            },
+          },
+          // slots: {
+          //   default: '<p>The content of the modal</p>',
+          // },
+        })
+        // pop modal
+        open()
+        return
+      }
+      // save session config with default project ID or in a non-PCCE demo
       this.saveDemoConfig(this.model.configuration)
-    },
-    save () {
-      return this.saveOnServer()
     },
     clickLoadVerticals (owner) {
       this.listVerticals(owner)
