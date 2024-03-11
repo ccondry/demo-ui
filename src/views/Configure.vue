@@ -148,7 +148,7 @@ export default {
       const vertical = this.verticals.find(v => v.id === this.model.configuration.vertical)
       // console.log('vertical', vertical)
       if (
-        this.demoBaseConfig.type === 'pcce' &&
+        ['wxcce', 'pcce'].includes(this.demoBaseConfig.type.toLowerCase()) &&
         vertical.gcpProjectId !== 'cumulus-v2-hotikl'
       ) {
         // define modal
