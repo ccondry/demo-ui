@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2024.3.11
+
+### Fixes
+* **Vertical:** Pop modal asking for GCP project private key ID when saving
+vertical data for PCCE demos with vertical that has non-default gcpProjectId.
+
+
 # 2024.1.31
 
 ### Fixes
