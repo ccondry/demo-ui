@@ -11,6 +11,14 @@
     :busy="busy"
     />
 
+    <!-- AI selection -->
+    <select-ai
+    v-model="aiAgentType"
+    @update:modelValue="updateParent" 
+    @save="clickSave"
+    :busy="busy"
+    />
+
     <!-- multichannel selection -->
     <select-multichannel
     v-if="hasMultichannel"
@@ -25,16 +33,17 @@
 </template>
 
 <script>
+import SelectAi from './select-ai.vue'
 import SelectVertical from './select-vertical.vue'
 import SelectMultichannel from './select-multichannel.vue'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'SessionConfig',
 
   components: {
+    SelectAi,
     SelectMultichannel,
-    SelectVertical
+    SelectVertical,
   },
 
   props: {
@@ -82,6 +91,21 @@ export default {
         return this.model.vertical
       } catch (e) {
         return null
+      }
+    },
+    aiAgentType: {
+      get () {
+        try {
+          return this.model.aiagent
+        } catch (e) {
+          return 'scripted'
+        }
+      },
+      set (value) {
+        if (!this.model) {
+          this.model = {}
+        }
+        this.model.aiagent = value
       }
     },
     vertical: {
