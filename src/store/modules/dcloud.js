@@ -84,7 +84,7 @@ const getters = {
   },
   hasMultichannel (state, getters) {
     try {
-      return getters.multichannelOptions.length > 0
+      return getters.multichannelOptions.length > 1
     } catch (e) {
       return false
     }
