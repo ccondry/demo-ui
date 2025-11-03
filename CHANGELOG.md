@@ -3,6 +3,13 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2025.11.3
+
+### Fixes
+* **Multichannel:** Hide multichannel selection if there is only 1 option to
+choose from, like UCCX demos.
+
+
 # 2024.3.11-1
 
 ### Fixes
