@@ -3,6 +3,12 @@
 Dates are in YYYY-MM-DD format
 
 
+# 2025.11.14
+
+### Fixes
+* **AI:** Hide AI selection for UCCX demos
+
+
 # 2025.11.3
 
 ### Fixes
@@ -10,12 +16,17 @@ Dates are in YYYY-MM-DD format
 choose from, like UCCX demos.
 
 
+# 2025.10.28
+
+### Features
+* **AI:** Add AI Agent Type selection to session configuration.
+
+
 # 2024.3.11-1
 
 ### Fixes
 * **Vertical:** Also pop modal asking for GCP project private key ID when saving
 vertical data for WXCCE demos with vertical that has non-default gcpProjectId.
-
 
 
 # 2024.3.11
