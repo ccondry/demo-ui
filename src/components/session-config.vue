@@ -13,6 +13,7 @@
 
     <!-- AI selection -->
     <select-ai
+    v-if="hasAi"
     v-model="aiAgentType"
     @update:modelValue="updateParent" 
     @save="clickSave"
@@ -86,6 +87,9 @@ export default {
   },
 
   computed: {
+    hasAi () {
+      return this.demo !== 'uccx'
+    },
     verticalId () {
       try {
         return this.model.vertical
