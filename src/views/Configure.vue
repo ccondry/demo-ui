@@ -29,6 +29,7 @@
         :multichannel-options="multichannelOptions"
         :busy="isBusy"
         :default-multichannel="defaultMultichannel"
+        :version="model.version"
         />
       </div>
 

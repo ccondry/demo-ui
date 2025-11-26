@@ -56,6 +56,10 @@ export default {
       type: String,
       default () { return '' }
     },
+    version: {
+      type: String,
+      default () { return '' }
+    },
     modelValue: {
       type: Object,
       default () { return null }
@@ -88,7 +92,7 @@ export default {
 
   computed: {
     hasAi () {
-      return this.demo !== 'uccx'
+      return this.demo !== 'uccx' && !this.version.includes("ece")
     },
     verticalId () {
       try {
